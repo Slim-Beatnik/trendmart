@@ -15,7 +15,6 @@ from routes.catalog import categories_bp, products_bp, subcategories_bp
 from routes.customers import customers_bp
 from routes.events import events_bp, recom_feedback_bp
 from routes.payment import payment_bp
-from routes.shopping import order_bp
 from routes import cold_start
 import models
 from models.catalog import Category, Subcategory, Product
