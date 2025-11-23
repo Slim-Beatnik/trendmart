@@ -1,17 +1,17 @@
 import stripe
 from flask import current_app
+from datetime import datetime
+from extensions import db
 from models.payment import Payment
 from models.shopping import Order
-from extensions import db
-from datetime import datetime
 
 
 class PaymentService:
     """
     Handles all the Stripe payment for our e-commerce app.
 
-    This class basically wraps all the Stripe API calls and manages our 
-    payment records in the database. I tried to keep it simple but still 
+    This class basically wraps all the Stripe API calls and manages our
+    payment records in the database. I tried to keep it simple but still
     handle all the edge cases we might run into.
     """
 
@@ -20,72 +20,95 @@ class PaymentService:
         """
         Creates a Stripe PaymentIntent for an order.
 
-        This is the first step in our payment flow - we create the intent on our 
-        backend, then send the client_secret to the frontend so they can confirm 
+        This is the first step in our payment flow - we create the intent on our
+        backend, then send the client_secret to the frontend so they can confirm
         the payment with Stripe.js.
 
         Args:
             order_id: The ID of the order we're creating payment for
             amount: Payment amount in cents (so $19.99 = 1999)
-            currency: Three-letter currency code, defaults to USD  
+            currency: Three-letter currency code, defaults to USD
             metadata: Any extra data we want to store with the payment
 
         Returns:
-            Dictionary with client_secret (for frontend), payment_intent_id, 
+            Dictionary with client_secret (for frontend), payment_intent_id,
             and our internal payment_id
 
-        Note: This creates a pending Payment record in our DB right away, even 
+        Note: This creates a pending Payment record in our DB right away, even
         before the customer actually pays. The webhook will update the status later.
         """
         try:
             # Check if order exists first
-            order = Order.query.get(order_id)
+            order = db.session.get(Order, order_id)
             if not order:
                 raise ValueError(f"Order {order_id} not found")
 
-            # Make sure we don't double-charge
-            if order.payment:
-                raise ValueError(f"Order {order_id} already has a payment")
+            # Idempotent reuse: if there's an existing non-final payment with an intent, reuse it
+            existing = order.payment
+            if existing and existing.stripe_payment_intent_id and not PaymentService._is_final_status(existing.status):
+                try:
+                    intent = stripe.PaymentIntent.retrieve(
+                        existing.stripe_payment_intent_id)
+                    return {
+                        'client_secret': intent.client_secret,
+                        'payment_intent_id': intent.id,
+                        'payment_id': existing.id,
+                        'order_id': order_id,
+                        'status': existing.status,
+                    }
+                except Exception as e:
+                    current_app.logger.warning(
+                        f"[payments.service] Reuse failed; creating new intent: {e}")
 
-            # Setup metadata for tracking
-            payment_metadata = {
-                'order_id': str(order_id),
-                'integration': 'trendmart'
-            }
-            if metadata:
-                payment_metadata.update(metadata)
-
-            # Create the Stripe payment intent
+            # Create Intent on Stripe
+            # Use idempotency key so repeated client calls (network retries) don't create duplicates.
             intent = stripe.PaymentIntent.create(
                 amount=amount,
                 currency=currency,
                 automatic_payment_methods={'enabled': True},
-                metadata=payment_metadata
+                metadata={
+                    'order_id': str(order_id),
+                    'integration': 'trendmart',
+                    **({'user_id': str(order.user_id)} if getattr(order, 'user_id', None) is not None else {}),
+                    **(metadata or {})
+                },
+                idempotency_key=f"order_{order_id}"
             )
 
-            # Save payment info to our database
-            payment = Payment(
-                order_id=order_id,
-                total_amount=amount / 100,
-                currency=currency.upper(),
-                payment_method='card',  # Will update this later when we know the actual method
-                stripe_payment_intent_id=intent.id,
-                status='pending'
-            )
+            # Persist pending payment (create new or update existing if present but final)
+            if existing and PaymentService._is_final_status(existing.status):
+                payment = existing
+            elif existing is None:
+                payment = Payment(
+                    order_id=order_id,
+                    total_amount=amount / 100.0,  # legacy field
+                    amount_cents=amount,
+                    currency=currency.upper(),
+                    payment_method='card',
+                    stripe_payment_intent_id=intent.id,
+                    status='pending'
+                )
+                db.session.add(payment)
+            else:
+                payment = existing
+            # Normalize / refresh fields each time we (re)create intent
+            payment.total_amount = amount / 100.0
+            payment.amount_cents = amount
+            payment.currency = currency.upper()
+            payment.payment_method = 'card'
+            payment.stripe_payment_intent_id = intent.id
+            payment.status = 'pending'
 
-            db.session.add(payment)
             db.session.commit()
 
             return {
                 'client_secret': intent.client_secret,
                 'payment_intent_id': intent.id,
-                'payment_id': payment.id
+                'payment_id': payment.id,
+                'order_id': order_id,
+                'status': payment.status,
             }
 
-        except stripe.error.StripeError as e:
-            db.session.rollback()
-            current_app.logger.error(f"Stripe API error: {e}")
-            raise
         except Exception as e:
             db.session.rollback()
             current_app.logger.error(f"Payment creation failed: {e}")
@@ -96,8 +119,8 @@ class PaymentService:
         """
         Updates our payment record when Stripe confirms (or fails) a payment.
 
-        This gets called either manually or from our webhook handler. It checks 
-        the current status of a PaymentIntent in Stripe and updates our database 
+        This gets called either manually or from our webhook handler. It checks
+        the current status of a PaymentIntent in Stripe and updates our database
         to match. Pretty straightforward but important for keeping everything in sync.
 
         Args:
@@ -106,7 +129,7 @@ class PaymentService:
         Returns:
             The updated Payment object from our database
 
-        Note: If the payment succeeded, we also try to grab the actual payment 
+        Note: If the payment succeeded, we also try to grab the actual payment
         method that was used (card, apple_pay, etc.) and store that too.
         """
         try:
@@ -123,19 +146,22 @@ class PaymentService:
                     f"Can't find payment for intent {payment_intent_id}")
 
             # Update status based on what happened
-            if intent.status == 'succeeded':
+            status = intent.status
+            if status == 'succeeded':
                 payment.status = 'completed'
                 payment.paid_at = datetime.utcnow()
-                # Try to get the actual payment method used
                 if intent.charges.data:
-                    payment.payment_method = intent.charges.data[0].payment_method_details.type
-            elif intent.status == 'payment_failed':
-                payment.status = 'failed'
-            elif intent.status == 'canceled':
-                payment.status = 'canceled'
+                    ch = intent.charges.data[0]
+                    if ch.payment_method_details:
+                        payment.payment_method = ch.payment_method_details.type
+                # Sync order status on success
+                if payment.order:
+                    payment.order.status = 'paid'
+            elif status in ('payment_failed', 'canceled'):
+                payment.status = 'failed' if status == 'payment_failed' else 'canceled'
             else:
                 # Just use whatever Stripe says
-                payment.status = intent.status
+                payment.status = status
 
             db.session.commit()
             return payment
@@ -150,8 +176,8 @@ class PaymentService:
         """
         Processes incoming webhook events from Stripe.
 
-        Stripe sends us webhooks whenever something happens with a payment - 
-        succeeded, failed, canceled, etc. This method looks at the event type 
+        Stripe sends us webhooks whenever something happens with a payment -
+        succeeded, failed, canceled, etc. This method looks at the event type
         and calls the right handler to update our payment records.
 
         Args:
@@ -160,26 +186,17 @@ class PaymentService:
         Returns:
             True if we handled the event successfully, False if something went wrong
 
-        Note: We only handle the payment_intent events we care about. Other 
-        event types just get logged and ignored for now. Might expand this later 
+        Note: We only handle the payment_intent events we care about. Other
+        event types just get logged and ignored for now. Might expand this later
         if we need to handle refunds, disputes, etc.
         """
         try:
-            # Handle the webhook events we care about
-            if event['type'] == 'payment_intent.succeeded':
-                payment_intent = event['data']['object']
-                PaymentService.confirm_payment(payment_intent['id'])
-            elif event['type'] == 'payment_intent.payment_failed':
-                payment_intent = event['data']['object']
-                PaymentService.confirm_payment(payment_intent['id'])
-            elif event['type'] == 'payment_intent.canceled':
+            t = event['type']
+            if t in ('payment_intent.succeeded', 'payment_intent.payment_failed', 'payment_intent.canceled'):
                 payment_intent = event['data']['object']
                 PaymentService.confirm_payment(payment_intent['id'])
             else:
-                # Log unhandled events but don't fail
-                current_app.logger.info(
-                    f"Got unhandled event: {event['type']}")
-
+                current_app.logger.info(f"Unhandled Stripe event: {t}")
             return True
         except Exception as e:
             current_app.logger.error(f"Webhook processing failed: {e}")
@@ -187,34 +204,76 @@ class PaymentService:
 
     @staticmethod
     def get_payment_status(payment_id):
-        """
-        Gets the current status and details of a payment.
-
-        Simple helper method to fetch payment info. Usually called by API 
-        endpoints when the frontend wants to check on a payment status, or 
-        for admin dashboards to see payment details.
-
-        Args:
-            payment_id: Our internal payment ID (not the Stripe one)
-
-        Returns:
-            Dictionary with all the important payment details formatted nicely 
-            for API responses. Dates are converted to ISO format strings.
-
-        Raises:
-            ValueError if the payment doesn't exist in our database
-        """
-        payment = Payment.query.get(payment_id)
-        if not payment:
+        """Return normalized payment status/details for API consumers."""
+        p = db.session.get(Payment, payment_id)
+        if not p:
             raise ValueError(f"Payment {payment_id} not found")
-
-        # Return the payment data as a dict
         return {
-            'id': payment.id,
-            'status': payment.status,
-            'total_amount': payment.total_amount,
-            'currency': payment.currency,
-            'payment_method': payment.payment_method,
-            'created_at': payment.created_at.isoformat(),
-            'paid_at': payment.paid_at.isoformat() if payment.paid_at else None
+            'id': p.id,
+            'order_id': p.order_id,
+            'stripe_payment_intent_id': p.stripe_payment_intent_id,
+            'status': p.status,
+            'total_amount': p.normalized_total,
+            'amount_cents': p.amount_cents,
+            'currency': p.currency,
+            'payment_method': p.payment_method,
+            'created_at': p.created_at.isoformat(),
+            'paid_at': p.paid_at.isoformat() if p.paid_at else None,
         }
+
+    @staticmethod
+    def _is_final_status(status: str) -> bool:
+        """Return True if the local payment status is considered final."""
+        if not status:
+            return False
+        return status.lower() in {"completed", "failed", "canceled", "refunded"}
+
+    @staticmethod
+    def create_refund(payment_id: int, amount_cents: int | None = None, reason: str | None = None):
+        """
+        Issue a refund against the Stripe PaymentIntent for this payment.
+        If amount_cents is None, a full refund is attempted.
+        """
+        p = db.session.get(Payment, payment_id)
+        if not p or not p.stripe_payment_intent_id:
+            raise ValueError(
+                f"Payment {payment_id} not found or missing PaymentIntent")
+
+        params = {"payment_intent": p.stripe_payment_intent_id}
+        if amount_cents is not None:
+            params["amount"] = amount_cents
+        if reason:
+            # e.g. 'requested_by_customer' or 'fraudulent'
+            params["reason"] = reason
+
+        r = stripe.Refund.create(**params)
+        return {
+            "id": r.id,
+            "status": r.status,
+            "amount": r.amount,
+            "currency": r.currency,
+            "created": r.created,
+            "payment_intent_id": r.payment_intent,
+        }
+
+    @staticmethod
+    def list_refunds(payment_id: int):
+        """
+        List refunds for the payment's PaymentIntent.
+        """
+        p = db.session.get(Payment, payment_id)
+        if not p or not p.stripe_payment_intent_id:
+            raise ValueError(
+                f"Payment {payment_id} not found or missing PaymentIntent")
+
+        refunds = stripe.Refund.list(payment_intent=p.stripe_payment_intent_id)
+        items = []
+        for r in refunds.auto_paging_iter():
+            items.append({
+                "id": r.id,
+                "status": r.status,
+                "amount": r.amount,
+                "currency": r.currency,
+                "created": r.created,
+            })
+        return items

@@ -1,6 +1,6 @@
 #app/static/swagger.yaml
 
-swagger: '2.0'
+swagger: "2.0"
 info:
   title: "TRENDMART API"
   description: "API documentation for the TRENDMART application."
@@ -13,8 +13,6 @@ consumes:
   - "application/json"
 produces:
   - "application/json"
-
-
 
 # =========================
 # Paths
@@ -151,32 +149,214 @@ paths:
           required: true
           type: integer
           description: "Cart item id"
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/CartItemQuantityUpdate'
       responses:
         200:
-          description: Updated cart item (or removed if quantity <= 0)
+          description: Item updated
           schema:
-            oneOf:
-              - $ref: '#/definitions/CartItem'
-              - type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Item removed from cart"
-        400:
-          description: Missing/invalid quantity
-          schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/CartItem'
         404:
           description: Cart item not found
           schema:
             $ref: '#/definitions/ErrorResponse'
+        400:
+          description: Validation error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
 
- 
+
+  /payments/config:
+    get:
+      tags:
+        - Payments
+      summary: Get Stripe publishable key
+      responses:
+        200:
+          description: Publishable key
+          schema:
+            type: object
+            properties:
+              publishableKey:
+                type: string
+        500:
+          description: Config error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /payments/intent:
+    post:
+      tags:
+        - Payments
+      summary: Create or reuse a Stripe PaymentIntent for an order
+      description: Creates a PaymentIntent for the given `order_id`. If a non-final intent exists, returns its `client_secret`.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PaymentIntentCreate'
+      responses:
+        200:
+          description: Intent created or reused
+          schema:
+            $ref: '#/definitions/PaymentIntentResponse'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        404:
+          description: Order not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        502:
+          description: Stripe error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+
+  /payments/webhook:
+    post:
+      tags:
+        - Payments
+      summary: Stripe webhook endpoint
+      responses:
+        200:
+          description: Processed
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: ok
+        400:
+          description: Invalid payload or signature
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: Config error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /payments/{payment_id}:
+    get:
+      tags:
+        - Payments
+      summary: Get payment status by internal id
+      parameters:
+        - in: path
+          name: payment_id
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Payment status
+          schema:
+            $ref: "#/definitions/PaymentStatusResponse"
+        404:
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /payments/by-order/{order_id}:
+    get:
+      tags:
+        - Payments
+      summary: Get payment status by order id
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Payment status
+          schema:
+            $ref: "#/definitions/PaymentStatusResponse"
+        404:
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /payments/{payment_id}/refund:
+    post:
+      tags:
+        - Payments
+      summary: Create a refund
+      parameters:
+        - in: path
+          name: payment_id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: "#/definitions/RefundCreate"
+      responses:
+        201:
+          description: Refund created
+          schema:
+            $ref: "#/definitions/Refund"
+        400:
+          description: Stripe error or bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: Payment not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /payments/{payment_id}/refunds:
+    get:
+      tags:
+        - Payments
+      summary: List refunds for a payment
+      parameters:
+        - in: path
+          name: payment_id
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Refunds list
+          schema:
+            $ref: "#/definitions/RefundListResponse"
+        404:
+          description: Payment not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /orders/{order_id}/payments/intents:
+    post:
+      tags:
+        - Payments
+      summary: Create or reuse PaymentIntent for order (path param)
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: false
+          schema:
+            type: object
+            properties:
+              currency:
+                type: string
+                example: usd
+      responses:
+        200:
+          description: Intent created or reused
+          schema:
+            $ref: "#/definitions/PaymentIntentResponse"
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: Order not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
   /bulk/add:
     post:
       tags:
@@ -193,24 +373,24 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/BulkAddRequest'
+            $ref: "#/definitions/BulkAddRequest"
       responses:
         200:
           description: Upsert summary and created/updated items
           schema:
-            $ref: '#/definitions/BulkAddResponse'
+            $ref: "#/definitions/BulkAddResponse"
         400:
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
         409:
           description: Integrity error (e.g., SKU collisions after retries)
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
         500:
           description: Server error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
 
   /bulk/users:
     post:
@@ -231,7 +411,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/BulkUserData'
+            $ref: "#/definitions/BulkUserData"
       responses:
         200:
           description: Ingestion summary
@@ -270,15 +450,15 @@ paths:
         400:
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
         409:
           description: Integrity error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
         500:
           description: Server error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
 
   /events/view:
     post:
@@ -291,7 +471,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductInteractionCreate'
+            $ref: "#/definitions/ProductInteractionCreate"
       responses:
         201:
           description: Created
@@ -304,7 +484,7 @@ paths:
         400:
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
     get:
       tags:
         - Events
@@ -331,7 +511,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductInteractionCreate'
+            $ref: "#/definitions/ProductInteractionCreate"
       responses:
         201:
           description: Created
@@ -344,7 +524,7 @@ paths:
         400:
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
 
   /events/purchase:
     post:
@@ -357,7 +537,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductInteractionCreate'
+            $ref: "#/definitions/ProductInteractionCreate"
       responses:
         201:
           description: Created
@@ -370,7 +550,7 @@ paths:
         400:
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
 
   /recommendations/related:
     post:
@@ -406,7 +586,7 @@ paths:
               results:
                 type: array
                 items:
-                  $ref: '#/definitions/ProductCard'
+                  $ref: "#/definitions/ProductCard"
               count:
                 type: integer
               elapsed_ms:
@@ -414,7 +594,7 @@ paths:
         400:
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
 
   /recommendations/rerank:
     post:
@@ -448,7 +628,7 @@ paths:
               results:
                 type: array
                 items:
-                  $ref: '#/definitions/ProductCard'
+                  $ref: "#/definitions/ProductCard"
               count:
                 type: integer
               elapsed_ms:
@@ -456,7 +636,7 @@ paths:
         400:
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
 
   /recommendations/reindex/async:
     post:
@@ -496,7 +676,7 @@ paths:
         404:
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
 
   /recommendations/reindex/jobs:
     get:
@@ -527,7 +707,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/RecommendationFeedbackCreate'
+            $ref: "#/definitions/RecommendationFeedbackCreate"
       responses:
         201:
           description: Created
@@ -540,7 +720,7 @@ paths:
         400:
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
 
   /recommendations/health:
     get:
@@ -591,7 +771,7 @@ paths:
         200:
           description: Search results
           schema:
-            $ref: '#/definitions/ProductCardList'
+            $ref: "#/definitions/ProductCardList"
 
   /recommendations/similar/{product_id}:
     get:
@@ -612,7 +792,7 @@ paths:
         200:
           description: Similar products
           schema:
-            $ref: '#/definitions/ProductCardList'
+            $ref: "#/definitions/ProductCardList"
 
   /recommendations/category/{name}:
     get:
@@ -637,7 +817,7 @@ paths:
         200:
           description: Category products
           schema:
-            $ref: '#/definitions/ProductCardList'
+            $ref: "#/definitions/ProductCardList"
 
   /recommendations/answer:
     post:
@@ -672,7 +852,7 @@ paths:
               products:
                 type: array
                 items:
-                  $ref: '#/definitions/ProductCard'
+                  $ref: "#/definitions/ProductCard"
               raw:
                 type: object
               retrieved:
@@ -702,9 +882,25 @@ paths:
         200:
           description: Product cards
           schema:
-            $ref: '#/definitions/ProductCardList'
+            $ref: "#/definitions/ProductCardList"
 
   /recommendations/reindex:
+    post:
+      tags:
+        - Recommendations
+      summary: Force reload the product index file into memory
+      responses:
+        200:
+          description: Reloaded status
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: reloaded
+              stats:
+                type: object
+
   /recommendations/cold_start:
     get:
       tags:
@@ -721,23 +917,8 @@ paths:
         200:
           description: Product cards
           schema:
-            $ref: '#/definitions/ProductCardList'
-    post:
-      tags:
-        - Recommendations
-      summary: Force reload the product index file into memory
-      responses:
-        200:
-          description: Reloaded status
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                example: reloaded
-              stats:
-                type: object
-  
+            $ref: "#/definitions/ProductCardList"
+
   /auth/register: # Authentication - Register
     post:
       tags:
@@ -750,27 +931,16 @@ paths:
           description: Registration data
           required: true
           schema:
-            $ref: '#/definitions/RegisterPayload'
+            $ref: "#/definitions/RegisterPayload"
       responses:
         201:
           description: User registered successfully
           schema:
-            $ref: '#/definitions/RegisterResponse'
-          examples:
-            application/json:
-              {
-                "email": "user@example.com",
-              }
+            $ref: "#/definitions/RegisterResponse"
         400:
           description: Validation error or email already exists
           schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              {
-                "status": "error",
-                "message": "A user with this email already exists!"
-              }
+            $ref: "#/definitions/ErrorResponse"
 
   /auth/login: # Authentication - Login
     post:
@@ -784,29 +954,16 @@ paths:
           description: Login credentials
           required: true
           schema:
-            $ref: '#/definitions/LoginPayload'
+            $ref: "#/definitions/LoginPayload"
       responses:
         200:
           description: Login successful
           schema:
-            $ref: '#/definitions/TokenResponse'
-          examples:
-            application/json:
-              {
-                "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-                "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-                "token_type": "Bearer",
-                "expires_in": 3600
-              }
+            $ref: "#/definitions/TokenResponse"
         401:
           description: Invalid credentials
           schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              {
-                "error": "Invalid credentials"
-              }
+            $ref: "#/definitions/ErrorResponse"
 
   /auth/protected: # Protected Route - Test
     get:
@@ -820,24 +977,269 @@ paths:
         200:
           description: Authentication successful
           schema:
-            $ref: '#/definitions/ProtectedResponse'
-          examples:
-            application/json:
-              {
-                "message": "Hello! You are successfully authenticated!",
-                "user_id": 1,
-                "email": "user@example.com",
-              }
+            $ref: "#/definitions/ProtectedResponse"
         401:
           description: Unauthorized - Invalid or missing token
           schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              {
-                "msg": "Missing Authorization Header"
-              }
-          
+            $ref: "#/definitions/ErrorResponse"
+  # -----------------
+  # Orders Endpoints
+  # -----------------
+  /orders:
+    post:
+      tags:
+        - Orders
+      summary: Create a new order
+      description: Create a new order for a user with specified products and quantities.
+      security:
+        - BearerAuth: []
+      responses:
+        201:
+          description: Order created successfully
+          schema:
+            $ref: "#/definitions/OrderResponse"
+        400:
+          description: Validation error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /orders/{order_id}:
+    get:
+      tags:
+        - Orders
+      summary: Get order details
+      description: Retrieve details of an order by its ID.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Order details retrieved successfully
+          schema:
+            $ref: "#/definitions/OrderResponse"
+        404:
+          description: Order not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /orders/users/{user_id}:
+    get:
+      tags:
+        - Orders
+      summary: Get orders for a user
+      description: Retrieve all orders placed by a specific user.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          type: integer
+      responses:
+        200:
+          description: User orders retrieved successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/OrderResponse"
+        404:
+          description: User not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  # -----------------
+  # Reviews Endpoints
+  # -----------------
+  /products/{product_id}/reviews:
+    post:
+      tags:
+        - Reviews
+      summary: Add a review for a product
+      description: Submit a review for a specific product.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ReviewCreatePayload"
+      responses:
+        201:
+          description: Review created successfully
+          schema:
+            $ref: "#/definitions/ReviewCreateResponse"
+        400:
+          description: Validation error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: Product not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    get:
+      tags:
+        - Reviews
+      summary: Get all reviews for a product
+      description: Retrieve all reviews for a specific product.
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Reviews retrieved successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ReviewResponse"
+        404:
+          description: Product not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    patch:
+      tags:
+        - Reviews
+      summary: Update a review for a product
+      description: Update an existing review for a specific product.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ReviewUpdatePayload"
+      responses:
+        200:
+          description: Review updated successfully
+          schema:
+            $ref: "#/definitions/ReviewCreateResponse"
+        400:
+          description: Validation error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: Product or Review not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /products/{product_id}/reviews/my:
+    get:
+      tags:
+        - Reviews
+      summary: Get my review for a product
+      description: Retrieve the authenticated user's review for a specific product.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Review retrieved successfully
+          schema:
+            $ref: "#/definitions/ReviewResponse"
+        404:
+          description: Product or Review not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /products/{product_id}/reviews/{review_id}:
+    patch:
+      tags:
+        - Reviews
+      summary: Update a specific review for a product
+      description: Update an existing review identified by review_id for a specific product.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          type: integer
+        - in: path
+          name: review_id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ReviewUpdatePayload"
+      responses:
+        200:
+          description: Review updated successfully
+          schema:
+            $ref: "#/definitions/ReviewCreateResponse"
+        400:
+          description: Validation error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: Product or Review not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+        - Reviews
+      summary: Delete a review for a product
+      description: Delete an existing review for a specific product.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          type: integer
+        - in: path
+          name: review_id
+          required: true
+          type: integer
+      responses:
+        204:
+          description: Review deleted successfully
+        404:
+          description: Product or Review not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /products/{product_id}/rating_summary:
+    get:
+      tags:
+        - Reviews
+      summary: Get rating summary for a product
+      description: Retrieve the rating summary (average rating, total reviews) for a specific product.
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Rating summary retrieved successfully
+          schema:
+            $ref: "#/definitions/RatingSummaryResponse"
+        404:
+          description: Product not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
 # =========================
 # Security Definitions
 # =========================
@@ -850,8 +1252,8 @@ securityDefinitions:
 
 # =========================
 # Definitions (Schemas)
-# =========================  
-definitions: 
+# =========================
+definitions:
   # -----------------
   # Bulk Add Schemas
   # -----------------
@@ -908,7 +1310,7 @@ definitions:
       products:
         type: array
         items:
-          $ref: '#/definitions/ProductIn'
+          $ref: "#/definitions/ProductIn"
       related_subcategories:
         type: array
         items:
@@ -925,7 +1327,7 @@ definitions:
       subcategories:
         type: array
         items:
-          $ref: '#/definitions/SubcategoryIn'
+          $ref: "#/definitions/SubcategoryIn"
 
   BulkAddRequest:
     type: object
@@ -934,7 +1336,7 @@ definitions:
       categories:
         type: array
         items:
-          $ref: '#/definitions/CategoryIn'
+          $ref: "#/definitions/CategoryIn"
     example:
       categories:
         - main_category: Electronics
@@ -982,7 +1384,7 @@ definitions:
       products:
         type: array
         items:
-          $ref: '#/definitions/BulkAddProductResult'
+          $ref: "#/definitions/BulkAddProductResult"
 
   BulkAddCategoryResult:
     type: object
@@ -994,7 +1396,7 @@ definitions:
       subcategories:
         type: array
         items:
-          $ref: '#/definitions/BulkAddSubcategoryResult'
+          $ref: "#/definitions/BulkAddSubcategoryResult"
 
   BulkAddResponse:
     type: object
@@ -1032,7 +1434,7 @@ definitions:
           categories:
             type: array
             items:
-              $ref: '#/definitions/BulkAddCategoryResult'
+              $ref: "#/definitions/BulkAddCategoryResult"
 
   ProductCard:
     type: object
@@ -1081,10 +1483,10 @@ definitions:
       results:
         type: array
         items:
-          $ref: '#/definitions/ProductCard'
+          $ref: "#/definitions/ProductCard"
       count:
         type: integer
-  
+
   # -----------------
   # Events Schemas
   # -----------------
@@ -1149,7 +1551,7 @@ definitions:
       email:
         type: string
         example: "user@example.com"
-      
+
   LoginPayload:
     type: object
     required:
@@ -1214,6 +1616,95 @@ definitions:
         description: "Validation error details"
 
   # -----------------
+  # Payments Schemas
+  # -----------------
+  PaymentIntentCreate:
+    type: object
+    required: [order_id]
+    properties:
+      order_id:
+        type: integer
+      currency:
+        type: string
+        example: usd
+      metadata:
+        type: object
+        description: Optional metadata; user_id automatically included when available.
+
+  PaymentIntentResponse:
+    type: object
+    properties:
+      client_secret:
+        type: string
+      payment_intent_id:
+        type: string
+      payment_id:
+        type: integer
+      order_id:
+        type: integer
+      status:
+        type: string
+        example: pending
+      amount_cents:
+        type: integer
+        description: Convenience amount in cents (derived)
+      total_amount:
+        type: number
+        format: float
+        description: Payment amount in dollars
+
+  PaymentStatusResponse:
+    type: object
+    properties:
+      payment_id:
+        type: integer
+      order_id:
+        type: integer
+      stripe_payment_intent_id:
+        type: string
+      status:
+        type: string
+      amount_cents:
+        type: integer
+      total_amount:
+        type: number
+        format: float
+
+  RefundCreate:
+    type: object
+    properties:
+      amount_cents:
+        type: integer
+        description: Optional amount in cents for a partial refund
+      reason:
+        type: string
+        description: Optional refund reason (e.g., requested_by_customer)
+
+  Refund:
+    type: object
+    properties:
+      id:
+        type: string
+      status:
+        type: string
+      amount:
+        type: integer
+      currency:
+        type: string
+      created:
+        type: integer
+      payment_intent_id:
+        type: string
+
+  RefundListResponse:
+    type: object
+    properties:
+      refunds:
+        type: array
+        items:
+          $ref: "#/definitions/Refund"
+
+  # -----------------
   # Bulk User Data Schemas
   # -----------------
   CategoryInfoIn:
@@ -1244,7 +1735,7 @@ definitions:
         items:
           type: string
       category_info:
-        $ref: '#/definitions/CategoryInfoIn'
+        $ref: "#/definitions/CategoryInfoIn"
 
   UserIn:
     type: object
@@ -1356,34 +1847,116 @@ definitions:
       products:
         type: array
         items:
-          $ref: '#/definitions/ProductFlatIn'
+          $ref: "#/definitions/ProductFlatIn"
       users:
         type: array
         items:
-          $ref: '#/definitions/UserIn'
+          $ref: "#/definitions/UserIn"
       interactions:
         type: array
         items:
-          $ref: '#/definitions/InteractionIn'
+          $ref: "#/definitions/InteractionIn"
       purchases:
         type: array
         items:
-          $ref: '#/definitions/PurchaseIn'
+          $ref: "#/definitions/PurchaseIn"
       search_queries:
         type: array
         items:
-          $ref: '#/definitions/SearchQueryIn'
+          $ref: "#/definitions/SearchQueryIn"
       sessions:
         type: array
         items:
-          $ref: '#/definitions/SessionIn'
+          $ref: "#/definitions/SessionIn"
 
-
+  # -----------------
+  # Orders Schemas
+  # -----------------
+  OrderResponse:
+    type: object
+    properties:
+      id:
+        type: integer
+      user_id:
+        type: integer
+      total:
+        type: number
+        format: float
+      subtotal:
+        type: number
+        format: float
+      tax_total:
+        type: number
+        format: float
+      status:
+        type: string
+      created_at:
+        type: string
+      placed_at:
+        type: string
+      items:
+        type: array
+        items:
+          type: object
+          properties:
+            product_id:
+              type: integer
+            quantity:
+              type: integer
+            price_per_unit:
+              type: number
+              format: float
+            order_id:
+              type: integer
 
   # ------------------------
   # Shopping / Cart Schemas
   # ------------------------
   CartItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 10
+      cart_id:
+        type: integer
+        example: 4
+      product_id:
+        type: integer
+        example: 123
+      quantity:
+        type: integer
+        example: 2
+      price_per_unit:
+        type: number
+        format: float
+        example: 19.99
+  # -----------------
+  # Reviews Schemas
+  # -----------------
+  ReviewCreatePayload:
+    type: object
+    properties:
+      rating:
+        type: integer
+        minimum: 1
+        maximum: 5
+      title:
+        type: string
+      comment:
+        type: string
+  ReviewUpdatePayload:
+    type: object
+    properties:
+      rating:
+        type: integer
+        minimum: 1
+        maximum: 5
+      title:
+        type: string
+      comment:
+        type: string
+  ReviewResponse:
     type: object
     properties:
       id:
@@ -1443,3 +2016,32 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/CartItem'
+      # user_id:
+      #   type: integer
+      # product_id:
+      #   type: integer
+      rating:
+        type: integer
+      title:
+        type: string
+      comment:
+        type: string
+      created_at:
+        type: string
+  ReviewCreateResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      review:
+        $ref: "#/definitions/ReviewResponse"
+  RatingSummaryResponse:
+    type: object
+    properties:
+      average_rating:
+        type: number
+        format: float
+      count:
+        type: integer
+      product:
+        $ref: "#/definitions/ProductCard"

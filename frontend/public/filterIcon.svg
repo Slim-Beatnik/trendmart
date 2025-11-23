@@ -1,7 +1,6 @@
 <svg fill="#000000" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
     <g
         id="filterIcon"
-        fill="#000"
     >
         <path id="trackHRight" d="M29,10H10a1,1,0,0,1,0-2H29a1,1,0,0,1,0,2Z"/>
         <path id="trackHLeft" d="M6,10H3A1,1,0,0,1,3,8H6a1,1,0,0,1,0,2Z"/>
@@ -20,7 +19,6 @@
         </g>
         <g
             id="knobsBg"
-            fill="#00aef0"
         >
             <path id="knobHBg" d="M10,12H6a1,1,0,0,1-1-1V7A1,1,0,0,1,6,6h4a1,1,0,0,1,1,1v4A1,1,0,0,1,10,12ZM7,10H9V8H7Z"/>
             <path id="knobLBg" d="M10,26H6a1,1,0,0,1-1-1V21a1,1,0,0,1,1-1h4a1,1,0,0,1,1,1v4A1,1,0,0,1,10,26ZM7,24H9V22H7Z"/>

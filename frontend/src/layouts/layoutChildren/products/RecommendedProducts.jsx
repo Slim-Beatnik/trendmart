@@ -1,40 +1,26 @@
-import { useEffect, useState, useCallback } from "react";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import SearchbarRow from "../sectionSearchbar/SearchbarRow";
-import {
-  getColdStart,
-  searchRecommendations,
-  getSimilarById,
-} from "../../../api/recommendations";
-import {
-  logView,
-  logCartAdd,
-  sendRecommendationFeedback,
-} from "../../../api/events";
-import PopupLayout from "../../mainComponents/PopupLayout";
+import { useEffect, useState, useCallback, useMemo } from 'react';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import SearchbarRow from '../sectionSearchbar/SearchbarRow';
+import ProductGrid from './productsChildren/ProductGrid';
+import ProductPopup from './productsChildren/ProductPopup';
+import { getColdStart, searchRecommendations } from '@api/recommendations';
+import { logView } from '@api/events';
+import { useTheme } from '@resources/themes/themeContext';
 
 function RecommendedProducts() {
+  const { theme } = useTheme()
   const [state, setState] = useState({ loading: true, error: null, items: [] });
-  const [searchState, setSearchState] = useState({
-    query: "",
-    loading: false,
-    error: null,
-    items: [],
-  });
+  const [searchState, setSearchState] = useState({ query: '', loading: false, error: null, items: [] });
   const searching = searchState.query.length > 0;
-  const [similarState, setSimilarState] = useState({
-    open: false,
-    base: null,
-    loading: false,
-    error: null,
-    items: [],
-  });
+  const [selected, setSelected] = useState(null);
+  const [pageIndex, setPageIndex] = useState(0);
+  const pageSize = 4;
 
   const performSearch = useCallback(async (q) => {
     setSearchState((s) => ({ ...s, query: q }));
     if (!q) {
-      setSearchState({ query: "", loading: false, error: null, items: [] });
+      setSearchState({ query: '', loading: false, error: null, items: [] });
       return;
     }
     setSearchState((s) => ({ ...s, loading: true, error: null }));
@@ -43,12 +29,7 @@ function RecommendedProducts() {
       const items = Array.isArray(data?.results) ? data.results : [];
       setSearchState({ query: q, loading: false, error: null, items });
     } catch (err) {
-      setSearchState({
-        query: q,
-        loading: false,
-        error: err?.message || "Search failed",
-        items: [],
-      });
+      setSearchState({ query: q, loading: false, error: err?.message || 'Search failed', items: [] });
     }
   }, []);
 
@@ -56,349 +37,104 @@ function RecommendedProducts() {
     let isActive = true;
     (async () => {
       try {
-        const data = await getColdStart(8);
+        const data = await getColdStart(12);
         const items = Array.isArray(data?.results) ? data.results : [];
         if (isActive) setState({ loading: false, error: null, items });
       } catch (err) {
-        if (isActive)
-          setState({
-            loading: false,
-            error: err?.message || "Failed to load",
-            items: [],
-          });
+        if (isActive) setState({ loading: false, error: err?.message || 'Failed to load', items: [] });
       }
     })();
-    return () => {
-      isActive = false;
-    };
+    return () => { isActive = false; };
   }, []);
+
+  // Normalize recommendation item to ProductCard shape
+  const normalize = useCallback((p) => ({
+    id: p.id || p.product_id || p.external_id,
+    name: p.title || p.name || 'Untitled',
+    imageUrl: p.image_url || p.imageUrl || '',
+    description: p.description || '',
+    price: p.price,
+    score: p.score,
+  }), []);
+
+  const filteredProducts = useMemo(() => {
+    const base = searching ? searchState.items : state.items;
+    return (base || []).map(normalize);
+  }, [searching, searchState.items, state.items, normalize]);
+
+  const totalProducts = filteredProducts.length;
+  const totalPages = Math.max(1, Math.ceil(totalProducts / pageSize));
+  const start = pageIndex * pageSize;
+  const end = start + pageSize;
+  const visibleProducts = filteredProducts.slice(start, end);
+
+  useEffect(() => {
+    setPageIndex(prev => Math.min(prev, totalPages - 1));
+  }, [totalPages]);
+  useEffect(() => { setPageIndex(0); }, [searching, searchState.query]);
+
+  const handlePrevPage = useCallback(() => setPageIndex(prev => Math.max(0, prev - 1)), []);
+  const handleNextPage = useCallback(() => setPageIndex(prev => Math.min(totalPages - 1, prev + 1)), [totalPages]);
+
+  const handleView = useCallback(async (p) => {
+    setSelected(p);
+    try { await logView(p, searching ? 'search' : 'cold_start'); } catch { (e) => console.log(e) }
+  }, [searching]);
 
   return (
     <Col
-      className="d-flex flex-column justify-content-start align-items-center m-0 p-0"
-      style={{ width: "100%", height: "100%", backgroundColor: "#d9d9d9" }}
+      className="d-flex flex-column w-100 p-0"
+      style={{ borderTop: '${}' }}
     >
       <SearchbarRow
         searchId="recommendedSearch"
-        placeholder="Search recommended products"
+        placeholder="Search..."
         sectionTitle="Recommended Products"
-        onSearch={ performSearch }
-        sm={6}
+        onSearch={performSearch}
       />
-      <Row className="m-0 p-1">
-        {state.loading && (
-          <div className="text-gray-500">Loading recommendations…</div>
-        )}
-        {state.error && <div className="text-red-600">{ state.error}</div> }
 
-        {searching && searchState.loading && (
-          <div className="text-gray-500">Searching…</div>
-        )}
-        {searching && searchState.error && (
-          <div className="text-red-600">{ searchState.error }</div>
-        )}
-        {!searching && !state.loading && !state.error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {state.items.map((p) => (
-              <div
-                key={p.id || p.product_id || p.external_id}
-                className="border rounded-lg p-4 hover:shadow-sm transition"
-              >
-                <div className="h-40 bg-gray-100 rounded mb-3 overflow-hidden flex items-center justify-center">
-                  {p.image_url ? (
-                    <img
-                      src={ p.image_url }
-                      alt={p.title || p.name}
-                      className="h-full object-cover"
-                    />
-                  ) : (
-                    <div className="text-gray-400 text-sm">No image</div>
-                  )}
-                </div>
+      <div className="d-flex flex-column w-100 m-0 p-0 pt-1">
+        <div className="d-flex justify-content-between align-items-center px-1">
+          <Button
+            type="button"
+            onClick={handlePrevPage}
+            disabled={pageIndex === 0}
+            className="btn btn-sm px-1"
+            style={{
+              ...theme.buttons.emphasis
+            }}
+          >
+            Prev
+          </Button>
+          <span className="small">
+            Page {totalProducts === 0 ? 0 : pageIndex + 1} of {totalPages}
+          </span>
+          <Button
+            type="button"
+            onClick={handleNextPage}
+            disabled={pageIndex >= totalPages - 1}
+            className="btn btn-sm px-1"
+            style={{
+              ...theme.buttons.emphasis
+            }}
+          >
+            Next
+          </Button>
+        </div>
 
-                <div className="font-medium line-clamp-2">
-                  {p.title || p.name || "Untitled"}
-                </div>
-                {typeof p.price !== "undefined" && (
-                  <div className="text-sm text-gray-900 mt-1">
-                    ${Number(p.price).toFixed(2)}
-                  </div>
-                )}
-                {p.description && (
-                  <div className="text-sm text-gray-600 mt-1 line-clamp-2">
-                    { p.description }
-                  </div>
-                )}
+        <ProductGrid
+          products={visibleProducts}
+          onSelect={handleView}
+          loading={searching ? searchState.loading : state.loading}
+          error={(searching ? searchState.error : state.error) || null}
+        />
+      </div>
 
-                <div className="mt-3 flex gap-2">
-                  <button
-                    className="px-3 py-1 rounded bg-blue-600 text-white text-sm"
-                    onClick={async () => {
-                      try {
-                        const source = searching ? "search" : "cold_start";
-                        await logView(p, source);
-                        await sendRecommendationFeedback({
-                          product: p,
-                          action: "clicked",
-                          source,
-                        });
-                      } catch (e) {
-                        console.debug("log view/feedback failed", e);
-                      }
-                    }}
-                  >
-                    View
-                  </button>
-                  <button
-                    className="px-3 py-1 rounded bg-indigo-600 text-white text-sm"
-                    onClick={async () => {
-                      setSimilarState({
-                        open: true,
-                        base: p,
-                        loading: true,
-                        error: null,
-                        items: [],
-                      });
-                      try {
-                        const data = await getSimilarById(
-                          p.id || p.product_id || p.external_id,
-                          6,
-                        );
-                        const items = Array.isArray(data?.results)
-                          ? data.results
-                          : data;
-                        setSimilarState({
-                          open: true,
-                          base: p,
-                          loading: false,
-                          error: null,
-                          items,
-                        });
-                      } catch (err) {
-                        setSimilarState({
-                          open: true,
-                          base: p,
-                          loading: false,
-                          error: err?.message || "Failed to load similar",
-                          items: [],
-                        });
-                      }
-                    }}
-                  >
-                    Similar
-                  </button>
-                  <button
-                    className="px-3 py-1 rounded bg-emerald-600 text-white text-sm"
-                    onClick={async () => {
-                      try {
-                        const source = searching ? "search" : "cold_start";
-                        await logCartAdd(p, source);
-                        await sendRecommendationFeedback({
-                          product: p,
-                          action: "converted",
-                          source,
-                        });
-                      } catch (e) {
-                        console.debug("log cart/feedback failed", e);
-                      }
-                    }}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-        {similarState.open && (
-          <PopupLayout>
-            <div style={{ padding: "1rem", minWidth: "60vw" }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: ".5rem",
-                }}
-              >
-                <h3 style={{ margin: 0 }}>
-                  Similar to:{" "}
-                  {similarState.base?.title || similarState.base?.name}
-                </h3>
-                <button
-                  onClick={() =>
-                    setSimilarState({
-                      open: false,
-                      base: null,
-                      loading: false,
-                      error: null,
-                      items: [],
-                    })
-                  }
-                  style={{
-                    padding: ".25rem .5rem",
-                    borderRadius: 4,
-                    border: "1px solid #ccc",
-                  }}
-                >
-                  Close
-                </button>
-              </div>
-              {similarState.loading && <div>Loading similar products…</div>}
-              {similarState.error && (
-                <div style={{ color: "red" }}>{ similarState.error }</div>
-              )}
-              {!similarState.loading && !similarState.error && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {similarState.items.map((p) => (
-                    <div
-                      key={p.id || p.product_id || p.external_id}
-                      className="border rounded-lg p-4"
-                    >
-                      <div className="h-32 bg-gray-100 rounded mb-3 overflow-hidden flex items-center justify-center">
-                        {p.image_url ? (
-                          <img
-                            src={ p.image_url }
-                            alt={p.title || p.name}
-                            className="h-full object-cover"
-                          />
-                        ) : (
-                          <div className="text-gray-400 text-sm">No image</div>
-                        )}
-                      </div>
-                      <div className="font-medium line-clamp-2">
-                        {p.title || p.name || "Untitled"}
-                      </div>
-                      {typeof p.price !== "undefined" && (
-                        <div className="text-sm text-gray-900 mt-1">
-                          ${Number(p.price).toFixed(2)}
-                        </div>
-                      )}
-                      <div className="mt-2 flex gap-2">
-                        <button
-                          className="px-2 py-1 rounded bg-blue-600 text-white text-xs"
-                          onClick={async () => {
-                            try {
-                              const source = "similar";
-                              await logView(p, source);
-                              await sendRecommendationFeedback({
-                                product: p,
-                                action: "clicked",
-                                source,
-                              });
-                            } catch (e) {
-                              console.debug(
-                                "log view/feedback failed (similar)",
-                                e,
-                              );
-                            }
-                          }}
-                        >
-                          View
-                        </button>
-                        <button
-                          className="px-2 py-1 rounded bg-emerald-600 text-white text-xs"
-                          onClick={async () => {
-                            try {
-                              const source = "similar";
-                              await logCartAdd(p, source);
-                              await sendRecommendationFeedback({
-                                product: p,
-                                action: "converted",
-                                source,
-                              });
-                            } catch (e) {
-                              console.debug(
-                                "log cart/feedback failed (similar)",
-                                e,
-                              );
-                            }
-                          }}
-                        >
-                          Add to Cart
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </PopupLayout>
-        )}
-        {searching && !searchState.loading && !searchState.error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {searchState.items.map((p) => (
-              <div
-                key={p.id || p.product_id || p.external_id}
-                className="border rounded-lg p-4 hover:shadow-sm transition"
-              >
-                <div className="h-40 bg-gray-100 rounded mb-3 overflow-hidden flex items-center justify-center">
-                  {p.image_url ? (
-                    <img
-                      src={ p.image_url }
-                      alt={p.title || p.name}
-                      className="h-full object-cover"
-                    />
-                  ) : (
-                    <div className="text-gray-400 text-sm">No image</div>
-                  )}
-                </div>
-                <div className="font-medium line-clamp-2">
-                  {p.title || p.name || "Untitled"}
-                </div>
-                {typeof p.price !== "undefined" && (
-                  <div className="text-sm text-gray-900 mt-1">
-                    ${Number(p.price).toFixed(2)}
-                  </div>
-                )}
-                {p.description && (
-                  <div className="text-sm text-gray-600 mt-1 line-clamp-2">
-                    { p.description }
-                  </div>
-                )}
-                <div className="mt-3 flex gap-2">
-                  <button
-                    className="px-3 py-1 rounded bg-blue-600 text-white text-sm"
-                    onClick={async () => {
-                      try {
-                        const source = "search";
-                        await logView(p, source);
-                        await sendRecommendationFeedback({
-                          product: p,
-                          action: "clicked",
-                          source,
-                        });
-                      } catch (e) {
-                        console.debug("log view/feedback failed (search)", e);
-                      }
-                    }}
-                  >
-                    View
-                  </button>
-                  <button
-                    className="px-3 py-1 rounded bg-emerald-600 text-white text-sm"
-                    onClick={async () => {
-                      try {
-                        const source = "search";
-                        await logCartAdd(p, source);
-                        await sendRecommendationFeedback({
-                          product: p,
-                          action: "converted",
-                          source,
-                        });
-                      } catch (e) {
-                        console.debug("log cart/feedback failed (search)", e);
-                      }
-                    }}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </Row>
+      <ProductPopup
+        product={selected}
+        show={!!selected}
+        onClose={() => setSelected(null)}
+      />
     </Col>
   );
 }

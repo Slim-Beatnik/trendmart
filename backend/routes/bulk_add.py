@@ -145,6 +145,12 @@ def ensure_product(subcat: Subcategory, p: dict) -> tuple[Product, bool]:
             product.image_attribution = p.get("image_attribution")
         if product.subcategory_id != subcat.id:
             product.subcategory_id = subcat.id
+        # Preserve source_id if not set yet and incoming has 'id'
+        if getattr(product, 'source_id', None) is None and p.get('id') is not None:
+            try:
+                product.source_id = int(p.get('id'))
+            except Exception:
+                pass
         return product, False
 
     # create new product with unique SKU
@@ -160,6 +166,7 @@ def ensure_product(subcat: Subcategory, p: dict) -> tuple[Product, bool]:
         image_attribution=p.get("image_attribution"),
         tags=tags_csv,
         subcategory_id=subcat.id,
+        source_id=p.get('id') if isinstance(p.get('id'), int) else None,
     )
     db.session.add(product)
     db.session.flush()

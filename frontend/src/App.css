@@ -1,0 +1,17 @@
+/* Additional responsive tweaks for product cards */
+.card img {}
+
+@media (max-width: 576px) {
+    .featured-scroll {
+        padding: .5rem .25rem;
+    }
+}
+
+@media (min-width: 992px) {
+
+    /* Slightly tighter grid on large screens */
+    .row.g-3>[class*='col-'] {
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
+}

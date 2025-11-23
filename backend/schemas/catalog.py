@@ -37,6 +37,7 @@ class ProductSchema(BaseSchema):
     # Nested relationships for rich API responses (read-only)
     subcategory = fields.Nested(SubcategorySchema, dump_only=True)
     reviews = fields.Nested('ReviewSchema', many=True, dump_only=True)
+    source_id = fields.Int(dump_only=True)
 
 
 class InventorySchema(BaseSchema):

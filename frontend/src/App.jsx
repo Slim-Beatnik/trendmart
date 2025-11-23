@@ -1,14 +1,16 @@
-import { useState } from "react";
-import { Routes, Route, Outlet } from "react-router-dom";
-import MasterLayout from "./layouts/mainComponents/MasterLayout";
-import LoginRegister from "./layouts/layoutChildren/popupLayoutChildren/loginRegister/LoginRegister";
-import FocusedProduct from "./layouts/layoutChildren/popupLayoutChildren/focusedProduct/FocusedProduct";
-import Profile from "./layouts/layoutChildren/popupLayoutChildren/profileSettingsCompanyInfo/Profile";
-import ProtectedURLs from './layouts/layoutChildren/securityWrapper/ProtectedURLs'
-// import Profile from './layouts/layoutChildren/popupLayoutChildren/profileSettingsCompanyInfo/Profile'
-// import ProtectedURLs from './access/ProtectedURLs'
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes, Route, Outlet } from 'react-router-dom';
+import MasterLayout from '@main/MasterLayout';
+import FocusedProduct from '@children/popupLayoutChildren/focusedProduct/FocusedProduct';
+import Profile from '@children/popupLayoutChildren/profileSettings/Profile';
+import Address from '@children/popupLayoutChildren/profileSettings/Address';
+import ProtectedURLs from '@children/securityWrapper/ProtectedURLs';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
+import StyleGuide from '@resources/themes/StyleGuide';
+import ShippingPopup from '@children/popupLayoutChildren/checkout/ShippingPopup';
+import PaymentPopup from '@children/popupLayoutChildren/checkout/PaymentPopup';
+import OrderConfirmation from '@children/popupLayoutChildren/checkout/OrderConfirmation';
 
 function App() {
   const [popup, setPopup] = useState(null);
@@ -17,18 +19,57 @@ function App() {
     <>
       <Routes>
         <Route
+          path="/styleguide"
+          element={<StyleGuide />}
+        />
+        <Route
           path="/"
-          element={
-            <MasterLayout
-              popupChildren={<Outlet context={[popup, setPopup]} />}
-              setPopup={ setPopup }
-            />
-          }
+          element={<MasterLayout state={{ popup, setPopup }} />}
         >
-          <Route path="/login" element={<LoginRegister />} />
-          <Route path="/product" element={<FocusedProduct />} />
-          <Route element={ <ProtectedURLs /> } >
-            <Route path="/profile" element={ <Profile /> } />
+          <Route element={<ProtectedURLs />}>
+            <Route
+              path="/product/:int"
+              element={
+                <FocusedProduct
+                  onAddToCart={null}
+                  onBuyNow={null}
+                  onWishlist={null}
+                  onMoreLikeThis={null}
+                  onClose={null}
+                />
+              }
+            />
+
+            <Route
+              path="/profile"
+              element={<Profile />}
+            >
+              <Route
+                index
+                element={<Address />}
+              />
+              {/* <Route
+                path="profile/contact-info"
+                element={<ContactInfo />}
+              /> */}
+              <Route
+                path="profile/address"
+                element={<Address />}
+              />
+              {/* <Route
+                path="profile/security"
+                element={<Security />}
+              /> */}
+            </Route>
+
+            <Route
+              path="/checkout/shipping"
+              element={<ShippingPopup />}
+            />
+            <Route
+              path="/checkout/payment/:orderId"
+              element={<PaymentPopup />}
+            />
           </Route>
         </Route>
       </Routes>

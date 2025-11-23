@@ -11,7 +11,8 @@
 **/dist-ssr/
 
 # Ignore editor and environment-specific folders/files anywhere
-.env*
+# Only ignore dedicated Stripe env file; allow .env to be committed if desired
+**/.env.stripe
 .idea/
 .vscode/
 .DS_Store

@@ -1,5 +1,5 @@
 from marshmallow import fields
-from extensions import BaseSchema
+from extensions import BaseSchema, ValidationSchema
 from models.payment import Payment
 
 
@@ -76,7 +76,7 @@ class PaymentSchemas:
     PaymentUpdateSchema = PaymentUpdateSchema
 
 
-class PaymentIntentCreateSchema(BaseSchema):
+class PaymentIntentCreateSchema(ValidationSchema):
     """
     Schema for creating Stripe PaymentIntent requests.
 
@@ -84,15 +84,11 @@ class PaymentIntentCreateSchema(BaseSchema):
     Validates required fields for payment processing.
     """
     order_id = fields.Int(required=True)
-    # Amount in cents
-    amount = fields.Int(required=True, validate=lambda x: x > 0)
-    # currency = fields.Str(missing='usd', validate=lambda x: len(x) == 3)
-    # metadata = fields.Dict(missing=dict)
-    currency = fields.Str(validate=lambda x: len(x) == 3)
-    metadata = fields.Dict()
+    currency = fields.Str(load_default='usd', validate=lambda x: len(x) == 3)
+    metadata = fields.Dict(load_default=dict)
 
 
-class PaymentIntentResponseSchema(BaseSchema):
+class PaymentIntentResponseSchema(ValidationSchema):
     """
     Schema for PaymentIntent creation responses.
 
@@ -103,7 +99,7 @@ class PaymentIntentResponseSchema(BaseSchema):
     payment_id = fields.Int(required=True)
 
 
-class WebhookEventSchema(BaseSchema):
+class WebhookEventSchema(ValidationSchema):
     """
     Schema for processing Stripe webhook events.
 

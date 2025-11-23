@@ -36,7 +36,10 @@ class Payment(db.Model):
     # Payment status tracking
     status = db.Column(db.String(32), nullable=False, default='pending')
 
+    # Deprecated float storage (kept for backward compatibility). Prefer integer "amount_cents".
     total_amount = db.Column(db.Float, nullable=False)
+    amount_cents = db.Column(db.Integer, nullable=False, default=0)
+    # Integer cents stored natively; legacy float kept for backward compatibility.
     currency = db.Column(db.String(10), nullable=False, default='USD')
     payment_method = db.Column(db.String(50), nullable=False)
     stripe_payment_intent_id = db.Column(db.String(255), unique=True)
@@ -47,3 +50,10 @@ class Payment(db.Model):
 
     # Relationships
     order = db.relationship('Order', back_populates='payment')
+
+    @property
+    def normalized_total(self) -> float:
+        """Preferred dollar amount derived from amount_cents if present."""
+        if self.amount_cents is not None:
+            return self.amount_cents / 100.0
+        return self.total_amount

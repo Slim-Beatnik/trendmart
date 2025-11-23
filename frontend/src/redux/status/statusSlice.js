@@ -1,12 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  message: "",
+  message: '',
   variant: null, // 'success' | 'error' | 'info'
 };
 
 const statusSlice = createSlice({
-  name: "status",
+  name: 'status',
   initialState,
   reducers: {
     setStatus: (state, action) => {
@@ -15,7 +15,7 @@ const statusSlice = createSlice({
       state.variant = variant;
     },
     clearStatus: (state) => {
-      state.message = "";
+      state.message = '';
       state.variant = null;
     },
   },

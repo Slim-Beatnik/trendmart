@@ -1,28 +1,33 @@
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ProductCard from './ProductCard';
 
-function ProductGrid() {
+// Single-row grid: up to 4 products, no internal scrolling
+function ProductGrid({ products = [], onSelect, onAddToCart, loading, error }) {
   return (
-    <Row className="d-flex flex-row h-100 w-100 m-0 p-1 gap-1">
-      <Col
-        xs={6}
-        md={4}
-        className="d-flex flex-column m-0 p-0 bg-info"
-        style={{ height: "100%", maxWidth: "50%" }}
-      >
-        
-      </Col>
-      <Col xs={6} md={2} className="d-flex flex-column flex-grow-1 bg-success">
-        <Row
-          xs={6}
-          id="cardContainer1"
-          className="d-flex flex-row h-50 bg-secondary"
-        >
-
-        </Row>
-        <Row xs={6} id="cardContainer2" className="d-flex flex-row h-50"></Row>
-      </Col>
-    </Row>
+    <div className="w-100" style={{ padding: '0.5rem 0' }}>
+      {loading && <div className="text-muted small px-2">Loading...</div>}
+      {error && !loading && <div className="text-danger small px-2">{error}</div>}
+      <Row className="gx-3 m-0 w-100">
+        {products.map((p, idx) => (
+          <Col
+            key={p.id || idx}
+            xs={12}
+            sm={6}
+            md={3}
+            lg={3}
+            className="d-flex"
+          >
+            <ProductCard
+              product={p}
+              minimal
+              onView={() => onSelect?.(p)}
+              onAddToCart={onAddToCart}
+            />
+          </Col>
+        ))}
+      </Row>
+    </div>
   );
 }
 

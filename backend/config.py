@@ -10,6 +10,11 @@ if os.path.exists(_backend_env):
 else:
     load_dotenv()
 
+# Optionally load Stripe-specific env file if present, to override keys securely
+_backend_env_stripe = os.path.join(_here, '.env.stripe')
+if os.path.exists(_backend_env_stripe):
+    load_dotenv(_backend_env_stripe, override=True)
+
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')

@@ -60,9 +60,6 @@ COPY --from=deps /usr/local/bin /usr/local/bin
 # Ensure appuser owns the application files and instance directory
 RUN mkdir -p /app/instance && chown -R appuser:appuser /app
 
-# Copy app code
-COPY . .
-
 # Switch to non-root user for safety
 USER appuser
 

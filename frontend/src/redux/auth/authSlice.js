@@ -1,26 +1,30 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../api/api";
-import { setStatus } from "../status/statusSlice";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import api, { setAuthToken } from '@api/api';
+import { setStatus } from '../status/statusSlice';
 
 const initialState = {
   user: null,
   isAuthenticated: false,
-  status: "idle", // 'idle' | 'loading' | 'succeeded' | 'error'
+  status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'error'
   error: null,
 };
 
-export const createUser = createAsyncThunk(
-  "auth/register",
+export const loginUser = createAsyncThunk(
+  'auth/login',
   async ({ email, password }, { rejectWithValue, dispatch }) => {
     try {
-      const response = await api.post("/auth/register", { email, password });
-
+      const response = await api.post('/auth/login', { email, password });
+      // Attach token immediately
+      const token = response.data?.access_token;
+      if (token) setAuthToken(token);
+      dispatch(setStatus({ message: 'Login successful.', variant: 'success' }));
       return response.data;
     } catch (error) {
       dispatch(
         setStatus({
-          message: error.response?.data?.message || "Registration failed.",
-          variant: "error",
+          message:
+            error.response?.data?.message || 'Login failed. Check credentials.',
+          variant: 'error',
         })
       );
       return rejectWithValue(error.response?.data);
@@ -28,19 +32,25 @@ export const createUser = createAsyncThunk(
   }
 );
 
-export const loginUser = createAsyncThunk(
-  "auth/login",
+export const createUser = createAsyncThunk(
+  'auth/register',
   async ({ email, password }, { rejectWithValue, dispatch }) => {
     try {
-      const response = await api.post("/auth/login", { email, password });
+      const response = await api.post('/auth/register', { email, password });
+      dispatch(
+        setStatus({
+          message: 'Registration successful. You are now logged in.',
+          variant: 'success',
+        })
+      );
 
-      return response.data;
+      // Expect { user: {...} }
+      return response.data.user;
     } catch (error) {
       dispatch(
         setStatus({
-          message:
-            error.response?.data?.message || "Login failed. Check credentials.",
-          variant: "error",
+          message: error.response?.data?.message || 'Registration failed.',
+          variant: 'error',
         })
       );
       return rejectWithValue(error.response?.data);
@@ -49,38 +59,37 @@ export const loginUser = createAsyncThunk(
 );
 
 export const checkAuthStatus = createAsyncThunk(
-  "auth/protected",
-  async (_, { rejectWithValue, dispatch }) => {
+  'auth/check',
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await api.get("/auth/protected");
-      dispatch(setStatus({ message: "Session active.", variant: "info" }));
-      return response.data;
+      // If the page was refreshed, api.js bootstraps from localStorage already.
+      const response = await api.get('/auth/protected');
+
+      // Expect { user }
+      return response.data.user;
     } catch (error) {
-      dispatch(
-        setStatus({
-          message: "Session expired. Please log in again.",
-          variant: "error",
-        })
-      );
       return rejectWithValue(error.response?.data);
     }
   }
 );
 
 export const logoutUser = createAsyncThunk(
-  "auth/logoutUser",
+  'auth/logout',
   async (_, { rejectWithValue, dispatch }) => {
     try {
-      await api.post("/auth/logout");
+      await api.post('/auth/logout');
       dispatch(
-        setStatus({ message: "Logged out successfully.", variant: "info" })
+        setStatus({
+          message: "Logged out successfully. We'll see you next time!",
+          variant: 'info',
+        })
       );
       return null;
     } catch (error) {
       dispatch(
         setStatus({
-          message: error.response?.data?.message || "Logout failed.",
-          variant: "error",
+          message: error.response?.data?.message || 'Logout failed.',
+          variant: 'error',
         })
       );
       return rejectWithValue(error.response?.data);
@@ -89,55 +98,57 @@ export const logoutUser = createAsyncThunk(
 );
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Login reducers
+      // LOGIN
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isAuthenticated = true;
         state.user = action.payload;
-        state.status = "succeeded";
+        state.status = 'succeeded';
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isAuthenticated = false;
+        state.user = null;
         state.error = action.payload;
-        state.status = "error";
+        state.status = 'error';
       })
 
-      // Registration reducers
+      // REGISTER
       .addCase(createUser.fulfilled, (state, action) => {
         state.isAuthenticated = true;
         state.user = action.payload;
-        state.status = "succeeded";
+        state.status = 'succeeded';
       })
       .addCase(createUser.rejected, (state, action) => {
         state.isAuthenticated = false;
+        state.user = null;
         state.error = action.payload;
-        state.status = "error";
+        state.status = 'error';
       })
 
-      // Auth check reducers
+      // CHECK SESSION
       .addCase(checkAuthStatus.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(checkAuthStatus.fulfilled, (state, action) => {
         state.isAuthenticated = true;
         state.user = action.payload;
-        state.status = "succeeded";
+        state.status = 'succeeded';
       })
       .addCase(checkAuthStatus.rejected, (state) => {
         state.isAuthenticated = false;
         state.user = null;
-        state.status = "failed";
+        state.status = 'error';
       })
 
-      // Logout reducers
+      // LOGOUT
       .addCase(logoutUser.fulfilled, (state) => {
         state.isAuthenticated = false;
         state.user = null;
-        state.status = "idle";
+        state.status = 'idle';
       });
   },
 });

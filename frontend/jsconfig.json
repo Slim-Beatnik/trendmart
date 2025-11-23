@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@redux/*": ["src/redux/*"],
+      "@resources/*": ["src/reusable/*"],
+      "@main/*": ["src/layouts/mainComponents"],
+      "@children/*": ["src/layouts/layoutChildren"],
+      "@api/*": ["src/api"],
+      "@utils/*": ["src/utils"],
+    }
+  }
+}

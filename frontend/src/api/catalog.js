@@ -3,13 +3,24 @@
 // Backend endpoints referenced: /products, /categories/:id/products, /products/:id/inventory, /products/:id/reviews
 // All functions return response.data directly; callers handle errors.
 
-import api from "./api";
+import api from './api';
 
 // -------- Products --------
 
 export async function listProducts(params = {}) {
-  const { data } = await api.get("/products", { params });
+  const { data } = await api.get('/products', { params });
   return data; // Array of products
+}
+
+// Client-side search helper (case-insensitive substring match on name/description)
+export function filterProductsByQuery(products, query) {
+  if (!query) return products;
+  const q = query.trim().toLowerCase();
+  if (!q) return products;
+  return products.filter(p => (
+    (p.name && p.name.toLowerCase().includes(q)) ||
+    (p.description && p.description.toLowerCase().includes(q))
+  ));
 }
 
 export async function getProduct(productId) {
@@ -18,7 +29,7 @@ export async function getProduct(productId) {
 }
 
 export async function createProduct(payload) {
-  const { data } = await api.post("/products", payload);
+  const { data } = await api.post('/products', payload);
   return data;
 }
 
@@ -35,7 +46,7 @@ export async function deleteProduct(productId) {
 // -------- Categories --------
 
 export async function listCategories(params = {}) {
-  const { data } = await api.get("/categories", { params });
+  const { data } = await api.get('/categories', { params });
   return data; // Array of categories
 }
 
@@ -92,9 +103,9 @@ export async function safeGetProduct(productId) {
 }
 
 function extractErrorMessage(err) {
-  if (!err) return "Unknown error";
+  if (!err) return 'Unknown error';
   const res = err.response;
   if (res?.data?.message) return res.data.message;
   if (res?.data?.error) return res.data.error;
-  return err.message || "Request failed";
+  return err.message || 'Request failed';
 }

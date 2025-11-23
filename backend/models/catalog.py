@@ -58,6 +58,8 @@ class Product(db.Model):
     image_attribution = db.Column(db.String(255))
     times_click_on = db.Column(db.Integer, default=0, nullable=False)
     tags = db.Column(db.String(255))
+    # Original external/source dataset ID (optional). Allows resolving products by sample file ID.
+    source_id = db.Column(db.Integer, index=True, nullable=True)
 
     # Relationships
     # One-to-many: Product can have multiple reviews, delete reviews if product deleted
