@@ -100,7 +100,6 @@ def create_app():
     app.register_blueprint(bulk_bp)
     app.register_blueprint(bulk_users_bp)
     app.register_blueprint(payment_bp)
-    app.register_blueprint(order_bp)
 
     # Serve product/media assets from backend/assets directory
     @app.route("/assets/<path:filename>")
