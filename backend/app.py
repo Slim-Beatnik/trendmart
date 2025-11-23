@@ -15,6 +15,7 @@ from routes.catalog import categories_bp, products_bp, subcategories_bp
 from routes.customers import customers_bp
 from routes.events import events_bp, recom_feedback_bp
 from routes.recommendation import recom_bp
+from routes.shopping import cart_bp
 
 # Swagger UI configuration
 SWAGGER_URL = "/api/docs"
@@ -88,6 +89,7 @@ def create_app():
     app.register_blueprint(recom_feedback_bp)
     app.register_blueprint(bulk_bp)
     app.register_blueprint(bulk_users_bp)
+    app.register_blueprint(cart_bp)
 
     # Serve the raw swagger.yaml
     @app.route("/api/swagger")

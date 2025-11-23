@@ -19,7 +19,164 @@ produces:
 # =========================
 # Paths
 # =========================
-paths: 
+paths:
+  /cart/items:
+    post:
+      tags:
+        - Shopping
+      summary: Add an item to a user's cart (creates cart if needed)
+      description: |
+        Adds a product to the user's cart. If the cart doesn't exist it will be created.
+        If the product already exists in the cart the quantities are merged (increments existing quantity).
+        Provide `user_id` either in the request body or as a `user_id` query parameter.
+      parameters:
+        - in: query
+          name: user_id
+          type: integer
+          required: false
+          description: "Optional. User id that owns the cart; can be provided in body instead."
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CartItemCreate'
+      responses:
+        201:
+          description: Created - new cart item added
+          schema:
+            $ref: '#/definitions/CartItem'
+        200:
+          description: Existing cart item updated (quantity merged)
+          schema:
+            $ref: '#/definitions/CartItem'
+        400:
+          description: Validation error (missing/invalid fields)
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        404:
+          description: Product not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+
+  /cart:
+    get:
+      tags:
+        - Shopping
+      summary: Get all items in a user's cart
+      description: |
+        Returns a list of cart items for the given `user_id`. `user_id` is required as a query parameter.
+      parameters:
+        - in: query
+          name: user_id
+          type: integer
+          required: true
+          description: "User id that owns the cart"
+      responses:
+        200:
+          description: List of cart items (empty list if cart does not exist)
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CartItem'
+        400:
+          description: Missing/invalid user_id
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+
+    delete:
+      tags:
+        - Shopping
+      summary: Clear all items in a user's cart
+      description: |
+        Removes all items from the cart for the given `user_id`. This operation is idempotent.
+      parameters:
+        - in: query
+          name: user_id
+          type: integer
+          required: true
+          description: "User id that owns the cart"
+      responses:
+        200:
+          description: Cart cleared (or no-op if cart did not exist)
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Cart cleared"
+        400:
+          description: Missing/invalid user_id
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+
+  /cart/items/{item_id}:
+    delete:
+      tags:
+        - Shopping
+      summary: Remove a single item from the cart
+      description: Deletes the cart item identified by `item_id`.
+      parameters:
+        - in: path
+          name: item_id
+          required: true
+          type: integer
+          description: "Cart item id"
+      responses:
+        200:
+          description: Item removed
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Item removed from cart"
+        404:
+          description: Cart item not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+
+    patch:
+      tags:
+        - Shopping
+      summary: Update quantity for a cart item
+      description: |
+        Update the `quantity` for a cart item. If `quantity` is 0 or negative the item is removed.
+      parameters:
+        - in: path
+          name: item_id
+          required: true
+          type: integer
+          description: "Cart item id"
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CartItemQuantityUpdate'
+      responses:
+        200:
+          description: Updated cart item (or removed if quantity <= 0)
+          schema:
+            oneOf:
+              - $ref: '#/definitions/CartItem'
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Item removed from cart"
+        400:
+          description: Missing/invalid quantity
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        404:
+          description: Cart item not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+
+ 
   /bulk/add:
     post:
       tags:
@@ -1223,3 +1380,66 @@ definitions:
 
 
 
+  # ------------------------
+  # Shopping / Cart Schemas
+  # ------------------------
+  CartItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 12
+      cart_id:
+        type: integer
+        example: 4
+      product_id:
+        type: integer
+        example: 123
+      quantity:
+        type: integer
+        example: 2
+      price_per_unit:
+        type: number
+        format: float
+        example: 19.99
+
+  CartItemCreate:
+    type: object
+    required: [product_id, quantity, price_per_unit]
+    properties:
+      user_id:
+        type: integer
+        example: 1
+        description: Optional. If provided here the cart will be associated with this user. Can also be passed as query param.
+      product_id:
+        type: integer
+        example: 123
+      quantity:
+        type: integer
+        example: 2
+      price_per_unit:
+        type: number
+        format: float
+        example: 19.99
+
+  CartItemQuantityUpdate:
+    type: object
+    required: [quantity]
+    properties:
+      quantity:
+        type: integer
+        example: 5
+
+  Cart:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 4
+      user_id:
+        type: integer
+        example: 1
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/CartItem'
