@@ -3,6 +3,10 @@ import Button from 'react-bootstrap/Button';
 import { useTheme } from '@resources/themes/themeContext';
 import PopupCloseButton from '@children/button/CloseButton';
 import Logo from '@children/logo/Logo';
+import { useDispatch } from 'react-redux';
+import { addItem } from '@redux/cart/cartSlice';
+import { addToCart as addToCartApi } from '@api/cart';
+import { logCartAdd } from '@api/events';
 
 function ProductPopup({
     product,
@@ -13,10 +17,29 @@ function ProductPopup({
     onMoreLikeThis,
 }) {
     const { theme } = useTheme();
+    const dispatch = useDispatch();
     if (!product) return null;
 
     const { name, imageUrl, description, price, tags, score } = product;
     const priceDisplay = `$${Number(price || 0).toFixed(2)}`;
+
+    const handleAddToCartInternal = async () => {
+        dispatch(addItem({
+            productId: product.id,
+            name: product.name,
+            price: Number(product.price || 0),
+            imageUrl: product.imageUrl || '',
+            quantity: 1
+        }));
+        try {
+            await addToCartApi(product.id, 1);
+            logCartAdd(product, 'popup').catch(() => { });
+        } catch (e) {
+            console.warn('Popup cart sync failed', e);
+        }
+        // Preserve passed prop handler if provided
+        onAddToCart?.(product);
+    };
 
     return (
         <Modal
@@ -117,27 +140,25 @@ function ProductPopup({
                         Buy Now
                     </Button>
 
-                    {/* Right: TrendMart logo as Add-to-Cart */}
+                    {/* Add to Cart button with embedded logo */}
                     {onAddToCart && (
-                        <button
-                            type="button"
-                            onClick={() => onAddToCart(product)}
+                        <Button
+                            variant="dark"
+                            onClick={handleAddToCartInternal}
                             aria-label="Add to cart"
-                            className="border-0 p-0 m-0"
                             style={{
-                                width: 56,
-                                height: 56,
-                                borderRadius: '50%',
-                                overflow: 'hidden',
-                                backgroundColor: theme.colors.primaryBg || '#0a1f45',
+                                ...theme.buttons.splash,
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: 'center',
+                                gap: 8,
+                                fontSize: '.75rem',
+                                padding: '8px 14px',
                             }}
                         >
-                            {/* You can pass details={false} or true depending on look you want */}
-                            <Logo details={false} />
-                        </button>
+                            <div style={{ width: 24, height: 24, display: 'flex' }}>
+                                <Logo details={false} />
+                            </div>
+                        </Button>
                     )}
                     {onMoreLikeThis && (
                         <Button
