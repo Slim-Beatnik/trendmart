@@ -31,6 +31,8 @@ class CustomerProfileSchema(BaseSchema):
         model = CustomerProfile
 
     default_address = fields.Nested(AddressSchema, dump_only=True)
+    # Expose default_address_id for clients that need to confirm selection
+    default_address_id = fields.Int(dump_only=True)
 
 
 class UserSchema(BaseSchema):

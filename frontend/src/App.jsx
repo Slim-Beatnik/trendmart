@@ -27,11 +27,14 @@ function App() {
       try {
         const data = await getCart();
         const items = Array.isArray(data?.items) ? data.items : [];
-        if (!ignore && items.length) {
+        if (!ignore) {
+          // Always hydrate with the server items (may be empty) to avoid stale client state
           dispatch(hydrateCart(items));
         }
       } catch (e) {
         console.warn('Cart hydration failed', e);
+        // On any error, assume empty cart to avoid keeping stale items
+        if (!ignore) dispatch(hydrateCart([]));
       }
     };
     load();
@@ -92,6 +95,10 @@ function App() {
             <Route
               path="/checkout/payment/:orderId"
               element={<PaymentPopup />}
+            />
+            <Route
+              path="/order-confirmation/:orderId"
+              element={<OrderConfirmation />}
             />
           </Route>
         </Route>

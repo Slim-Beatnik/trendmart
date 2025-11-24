@@ -39,7 +39,8 @@ function ProductPopup({
             if (backendId) {
                 dispatch(attachBackendId({ productId: product.id, backendItemId: backendId }));
             }
-            logCartAdd(product, 'popup').catch(() => { });
+            // Use allowed generic source for analytics
+            logCartAdd(product, 'cold_start').catch(() => { });
         } catch (e2) {
             console.warn('Popup cart sync failed', e2);
         } finally {
@@ -67,7 +68,7 @@ function ProductPopup({
             </Modal.Header>
 
             <PopupCloseButton
-                onClick={onClose}
+                onClose={onClose}
                 style={{ zIndex: 999, margin: '4px' }}
             />
 

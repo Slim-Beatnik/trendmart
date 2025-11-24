@@ -1,4 +1,6 @@
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import { useNavigate } from 'react-router-dom';
 import PopupCloseButton from '@children/button/CloseButton';
 import { useTheme } from '@resources/themes/themeContext';
@@ -11,7 +13,7 @@ import { useState } from 'react';
 function ShippingPopup() {
     const { theme } = useTheme();
     const navigate = useNavigate();
-    const [step, setStep] = useState('address'); // address | reviewing
+    const [step, setStep] = useState('address'); // address | review
     const [validation, setValidation] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -23,7 +25,7 @@ function ShippingPopup() {
         try {
             const data = await validateCheckout();
             setValidation(data);
-            setStep('reviewing');
+            setStep('review');
         } catch {
             setError('Unable to validate cart.');
         } finally {
@@ -49,47 +51,87 @@ function ShippingPopup() {
         }
     };
 
+    const headerTitle = step === 'address' ? 'Checkout' : 'Review Order';
+
+    const isDark = theme?.mode === 'dark';
+
     return (
-        <Card className='p-3 shadow position-relative m-auto'
+        <Card
+            role="dialog"
+            aria-modal="true"
+            aria-label="Checkout"
+            className="p-3 shadow position-relative m-auto"
             style={{
-                width: 'min(92vw, 640px)',
-                maxHeight: '90vh',
-                backgroundColor: '#fffffb',
-                color: '#222',
-                borderRadius: 4,
-                ...theme.schemes.darkText,
+                width: '75vw',
+                height: '75vh',
+                maxWidth: '75vw',
+                maxHeight: '75vh',
+                backgroundColor: isDark ? '#000' : '#fffffb',
+                color: isDark ? '#eee' : '#222',
+                borderRadius: theme.props?.bR_less || 4,
+                display: 'flex',
+                flexDirection: 'column'
             }}
         >
-            <PopupCloseButton onClick={() => navigate(-1)} />
-            <Card.Body className='d-flex flex-column gap-3' style={{ overflowY: 'auto' }}>
-                <h3 className='m-0'>Shipping</h3>
-                {step === 'address' && (
-                    <ShippingAddressForm
-                        onBack={() => navigate(-1)}
-                        onNext={handleAddressComplete}
-                    />
-                )}
+            <PopupCloseButton
+                onClose={() => navigate('/', { replace: true })}
+                ariaLabel="Close checkout"
+                variant="darkBlue"
+            />
+            <Card.Body className="h-100 d-flex flex-column">
+                <div className="d-inline-flex flex-column gap-3 h-100" style={{ minHeight: '400px' }}>
+                    <h2 className="mb-2" style={{ fontSize: '1.1rem' }}>{headerTitle}</h2>
 
-                {step === 'reviewing' && (
-                    <>
-                        <h5 className='mb-1'>Review Order</h5>
-                        <OrderSummary validation={validation} />
-                        <div className='d-flex justify-content-between'>
-                            <button className='btn btn-outline-secondary' onClick={() => setStep('address')}>Back</button>
-                            <button className='btn btn-dark' disabled={creatingOrder} onClick={handleCreateOrder}>
-                                {creatingOrder ? 'Creating…' : 'Create Order'}
-                            </button>
+                    {step === 'address' && (
+                        <div className="flex-grow-1 overflow-auto">
+                            <ShippingAddressForm
+                                onBack={() => navigate('/', { replace: true })}
+                                onNext={handleAddressComplete}
+                            />
                         </div>
-                    </>
-                )}
+                    )}
 
-                {loading && <div>Validating cart…</div>}
-                {error && (
-                    <div className='alert alert-danger mt-2'>
-                        {error}
-                        <button className='btn btn-sm btn-outline-dark ms-2' onClick={() => { setError(null); setStep('address'); }}>Retry</button>
-                    </div>
-                )}
+                    {step === 'review' && (
+                        <div className="flex-grow-1 d-flex flex-column overflow-auto">
+                            {validation && !validation.valid && validation.messages && (
+                                <div className='alert alert-warning py-2 mb-2' style={{ fontSize: '.75rem' }}>
+                                    {validation.messages.map((m, i) => (
+                                        <div key={i}>{m}</div>
+                                    ))}
+                                </div>
+                            )}
+                            <OrderSummary validation={validation} />
+                            <div className="d-flex justify-content-between mt-2">
+                                <Button
+                                    type="button"
+                                    variant="outline-secondary"
+                                    size="sm"
+                                    onClick={() => setStep('address')}
+                                >Back</Button>
+                                <Button
+                                    variant="dark"
+                                    size="sm"
+                                    disabled={creatingOrder || !validation?.valid}
+                                    onClick={handleCreateOrder}
+                                    style={{ minWidth: '110px' }}
+                                >{creatingOrder ? (<><Spinner size="sm" className="me-1" />Creating…</>) : (validation?.valid ? 'Place Order' : 'Fix Issues')}</Button>
+                            </div>
+                        </div>
+                    )}
+
+                    {loading && <div>Validating cart…</div>}
+                    {error && (
+                        <div className='alert alert-danger mt-2'>
+                            {error}
+                            <Button
+                                variant='outline-dark'
+                                size='sm'
+                                className='ms-2'
+                                onClick={() => { setError(null); setStep('address'); }}
+                            >Retry</Button>
+                        </div>
+                    )}
+                </div>
             </Card.Body>
         </Card>
     );

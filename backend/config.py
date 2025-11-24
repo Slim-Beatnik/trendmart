@@ -27,6 +27,28 @@ class Config:
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
 
-    STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
-    STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
-    STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
+    @staticmethod
+    def _normalize_env(value: str | None) -> str | None:
+        if not value:
+            return None
+        value = value.strip()
+        if value.startswith('${') and value.endswith('}'):
+            return None
+        return value
+
+    @staticmethod
+    def _explicit_fake_mode_flag() -> bool:
+        return os.environ.get('STRIPE_FAKE_MODE', '').strip().lower() in {
+            '1', 'true', 'yes'
+        }
+
+    _stripe_secret = _normalize_env(os.environ.get('STRIPE_SECRET_KEY'))
+    _stripe_publishable = _normalize_env(
+        os.environ.get('STRIPE_PUBLISHABLE_KEY'))
+    _stripe_webhook = _normalize_env(
+        os.environ.get('STRIPE_WEBHOOK_SECRET'))
+
+    STRIPE_SECRET_KEY = _stripe_secret
+    STRIPE_PUBLISHABLE_KEY = _stripe_publishable
+    STRIPE_WEBHOOK_SECRET = _stripe_webhook
+    STRIPE_FAKE_MODE = _explicit_fake_mode_flag() or not bool(_stripe_secret)

@@ -40,7 +40,7 @@ function ProductCard({
             productId: id,
             name,
             price: Number(price || 0),
-            imageUrl: imageUrl || '',
+            imageUrl: imageUrl || null,
             quantity: 1
         }));
         try {
@@ -50,7 +50,8 @@ function ProductCard({
             if (backendId) {
                 dispatch(attachBackendId({ productId: id, backendItemId: backendId }));
             }
-            logCartAdd(product, 'product_card').catch(() => { });
+            // Use allowed generic source for analytics
+            logCartAdd(product, 'cold_start').catch(() => { });
         } catch (err) {
             console.warn('Cart sync failed', err);
         } finally {
@@ -66,12 +67,30 @@ function ProductCard({
             style={{ minWidth: 0, borderRadius: 8, background: '#fffffd', height: cardHeight || undefined }}
             onClick={() => onView?.(product)}
         >
-            <Card.Img
-                variant="top"
-                src={imageUrl || ''}
-                alt={name}
-                style={{ height: 140, width: '100%', objectFit: 'contain', background: '#e9eef2' }}
-            />
+            {imageUrl ? (
+                <Card.Img
+                    variant="top"
+                    src={imageUrl}
+                    alt={name}
+                    style={{ height: 140, width: '100%', objectFit: 'contain', background: '#e9eef2' }}
+                />
+            ) : (
+                <div
+                    style={{
+                        height: 140,
+                        width: '100%',
+                        background: '#e9eef2',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '.65rem',
+                        color: '#555'
+                    }}
+                    aria-label="No image available"
+                >
+                    No image
+                </div>
+            )}
             <Card.Body className="d-flex flex-column p-2" style={{ fontSize: '.75rem' }}>
                 <div className="fw-semibold" style={{ lineHeight: 1.2, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
                     {name}

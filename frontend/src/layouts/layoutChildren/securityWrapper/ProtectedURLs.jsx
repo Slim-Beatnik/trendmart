@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { checkAuthStatus } from '@redux/auth/authSlice';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { setStatus, clearStatus } from '@redux/status/statusSlice';
+import { AUTH_TOKEN_KEY } from '@api/api';
 
 function ProtectedURLs() {
   const dispatch = useDispatch();
@@ -11,8 +12,16 @@ function ProtectedURLs() {
 
   // Kick off auth check once
   useEffect(() => {
-    dispatch(checkAuthStatus());
-  }, [dispatch]);
+    if (typeof window === 'undefined') {
+      return;
+    }
+    const storedToken = localStorage.getItem(AUTH_TOKEN_KEY);
+    if (storedToken) {
+      dispatch(checkAuthStatus());
+    } else {
+      navigate('/');
+    }
+  }, [dispatch, navigate]);
 
   // Manage global status text outside of render
   useEffect(() => {

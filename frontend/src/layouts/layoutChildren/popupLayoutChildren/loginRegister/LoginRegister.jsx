@@ -97,7 +97,7 @@ function LoginRegister({ setPopup }) {
         filter: 'drop-shadow(.5rem .5rem 1rem #0a1f44e8)',
       }}
     >
-      <PopupCloseButton onClick={() => setPopup(null)} />
+      <PopupCloseButton onClose={() => setPopup(null)} />
       <h1 className="text-center">
         {toggleForm === 'login' ? 'Login' : 'Register'}
       </h1>
@@ -164,39 +164,39 @@ function LoginRegister({ setPopup }) {
         </Row>
         <Row >
 
-            <p
-              className="mx-auto my-0 p-0"
-              style={{ fontSize: '.8rem' }}
-              >
-              {toggleForm === 'register'
-                ? 'Have an account? '
-                : 'New to TrendMart? '}
-              <Link
-                onClick={() =>
-                  setToggleForm(toggleForm === 'login' ? 'register' : 'login')
-                }
-                style={{ cursor: 'pointer' }}
-                >
-                {toggleForm === 'login' ? 'Register' : 'Login '}
-              </Link>
-            </p>
-        <Button
-          type="submit"
-          className="w-50 align-self-center fw-bold border-1 align-self-end"
-          style={{
-            ...(toggleForm === 'login'
-              ? theme.buttons.contrast
-              : theme.buttons.splash),
+          <p
+            className="mx-auto my-0 p-0"
+            style={{ fontSize: '.8rem' }}
+          >
+            {toggleForm === 'register'
+              ? 'Have an account? '
+              : 'New to TrendMart? '}
+            <Link
+              onClick={() =>
+                setToggleForm(toggleForm === 'login' ? 'register' : 'login')
+              }
+              style={{ cursor: 'pointer' }}
+            >
+              {toggleForm === 'login' ? 'Register' : 'Login '}
+            </Link>
+          </p>
+          <Button
+            type="submit"
+            className="w-50 align-self-center fw-bold border-1 align-self-end"
+            style={{
+              ...(toggleForm === 'login'
+                ? theme.buttons.contrast
+                : theme.buttons.splash),
             }}
             disabled={
               formData.email === '' ||
               formData.password.length < 8 ||
               (toggleForm === 'register' &&
                 formData.verification !== formData.email)
-              }
-              >
-          {toggleForm === 'login' ? 'Login' : 'Register'}
-        </Button>
+            }
+          >
+            {toggleForm === 'login' ? 'Login' : 'Register'}
+          </Button>
         </Row>
       </Form>
     </Col>

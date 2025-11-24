@@ -7,6 +7,8 @@ import PaymentResult from './PaymentResult';
 import { getOrder } from '@api/orders';
 import { getPaymentByOrder } from '@api/payments';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { clearCart } from '@redux/cart/cartSlice';
 import OrderSummary from './OrderSummary';
 
 function PaymentPopup() {
@@ -14,9 +16,10 @@ function PaymentPopup() {
     const navigate = useNavigate();
     const { orderId } = useParams();
 
+    const dispatch = useDispatch();
     const [result, setResult] = useState(null);
     const [showResult, setShowResult] = useState(false);
-    const [error, setError] = useState(null);
+    const [orderError, setOrderError] = useState(null);
     const [amountCents, setAmountCents] = useState(0);
     const [orderData, setOrderData] = useState(null);
 
@@ -25,13 +28,23 @@ function PaymentPopup() {
         (async () => {
             try {
                 const data = await getOrder(orderId);
+                setOrderError(null);
                 if (!active) return;
                 setOrderData(data);
                 const totalFloat = Number(data?.total || 0);
                 setAmountCents(Math.round(totalFloat * 100));
-            } catch {
+            } catch (err) {
                 if (!active) return;
-                setError('Unable to load order details.');
+                const unauthorized = [
+                    401,
+                    403,
+                ].includes(err?.response?.status);
+                setOrderError({
+                    message: unauthorized
+                        ? 'Please log in before viewing this order.'
+                        : 'Unable to load order details.',
+                    unauthorized,
+                });
             }
         })();
         return () => { active = false; };
@@ -58,43 +71,70 @@ function PaymentPopup() {
         if (!result || !orderId) return;
         const successStates = new Set(['succeeded', 'completed']);
         if (successStates.has(result.status)) {
+            // Clear client-side cart state once on successful payment
+            try {
+                dispatch(clearCart());
+            } catch (e) {
+                console.warn('Failed to clear client cart on payment success', e);
+            }
             navigate(`/order-confirmation/${orderId}`);
         }
-    }, [result, orderId, navigate]);
+    }, [result, orderId, navigate, dispatch]);
+
+    const isDark = theme?.mode === 'dark';
 
     return (
-        <Card className='p-3 shadow position-relative m-auto'
+        <Card
+            role="dialog"
+            aria-modal="true"
+            aria-label="Payment"
+            className='p-3 shadow position-relative m-auto'
             style={{
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#fffffb',
-                color: '#222',
-                borderRadius: 4,
-                ...theme.schemes.darkText,
+                width: '75vw',
+                height: '75vh',
+                maxWidth: '75vw',
+                maxHeight: '75vh',
+                backgroundColor: isDark ? '#000' : '#fffffb',
+                color: isDark ? '#eee' : '#222',
+                borderRadius: theme.props?.bR_less || 4,
+                display: 'flex',
+                flexDirection: 'column',
             }}
         >
-            <PopupCloseButton onClick={() => navigate(-1)} />
-            <Card.Body className='h-100 d-flex flex-column gap-3' style={{ overflowY: 'auto' }}>
-                <h3 className='m-0'>Payment</h3>
+            <PopupCloseButton
+                onClose={() => navigate('/', { replace: true })}
+                ariaLabel="Close payment"
+                variant="darkBlue"
+            />
+            <Card.Body className='h-100 d-flex flex-column gap-3'>
+                <h2 className='mb-2' style={{ fontSize: '1.1rem' }}>Payment</h2>
                 {showResult ? (
                     <PaymentResult
                         result={result}
-                        onClose={() => navigate(-1)}
+                        onClose={() => navigate('/', { replace: true })}
                     />
                 ) : (
                     <StripePaymentSection
                         orderId={orderId}
                         currency='usd'
                         amountCents={amountCents}
-                        onBack={() => navigate(-1)}
+                        onBack={() => navigate('/', { replace: true })}
                         onPaymentComplete={(intent) => { setResult(intent); setShowResult(true); }}
-                        onInitError={(msg) => setError(msg)}
                     />
                 )}
 
-                {error && !showResult && (
+                {orderError && !showResult && (
                     <div className='alert alert-danger mt-2' role='alert' aria-live='polite'>
-                        {error}
+                        {orderError.message}
+                        {orderError.unauthorized && (
+                            <button
+                                type='button'
+                                className='btn btn-sm btn-outline-primary ms-2'
+                                onClick={() => navigate('/', { replace: true })}
+                            >
+                                Return home to log in
+                            </button>
+                        )}
                         <button type='button' className='btn btn-sm btn-outline-dark ms-2' onClick={() => window.location.reload()}>
                             Retry
                         </button>
@@ -108,19 +148,21 @@ function PaymentPopup() {
                 )}
 
                 {!showResult && orderData && (
-                    <OrderSummary
-                        validation={{
-                            items: (orderData.items || []).map(it => ({
-                                id: it.id,
-                                name: it.product_name || it.name,
-                                quantity: it.quantity,
-                                price_cents: Math.round(Number(it.price_per_unit || 0) * 100),
-                            })),
-                            total_cents: Math.round(Number(orderData.total || 0) * 100),
-                            tax_cents: Math.round(Number(orderData.tax_total || 0) * 100),
-                            shipping_cents: 0,
-                        }}
-                    />
+                    <div className='flex-grow-1 d-flex flex-column overflow-auto'>
+                        <OrderSummary
+                            validation={{
+                                items: (orderData.items || []).map(it => ({
+                                    id: it.id,
+                                    name: it.product_name || it.name,
+                                    quantity: it.quantity,
+                                    price_cents: Math.round(Number(it.price_per_unit || 0) * 100),
+                                })),
+                                total_cents: Math.round(Number(orderData.total || 0) * 100),
+                                tax_cents: Math.round(Number(orderData.tax_total || 0) * 100),
+                                shipping_cents: 0,
+                            }}
+                        />
+                    </div>
                 )}
             </Card.Body>
         </Card>

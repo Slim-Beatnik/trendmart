@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, current_app
-from werkzeug.exceptions import BadRequest
 import stripe
+from stripe import _error as stripe_errors
 from marshmallow import ValidationError
 
 from schemas.payment import PaymentIntentCreateSchema
@@ -13,17 +13,27 @@ from models.shopping import Order
 payment_bp = Blueprint('payments', __name__, url_prefix='/payments')
 
 
-def _error(code: str, message: str, status: int):
-    return jsonify({"error": code, "message": message}), status
+def _error(code: str, message: str, status: int, *, details: str | None = None, error_type: str | None = None):
+    payload = {"error": code, "message": message}
+    if details:
+        payload["details"] = details
+    if error_type:
+        payload["type"] = error_type
+    return jsonify(payload), status
 
 
 @payment_bp.route('/config', methods=['GET'])
 @jwt_required(optional=True)
 def get_stripe_config():
     publishable_key = current_app.config.get('STRIPE_PUBLISHABLE_KEY')
+    fake_mode = current_app.config.get('STRIPE_FAKE_MODE', False) or not bool(
+        current_app.config.get('STRIPE_SECRET_KEY'))
+    if fake_mode:
+        # In fake mode always return a deterministic fake publishable key so frontend can initialize Stripe Elements
+        return jsonify({'publishableKey': publishable_key or 'pk_test_FAKE', 'fake': True}), 200
     if not publishable_key:
         return _error('config_error', 'Stripe publishable key not configured', 500)
-    return jsonify({'publishableKey': publishable_key}), 200
+    return jsonify({'publishableKey': publishable_key, 'fake': False}), 200
 
 
 # POST /payments/intent
@@ -49,12 +59,21 @@ def create_payment_intent():
             order_id=order_id,
             amount=amount_cents,
             currency=(data.get('currency') or 'usd').lower(),
-            metadata={'source': 'api'}
+            metadata={**({'source': 'api'}), **(data.get('metadata') or {})}
         )
-        # result already includes: payment_id, order_id, client_secret, status
         return jsonify(result), 200
-    except Exception as e:
-        return _error('stripe_error', str(e), 502)
+    except ValueError as err:
+        return _error('order_not_found', str(err), 404, details=str(err), error_type=err.__class__.__name__)
+    except stripe_errors.StripeError as err:
+        current_app.logger.error(f"Stripe payment intent failed: {err}")
+        details = getattr(err, 'user_message', None) or str(err)
+        # Map Stripe errors to 400 (client/actionable) unless clearly a configuration/auth issue
+        is_auth = isinstance(err, stripe_errors.AuthenticationError)
+        status_code = 400 if not is_auth else 500
+        return _error('stripe_error', 'Stripe API error', status_code, details=details, error_type=err.__class__.__name__)
+    except Exception as err:
+        current_app.logger.error(f"Unexpected payment intent error: {err}")
+        return _error('internal_error', 'Unable to start payment at this time', 500, details=str(err), error_type=err.__class__.__name__)
 
 
 # POST /payments/webhook
@@ -114,8 +133,12 @@ def issue_refund(payment_id: int):
         return jsonify(result), 201
     except ValueError as e:
         return _error('not_found', str(e), 404)
+    except stripe_errors.StripeError as err:
+        current_app.logger.error(f"Refund failed: {err}")
+        return _error('stripe_error', 'Stripe refund failed', 502, details=str(err), error_type=err.__class__.__name__)
     except Exception as e:
-        return _error('stripe_error', str(e), 400)
+        current_app.logger.error(f"Refund error: {e}")
+        return _error('internal_error', 'Unable to issue refund', 500, details=str(e), error_type=e.__class__.__name__)
 
 
 # GET /payments/{payment_id}/refunds

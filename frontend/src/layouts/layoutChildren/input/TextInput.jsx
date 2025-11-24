@@ -14,39 +14,39 @@ function TextInput({
   const { mode, theme } = useTheme();
 
   return (
-      <Form data-bs-mode={mode}>
-        <Form.Group
-          style={{ width: '100%' }}
-          controlId={inputId}
-          >
-          <InputGroup>
-            <Form.Control
-              type={password ? 'password' : 'text'}
-              placeholder={placeholder}
-              disabled={disabled}
-              onChange={onChange}
-              name={inputId}
-              autoComplete="on"
-              style={{
-                color: theme.colors.text,
-                backgroundColor: theme.colors.highlight,
-                borderColor: theme.colors.splash,
-              }}
-              />
-            {children}
-          </InputGroup>
-          {info && (
-            <Form.Text
+    <div data-bs-mode={mode}>
+      <Form.Group
+        style={{ width: '100%' }}
+        controlId={inputId}
+      >
+        <InputGroup>
+          <Form.Control
+            type={password ? 'password' : 'text'}
+            placeholder={placeholder}
+            disabled={disabled}
+            onChange={onChange}
+            name={inputId}
+            autoComplete="on"
+            style={{
+              color: theme.colors.text,
+              backgroundColor: theme.colors.highlight,
+              borderColor: theme.colors.splash,
+            }}
+          />
+          {children}
+        </InputGroup>
+        {info && (
+          <Form.Text
             style={{
               padding: '.1rem 1rem 1rem 1rem',
               marginBottom: '1rem',
             }}
-            >
-              <em>{info}</em>
-            </Form.Text>
-          )}
-        </Form.Group>
-      </Form>
+          >
+            <em>{info}</em>
+          </Form.Text>
+        )}
+      </Form.Group>
+    </div>
   );
 }
 

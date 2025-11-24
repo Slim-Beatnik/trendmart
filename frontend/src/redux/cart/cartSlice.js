@@ -13,10 +13,10 @@ const cartSlice = createSlice({
         hydrateCart(state, action) {
             state.items = (action.payload || []).map(ci => ({
                 productId: ci.product_id,
-                name: ci.name,
-                price: ci.price,
+                name: ci.name || ci.product_name || 'Item',
+                price: ci.price != null ? ci.price : (ci.price_per_unit != null ? ci.price_per_unit : 0),
                 quantity: ci.quantity,
-                imageUrl: ci.image_url,
+                imageUrl: ci.image_url || ci.product_image_url || null,
                 backendItemId: ci.id
             }));
         },

@@ -32,11 +32,11 @@ services:
       SECRET_KEY: trend1234
       JWT_SECRET_KEY: mart1234
       # Ensure Hugging Face caches are writable (container runs as non-root with no HOME)
-      HF_HOME: /app/instance/hf_cache
-      TRANSFORMERS_CACHE: /app/instance/hf_cache/transformers
-      HUGGINGFACE_HUB_CACHE: /app/instance/hf_cache/hub
-      SENTENCE_TRANSFORMERS_HOME: /app/instance/hf_cache/sentence_transformers
-      XDG_CACHE_HOME: /app/instance/.cache
+      HF_HOME: /app/hf_cache
+      TRANSFORMERS_CACHE: /app/hf_cache/transformers
+      HUGGINGFACE_HUB_CACHE: /app/hf_cache/hub
+      SENTENCE_TRANSFORMERS_HOME: /app/hf_cache/sentence_transformers
+      XDG_CACHE_HOME: /app/hf_cache/.cache
       # Explicitly choose a small, fast embedding model (CPU-friendly)
       HUGGINGFACE_EMBEDDING_MODEL: sentence-transformers/all-MiniLM-L6-v2
       # Optional RAG settings if you want the container to use host Ollama via HTTP

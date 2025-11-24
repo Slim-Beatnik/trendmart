@@ -19,6 +19,23 @@ class CartItemSchema(BaseSchema):
         include_fk = True
     product_id = fields.Int(required=True)
     quantity = fields.Int(required=True, validate=lambda n: n > 0)
+    # Expose price snapshot stored on cart item
+    price_per_unit = fields.Float(dump_only=True)
+    # Convenience fields for frontend display
+    product_name = fields.Method('get_product_name', dump_only=True)
+    product_image_url = fields.Method('get_product_image_url', dump_only=True)
+
+    def get_product_name(self, obj):
+        try:
+            return getattr(obj.product, 'name', None)
+        except Exception:
+            return None
+
+    def get_product_image_url(self, obj):
+        try:
+            return getattr(obj.product, 'image_url', None)
+        except Exception:
+            return None
 
 
 class CartSchema(BaseSchema):
