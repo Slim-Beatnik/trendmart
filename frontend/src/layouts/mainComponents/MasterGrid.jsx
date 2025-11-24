@@ -25,15 +25,14 @@ function MasterGrid() {
 
   return (
     <Row
-      className="w-100 h-100 d-flex flex-row m-0"
+      className="w-100 d-flex flex-row m-0"
       style={{ backgroundColor: theme.colors.whiteBg, padding: '2rem' }}
     >
       <Col
         id="leftCol"
-        className="flex-column m-0 p-0 d-none d-sm-flex flex-grow-0 justify-content-start m-0 p-0 me-3"
+        className="flex-column m-0 p-0 d-none d-sm-flex flex-grow-0-ns align-self-start"
         style={{
           maxWidth: '20%',
-          height: '98%',
           borderRight: `.13rem solid ${theme.colors.details}`,
         }}
       >
@@ -47,16 +46,13 @@ function MasterGrid() {
 
       <Col
         id="rightCol"
-        className="d-flex flex-column h-100 w-100 ps-5"
+        className="d-flex flex-column w-100 ps-5"
         style={{ gap: '2.3rem' }}
       >
         <Row
           id="featuredRow"
           className="d-flex flex-row"
-          style={{
-            height: '55%',
-            borderBottom: `.13rem solid ${theme.colors.details}`,
-          }}
+          style={{ borderBottom: `.13rem solid ${theme.colors.details}` }}
         >
           <FeaturedProducts
             activeCategoryId={activeCategoryId}
