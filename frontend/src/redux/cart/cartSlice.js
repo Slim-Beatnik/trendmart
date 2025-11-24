@@ -11,7 +11,14 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         hydrateCart(state, action) {
-            state.items = action.payload || [];
+            state.items = (action.payload || []).map(ci => ({
+                productId: ci.product_id,
+                name: ci.name,
+                price: ci.price,
+                quantity: ci.quantity,
+                imageUrl: ci.image_url,
+                backendItemId: ci.id 
+            }));
         },
         addItem(state, action) {
             const product = action.payload;
@@ -33,11 +40,18 @@ const cartSlice = createSlice({
         },
         clearCart(state) {
             state.items = [];
+        },
+        attachBackendId(state, action) {
+            const { productId, backendItemId } = action.payload;
+            const idx = state.items.findIndex(i => i.productId === productId);
+            if (idx !== -1) {
+                state.items[idx].backendItemId = backendItemId;
+            }
         }
     }
 });
 
-export const { hydrateCart, addItem, updateQuantity, removeItem, clearCart } = cartSlice.actions;
+export const { hydrateCart, addItem, updateQuantity, removeItem, clearCart, attachBackendId } = cartSlice.actions;
 
 // Selectors
 export const selectCartItems = state => state.cart.items;

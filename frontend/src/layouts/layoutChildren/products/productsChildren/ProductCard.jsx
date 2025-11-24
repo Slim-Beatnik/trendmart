@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { addItem } from '@redux/cart/cartSlice';
 import { addToCart as addToCartApi } from '@api/cart';
 import { logCartAdd } from '@api/events';
+import { attachBackendId } from '@redux/cart/cartSlice';
 
 function ProductCard({
     product,
@@ -35,14 +36,17 @@ function ProductCard({
             imageUrl: imageUrl || '',
             quantity: 1
         }));
-        // Optional backend + analytics (safe, non-blocking)
         try {
-            await addToCartApi(id, 1);
-            logCartAdd(product, 'featured_card').catch(() => { });
+            const resp = await addToCartApi(id, 1);
+            // API returns { cart_item: { id, product_id, quantity, ... }, cart_total, message }
+            const backendId = resp?.cart_item?.id;
+            if (backendId) {
+                dispatch(attachBackendId({ productId: id, backendItemId: backendId }));
+            }
+            logCartAdd(product, 'product_card').catch(() => { });
         } catch (err) {
             console.warn('Cart sync failed', err);
         }
-        // If parent provided override prop, call it last
         onAddToCart?.(product);
     };
 

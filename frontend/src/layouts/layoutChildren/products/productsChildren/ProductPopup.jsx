@@ -4,7 +4,7 @@ import { useTheme } from '@resources/themes/themeContext';
 import PopupCloseButton from '@children/button/CloseButton';
 import Logo from '@children/logo/Logo';
 import { useDispatch } from 'react-redux';
-import { addItem } from '@redux/cart/cartSlice';
+import { addItem, attachBackendId } from '@redux/cart/cartSlice';
 import { addToCart as addToCartApi } from '@api/cart';
 import { logCartAdd } from '@api/events';
 
@@ -18,10 +18,6 @@ function ProductPopup({
 }) {
     const { theme } = useTheme();
     const dispatch = useDispatch();
-    if (!product) return null;
-
-    const { name, imageUrl, description, price, tags, score } = product;
-    const priceDisplay = `$${Number(price || 0).toFixed(2)}`;
 
     const handleAddToCartInternal = async () => {
         dispatch(addItem({
@@ -32,7 +28,11 @@ function ProductPopup({
             quantity: 1
         }));
         try {
-            await addToCartApi(product.id, 1);
+            const resp = await addToCartApi(product.id, 1);
+            const backendId = resp?.cart_item?.id;
+            if (backendId) {
+                dispatch(attachBackendId({ productId: product.id, backendItemId: backendId }));
+            }
             logCartAdd(product, 'popup').catch(() => { });
         } catch (e) {
             console.warn('Popup cart sync failed', e);
@@ -40,6 +40,11 @@ function ProductPopup({
         // Preserve passed prop handler if provided
         onAddToCart?.(product);
     };
+
+    if (!product) return null;
+
+    const { name, imageUrl, description, price, tags, score } = product;
+    const priceDisplay = `$${Number(price || 0).toFixed(2)}`;
 
     return (
         <Modal
