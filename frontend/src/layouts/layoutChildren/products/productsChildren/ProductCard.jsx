@@ -1,6 +1,10 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useTheme } from '@resources/themes/themeContext';
+import { useDispatch } from 'react-redux';
+import { addItem } from '@redux/cart/cartSlice';
+import { addToCart as addToCartApi } from '@api/cart';
+import { logCartAdd } from '@api/events';
 
 function ProductCard({
     product,
@@ -17,7 +21,31 @@ function ProductCard({
     const { id, name, imageUrl, description, price, score } = product;
     const priceDisplay = `$${Number(price || 0).toFixed(2)}`;
 
+    const dispatch = useDispatch();
+
     const cardHeight = height || undefined;
+    const handleAddToCartInternal = async (e) => {
+        e.stopPropagation();
+        if (!product) return;
+        // Optimistic local add
+        dispatch(addItem({
+            productId: id,
+            name,
+            price: Number(price || 0),
+            imageUrl: imageUrl || '',
+            quantity: 1
+        }));
+        // Optional backend + analytics (safe, non-blocking)
+        try {
+            await addToCartApi(id, 1);
+            logCartAdd(product, 'featured_card').catch(() => { });
+        } catch (err) {
+            console.warn('Cart sync failed', err);
+        }
+        // If parent provided override prop, call it last
+        onAddToCart?.(product);
+    };
+
     return (
         <Card
             className="h-100 w-100 d-flex flex-column shadow-sm"
@@ -66,10 +94,7 @@ function ProductCard({
                                 size='sm'
                                 variant='outline-primary'
                                 style={{ fontSize: '.7rem' }}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    onAddToCart?.(product);
-                                }}
+                                onClick={handleAddToCartInternal}
                             >
                                 Cart
                             </Button>
