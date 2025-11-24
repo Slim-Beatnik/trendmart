@@ -113,6 +113,15 @@ def create_app():
     app.register_blueprint(checkout_bp)
     app.register_blueprint(cart_bp)
 
+    # Optional warmup: load recommendation vector store early to avoid first-request latency.
+    try:
+        from ai_recom_system.rag_service import load_simple_index
+        vs = load_simple_index()
+        app.logger.info(
+            f"[warmup] recommendation store products={len(getattr(vs,'products',[]))}")
+    except Exception as e:
+        app.logger.warning(f"[warmup] recommendation store failed: {e}")
+
     # Serve the raw swagger.yaml
 
     @app.route("/api/swagger")
