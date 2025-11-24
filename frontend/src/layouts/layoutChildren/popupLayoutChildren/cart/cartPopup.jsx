@@ -82,7 +82,14 @@ function CartPopup({ setPopup }) {
                 style={{ maxHeight: '50vh' }}
             >
                 {items.length === 0 && (
-                    <div className="text-muted">Cart is empty.</div>
+                    <Button
+                        variant="outline-secondary"
+                        size="sm"
+                        style={{ fontSize: '.65rem', alignSelf: 'flex-start' }}
+                        onClick={() => setPopup(null)}
+                    >
+                        Browse Products
+                    </Button>
                 )}
                 {items.map(item => {
                     const { productId, name, price, quantity, imageUrl, backendItemId } = item;
@@ -152,9 +159,12 @@ function CartPopup({ setPopup }) {
                 style={{ ...theme.buttons.splash, fontSize: '.8rem' }}
                 disabled={items.length === 0}
                 onClick={() => {
-
-
-                    setPopup(null);
+                    import('@children/popupLayoutChildren/checkout/ShippingPopup')
+                        .then(mod => {
+                            const ShippingPopup = mod.default;
+                            setPopup(<ShippingPopup />);
+                        })
+                        .catch(() => setPopup(null));
                 }}
             >
                 Proceed to Checkout
