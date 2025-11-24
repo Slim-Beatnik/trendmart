@@ -80,18 +80,18 @@ function NavBar({ setPopup }) {
           className="d-flex align-items-center p-0 m-0"
           style={{
             height: '8vh',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
           onClick={() => navigate('/')}
         >
-          <Logo variant="white" />
+          <Logo color={theme.colors.text} />
         </Navbar.Brand>
         <h1
           id="title"
           className="mb-0 fs-3"
           style={{
             fontWeight: 700,
-            color: theme.colors.lightBg
+            color: theme.colors.text,
           }}
         >
           TrendMart

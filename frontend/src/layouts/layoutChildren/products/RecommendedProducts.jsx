@@ -9,9 +9,14 @@ import { logView } from '@api/events';
 import { useTheme } from '@resources/themes/themeContext';
 
 function RecommendedProducts() {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
   const [state, setState] = useState({ loading: true, error: null, items: [] });
-  const [searchState, setSearchState] = useState({ query: '', loading: false, error: null, items: [] });
+  const [searchState, setSearchState] = useState({
+    query: '',
+    loading: false,
+    error: null,
+    items: [],
+  });
   const searching = searchState.query.length > 0;
   const [selected, setSelected] = useState(null);
   const [pageIndex, setPageIndex] = useState(0);
@@ -29,7 +34,12 @@ function RecommendedProducts() {
       const items = Array.isArray(data?.results) ? data.results : [];
       setSearchState({ query: q, loading: false, error: null, items });
     } catch (err) {
-      setSearchState({ query: q, loading: false, error: err?.message || 'Search failed', items: [] });
+      setSearchState({
+        query: q,
+        loading: false,
+        error: err?.message || 'Search failed',
+        items: [],
+      });
     }
   }, []);
 
@@ -41,21 +51,31 @@ function RecommendedProducts() {
         const items = Array.isArray(data?.results) ? data.results : [];
         if (isActive) setState({ loading: false, error: null, items });
       } catch (err) {
-        if (isActive) setState({ loading: false, error: err?.message || 'Failed to load', items: [] });
+        if (isActive)
+          setState({
+            loading: false,
+            error: err?.message || 'Failed to load',
+            items: [],
+          });
       }
     })();
-    return () => { isActive = false; };
+    return () => {
+      isActive = false;
+    };
   }, []);
 
   // Normalize recommendation item to ProductCard shape
-  const normalize = useCallback((p) => ({
-    id: p.id || p.product_id || p.external_id,
-    name: p.title || p.name || 'Untitled',
-    imageUrl: p.image_url || p.imageUrl || '',
-    description: p.description || '',
-    price: p.price,
-    score: p.score,
-  }), []);
+  const normalize = useCallback(
+    (p) => ({
+      id: p.id || p.product_id || p.external_id,
+      name: p.title || p.name || 'Untitled',
+      imageUrl: p.image_url || p.imageUrl || '',
+      description: p.description || '',
+      price: p.price,
+      score: p.score,
+    }),
+    []
+  );
 
   const filteredProducts = useMemo(() => {
     const base = searching ? searchState.items : state.items;
@@ -69,17 +89,32 @@ function RecommendedProducts() {
   const visibleProducts = filteredProducts.slice(start, end);
 
   useEffect(() => {
-    setPageIndex(prev => Math.min(prev, totalPages - 1));
+    setPageIndex((prev) => Math.min(prev, totalPages - 1));
   }, [totalPages]);
-  useEffect(() => { setPageIndex(0); }, [searching, searchState.query]);
+  useEffect(() => {
+    setPageIndex(0);
+  }, [searching, searchState.query]);
 
-  const handlePrevPage = useCallback(() => setPageIndex(prev => Math.max(0, prev - 1)), []);
-  const handleNextPage = useCallback(() => setPageIndex(prev => Math.min(totalPages - 1, prev + 1)), [totalPages]);
+  const handlePrevPage = useCallback(
+    () => setPageIndex((prev) => Math.max(0, prev - 1)),
+    []
+  );
+  const handleNextPage = useCallback(
+    () => setPageIndex((prev) => Math.min(totalPages - 1, prev + 1)),
+    [totalPages]
+  );
 
-  const handleView = useCallback(async (p) => {
-    setSelected(p);
-    try { await logView(p, searching ? 'search' : 'cold_start'); } catch { (e) => console.log(e) }
-  }, [searching]);
+  const handleView = useCallback(
+    async (p) => {
+      setSelected(p);
+      try {
+        await logView(p, searching ? 'search' : 'cold_start');
+      } catch {
+        (e) => console.log(e);
+      }
+    },
+    [searching]
+  );
 
   return (
     <Col
@@ -101,7 +136,7 @@ function RecommendedProducts() {
             disabled={pageIndex === 0}
             className="btn btn-sm px-1"
             style={{
-              ...theme.buttons.emphasis
+              ...theme.buttons.emphasis,
             }}
           >
             Prev
@@ -115,7 +150,7 @@ function RecommendedProducts() {
             disabled={pageIndex >= totalPages - 1}
             className="btn btn-sm px-1"
             style={{
-              ...theme.buttons.emphasis
+              ...theme.buttons.emphasis,
             }}
           >
             Next
