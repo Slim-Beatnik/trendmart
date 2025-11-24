@@ -12,15 +12,16 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setStatus, clearStatus } from '@redux/status/statusSlice';
 import {
-  getCurrentUser,
   getAddresses,
   addAddress,
   deleteAddress,
   setDefaultAddress,
 } from '@api/customer';
 import { US_STATES } from '@utils/constants';
+import { useTheme } from '@resources/themes/themeContext';
 
 const Address = () => {
+  const { theme } = useTheme();
   const dispatch = useDispatch();
   const { user, isAuthenticated, token } = useSelector((state) => state.auth);
 
@@ -188,7 +189,7 @@ const Address = () => {
     return (
       <div
         className="d-flex justify-content-center align-items-center"
-        style={{ height: '.244rem' }}
+        style={{ height: 'fit-content' }}
       >
         <Spinner
           animation="border"
@@ -203,7 +204,7 @@ const Address = () => {
   return (
     <>
       <div
-        className="d-flex justify-content-between align-items-center mb-4"
+      className="d-flex justify-content-between align-items-center mb-4 h-100"
       >
         {!showAddForm && (
           <Button
@@ -218,12 +219,10 @@ const Address = () => {
       </div>
 
       {showAddForm && (
-        <Card className="">
-          
+        <Card className="h-100">
           <Card.Body>
             <Form onSubmit={handleSubmitAddress}>
               <div className="d-flex flex-column gap-3">
-
                 {/* Line 1 */}
                 <Form.Group>
                   <Form.Label>Address Line 1 *</Form.Label>
@@ -274,7 +273,10 @@ const Address = () => {
                       >
                         <option value="">Select state</option>
                         {US_STATES.map((s) => (
-                          <option key={s.abbr} value={s.abbr}>
+                          <option
+                            key={s.abbr}
+                            value={s.abbr}
+                          >
                             {s.name} ({s.abbr})
                           </option>
                         ))}
@@ -306,7 +308,7 @@ const Address = () => {
                         value={newAddress.country}
                         onChange={handleChangeAddress}
                         required
-                        />
+                      />
                     </Form.Group>
                   </Col>
                 </Row>
@@ -315,23 +317,29 @@ const Address = () => {
               {/* Buttons */}
               <div className="d-flex gap-2 mt-3">
                 <Button
-                  variant="primary"
                   type="submit"
                   disabled={saving}
                   className="d-flex align-items-center gap-2"
+                  style={{ backgroundColor: theme.colors.emphasis, color: theme.colors.text }}
                 >
                   {saving && (
-                    <Spinner animation="border" size="sm" />
+                    <Spinner
+                      animation="border"
+                      size="sm"
+                    />
                   )}
                   {saving ? 'Saving...' : 'Save Address'}
                 </Button>
 
-                <Button variant="outline-secondary" type="button" onClick={resetForm}>
+                <Button
+                  style={{ backgroundColor: theme.colors.highlight, color: theme.colors.text }}
+                  type="button"
+                  onClick={resetForm}
+                >
                   Cancel
                 </Button>
               </div>
             </Form>
-
           </Card.Body>
         </Card>
       )}
