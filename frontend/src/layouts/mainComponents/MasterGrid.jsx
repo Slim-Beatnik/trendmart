@@ -5,6 +5,7 @@ import RecommendedProducts from '../layoutChildren/products/RecommendedProducts'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useTheme } from '@resources/themes/themeContext';
+import ChildrenMayScroll from '@resources/wrapperComponents/ChildrenMayScroll';
 
 function MasterGrid() {
   const { theme } = useTheme();
@@ -35,10 +36,12 @@ function MasterGrid() {
           borderRight: `.13rem solid ${theme.colors.details}`,
         }}
       >
-        <ProductCategories
-          onSelectCategory={handleSelectCategory}
-          activeCategoryId={activeCategoryId}
-        />
+        <ChildrenMayScroll direction='vertical' >
+          <ProductCategories
+            onSelectCategory={handleSelectCategory}
+            activeCategoryId={activeCategoryId}
+          />
+        </ChildrenMayScroll>
       </Col>
 
       <Col
@@ -51,7 +54,11 @@ function MasterGrid() {
           className="d-flex flex-row"
           style={{ borderBottom: `.13rem solid ${theme.colors.details}` }}
         >
-          <FeaturedProducts activeCategoryId={activeCategoryId} activeCategoryName={activeCategoryName} onClearCategory={() => handleSelectCategory(null)} />
+          <FeaturedProducts
+            activeCategoryId={activeCategoryId}
+            activeCategoryName={activeCategoryName}
+            onClearCategory={() => handleSelectCategory(null)}
+          />
         </Row>
         <Row className="d-flex flex-column">
           <RecommendedProducts />

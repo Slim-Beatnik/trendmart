@@ -162,41 +162,40 @@ function LoginRegister({ setPopup }) {
             )}
           </Col>
         </Row>
-        <Row >
-
-            <p
-              className="mx-auto my-0 p-0"
-              style={{ fontSize: '.8rem' }}
-              >
-              {toggleForm === 'register'
-                ? 'Have an account? '
-                : 'New to TrendMart? '}
-              <Link
-                onClick={() =>
-                  setToggleForm(toggleForm === 'login' ? 'register' : 'login')
-                }
-                style={{ cursor: 'pointer' }}
-                >
-                {toggleForm === 'login' ? 'Register' : 'Login '}
-              </Link>
-            </p>
-        <Button
-          type="submit"
-          className="w-50 align-self-center fw-bold border-1 align-self-end"
-          style={{
-            ...(toggleForm === 'login'
-              ? theme.buttons.contrast
-              : theme.buttons.splash),
+        <Row>
+          <p
+            className="mx-auto my-0 p-0"
+            style={{ fontSize: '.8rem' }}
+          >
+            {toggleForm === 'register'
+              ? 'Have an account? '
+              : 'New to TrendMart? '}
+            <Link
+              onClick={() =>
+                setToggleForm(toggleForm === 'login' ? 'register' : 'login')
+              }
+              style={{ cursor: 'pointer' }}
+            >
+              {toggleForm === 'login' ? 'Register' : 'Login '}
+            </Link>
+          </p>
+          <Button
+            type="submit"
+            className="w-50 align-self-center fw-bold border-1 align-self-end"
+            style={{
+              ...(toggleForm === 'login'
+                ? theme.buttons.contrast
+                : theme.buttons.splash),
             }}
             disabled={
               formData.email === '' ||
               formData.password.length < 8 ||
               (toggleForm === 'register' &&
                 formData.verification !== formData.email)
-              }
-              >
-          {toggleForm === 'login' ? 'Login' : 'Register'}
-        </Button>
+            }
+          >
+            {toggleForm === 'login' ? 'Login' : 'Register'}
+          </Button>
         </Row>
       </Form>
     </Col>

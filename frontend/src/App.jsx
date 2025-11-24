@@ -1,8 +1,7 @@
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import MasterLayout from '@main/MasterLayout';
 import FocusedProduct from '@children/popupLayoutChildren/focusedProduct/FocusedProduct';
 import Profile from '@children/popupLayoutChildren/profileSettings/Profile';
-import Address from '@children/popupLayoutChildren/profileSettings/Address';
 import ProtectedURLs from '@children/securityWrapper/ProtectedURLs';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,7 +25,29 @@ function App() {
           path="/"
           element={<MasterLayout state={{ popup, setPopup }} />}
         >
+            <Route
+              path="/product/:int"
+              element={
+                <FocusedProduct
+                  onAddToCart={null}
+                  onBuyNow={null}
+                  onWishlist={null}
+                  onMoreLikeThis={null}
+                  onClose={null}
+                />
+              }
+            />
           <Route element={<ProtectedURLs />}>
+
+            <Route path="/profile" element={<Navigate to="/profile/contact-info" />} />
+            <Route path="/profile/contact-info" element={<Profile />} />
+            <Route path="/profile/address" element={<Profile />} />
+            <Route path="/profile/security" element={<Profile />} />
+
+            <Route
+              path="/checkout/shipping"
+              element={<ShippingPopup />}
+            />
             <Route
               path="/product/:int"
               element={

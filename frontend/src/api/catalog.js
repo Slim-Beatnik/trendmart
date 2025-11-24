@@ -17,10 +17,11 @@ export function filterProductsByQuery(products, query) {
   if (!query) return products;
   const q = query.trim().toLowerCase();
   if (!q) return products;
-  return products.filter(p => (
-    (p.name && p.name.toLowerCase().includes(q)) ||
-    (p.description && p.description.toLowerCase().includes(q))
-  ));
+  return products.filter(
+    (p) =>
+      (p.name && p.name.toLowerCase().includes(q)) ||
+      (p.description && p.description.toLowerCase().includes(q))
+  );
 }
 
 export async function getProduct(productId) {
