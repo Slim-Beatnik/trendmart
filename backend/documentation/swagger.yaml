@@ -919,6 +919,10 @@ paths:
           schema:
             $ref: "#/definitions/ProductCardList"
 
+  # ------------------------
+  # Authentication Endpoints
+  # ------------------------
+
   /auth/register: # Authentication - Register
     post:
       tags:
@@ -982,9 +986,185 @@ paths:
           description: Unauthorized - Invalid or missing token
           schema:
             $ref: "#/definitions/ErrorResponse"
-  # -----------------
+  
+  # ----------------------------
+  # Customers Profile Endpoints
+  # ----------------------------
+  /customers/profile: # Customers - Profile
+    post:
+      tags:
+        - Customers Profile
+      summary: Update customer profile
+      description: Update the authenticated user's profile information.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/CustomerProfilePayload"
+      responses:
+        200:
+          description: Profile updated successfully
+          schema:
+            $ref: "#/definitions/CustomerMessageResponse"
+        400:
+          description: Validation error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        401:
+          description: Unauthorized - Invalid or missing token
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    patch:
+      tags:
+        - Customers Profile
+      summary: Partially update customer profile
+      description: Partially update the authenticated user's profile information.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/CustomerProfilePayload"
+      responses:
+        200:
+          description: Profile updated successfully
+          schema:
+            $ref: "#/definitions/CustomerMessageResponse"
+        400:
+          description: Validation error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        401:
+          description: Unauthorized - Invalid or missing token
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    get:
+      tags:
+        - Customers Profile
+      summary: Get customer profile
+      description: Retrieve the authenticated user's profile information.
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Profile retrieved successfully
+          schema:
+            $ref: "#/definitions/CustomerProfileResponse"
+        401:
+          description: Unauthorized - Invalid or missing token
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  # ----------------------------
+  # Customers Addresses Endpoints
+  # ----------------------------
+  /customers/addresses:
+    post:
+      tags:
+        - Customers Addresses
+      summary: Add a new address
+      description: Add a new address to the authenticated user's profile.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/CustomerAddressCreatePayload"
+      responses:
+        201:
+          description: Address added successfully
+          schema:
+            $ref: "#/definitions/AddressMessageResponse"
+        400:
+          description: Validation error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        401:
+          description: Unauthorized - Invalid or missing token
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    get:
+      tags:
+        - Customers Addresses
+      summary: Get all addresses
+      description: Retrieve all addresses associated with the authenticated user's profile.
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Addresses retrieved successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/CustomerAddressResponse"
+        401:
+          description: Unauthorized - Invalid or missing token
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /customers/addresses/{address_id}:
+    delete:
+      tags:
+        - Customers Addresses
+      summary: Delete an address
+      description: Delete an existing address by its ID for the authenticated user.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: address_id
+          required: true
+          type: integer
+      responses:
+        204:
+          description: Address deleted successfully
+        401:
+          description: Unauthorized - Invalid or missing token
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: Address not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /customers/set_default_address/{address_id}:
+    patch:
+      tags:
+        - Customers Addresses
+      summary: Set default address
+      description: Set an existing address as the default for the authenticated user.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: address_id
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Default address set successfully
+          schema:
+            $ref: "#/definitions/DefaultAddressMessageResponse"
+        401:
+          description: Unauthorized - Invalid or missing token
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: Address not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      
+
+  # ----------------------------
   # Orders Endpoints
-  # -----------------
+  # ----------------------------
   /orders:
     post:
       tags:
@@ -1868,10 +2048,86 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/SessionIn"
+  # ----------------------------------
+  # Customers Profile Schemas
+  # ----------------------------------
+  CustomerProfilePayload:
+    type: object
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone:
+        type: string
+  CustomerProfileResponse:
+    type: object
+    properties:
+      default_address:
+        $ref: "#/definitions/CustomerAddressResponse"
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone:
+        type: string
+  CustomerMessageResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      profile:
+        $ref: "#/definitions/CustomerProfileResponse"
+  CustomerAddressCreatePayload:
+    type: object
+    properties:
+      line_1:
+        type: string
+      line_2:
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      zip_code:
+        type: string
+      country:
+        type: string
+  CustomerAddressResponse:
+    type: object
+    properties:
+      id:
+        type: integer
+      line_1:
+        type: string
+      line_2:
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      zip_code:
+        type: string
+      country:
+        type: string
+  AddressMessageResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      address:
+        $ref: "#/definitions/CustomerAddressResponse"
+  DefaultAddressMessageResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      default_address:
+        $ref: "#/definitions/CustomerAddressResponse"
 
-  # -----------------
+  # ----------------------------------
   # Orders Schemas
-  # -----------------
+  # ----------------------------------
   OrderResponse:
     type: object
     properties:
