@@ -1,11 +1,16 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import { useTheme } from '@resources/themes/themeContext';
 import { useDispatch } from 'react-redux';
 import { addItem } from '@redux/cart/cartSlice';
 import { addToCart as addToCartApi } from '@api/cart';
 import { logCartAdd } from '@api/events';
 import { attachBackendId } from '@redux/cart/cartSlice';
+import { useSelector } from 'react-redux';
+import { selectCartTotal } from '@redux/cart/cartSlice';
+import { useState } from 'react';
+import Logo from '@children/logo/Logo';
 
 function ProductCard({
     product,
@@ -23,11 +28,13 @@ function ProductCard({
     const priceDisplay = `$${Number(price || 0).toFixed(2)}`;
 
     const dispatch = useDispatch();
+    const [adding, setAdding] = useState(false);
 
     const cardHeight = height || undefined;
     const handleAddToCartInternal = async (e) => {
         e.stopPropagation();
-        if (!product) return;
+        if (!product || adding) return;
+        setAdding(true);
         // Optimistic local add
         dispatch(addItem({
             productId: id,
@@ -46,6 +53,8 @@ function ProductCard({
             logCartAdd(product, 'product_card').catch(() => { });
         } catch (err) {
             console.warn('Cart sync failed', err);
+        } finally {
+            setAdding(false);
         }
         onAddToCart?.(product);
     };
@@ -97,10 +106,18 @@ function ProductCard({
                             <Button
                                 size='sm'
                                 variant='outline-primary'
-                                style={{ fontSize: '.7rem' }}
+                                style={{ fontSize: '.7rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4, minWidth: '42px' }}
+                                disabled={adding}
                                 onClick={handleAddToCartInternal}
+                                aria-label='Add to cart'
                             >
-                                Cart
+                                {adding ? (
+                                    <Spinner size='sm' animation='border' />
+                                ) : (
+                                    <div style={{ width: 20, height: 20, display: 'flex' }}>
+                                        <Logo details={false} />
+                                    </div>
+                                )}
                             </Button>
                         )}
                     </div>

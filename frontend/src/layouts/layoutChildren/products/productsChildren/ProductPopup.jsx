@@ -1,5 +1,6 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import { useTheme } from '@resources/themes/themeContext';
 import PopupCloseButton from '@children/button/CloseButton';
 import Logo from '@children/logo/Logo';
@@ -7,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { addItem, attachBackendId } from '@redux/cart/cartSlice';
 import { addToCart as addToCartApi } from '@api/cart';
 import { logCartAdd } from '@api/events';
+import { useState } from 'react';
 
 function ProductPopup({
     product,
@@ -18,8 +20,12 @@ function ProductPopup({
 }) {
     const { theme } = useTheme();
     const dispatch = useDispatch();
+    const [adding, setAdding] = useState(false);
 
-    const handleAddToCartInternal = async () => {
+    const handleAddToCartInternal = async (e) => {
+        e?.stopPropagation?.();
+        if (!product || adding) return;
+        setAdding(true);
         dispatch(addItem({
             productId: product.id,
             name: product.name,
@@ -34,8 +40,10 @@ function ProductPopup({
                 dispatch(attachBackendId({ productId: product.id, backendItemId: backendId }));
             }
             logCartAdd(product, 'popup').catch(() => { });
-        } catch (e) {
-            console.warn('Popup cart sync failed', e);
+        } catch (e2) {
+            console.warn('Popup cart sync failed', e2);
+        } finally {
+            setAdding(false);
         }
         // Preserve passed prop handler if provided
         onAddToCart?.(product);
@@ -145,24 +153,22 @@ function ProductPopup({
                         Buy Now
                     </Button>
 
-                    {/* Add to Cart button with embedded logo */}
                     {onAddToCart && (
                         <Button
-                            variant="dark"
+                            size='sm'
+                            variant='outline-primary'
+                            style={{ fontSize: '.7rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4, minWidth: '42px' }}
+                            disabled={adding}
                             onClick={handleAddToCartInternal}
-                            aria-label="Add to cart"
-                            style={{
-                                ...theme.buttons.splash,
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: 8,
-                                fontSize: '.75rem',
-                                padding: '8px 14px',
-                            }}
+                            aria-label='Add to cart'
                         >
-                            <div style={{ width: 24, height: 24, display: 'flex' }}>
-                                <Logo details={false} />
-                            </div>
+                            {adding ? (
+                                <Spinner size='sm' animation='border' />
+                            ) : (
+                                <div style={{ width: 20, height: 20, display: 'flex' }}>
+                                    <Logo details={false} />
+                                </div>
+                            )}
                         </Button>
                     )}
                     {onMoreLikeThis && (

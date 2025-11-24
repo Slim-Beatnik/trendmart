@@ -17,7 +17,7 @@ const cartSlice = createSlice({
                 price: ci.price,
                 quantity: ci.quantity,
                 imageUrl: ci.image_url,
-                backendItemId: ci.id 
+                backendItemId: ci.id
             }));
         },
         addItem(state, action) {
@@ -44,7 +44,7 @@ const cartSlice = createSlice({
         attachBackendId(state, action) {
             const { productId, backendItemId } = action.payload;
             const idx = state.items.findIndex(i => i.productId === productId);
-            if (idx !== -1) {
+            if (idx !== -1 && !state.items[idx].backendItemId) {
                 state.items[idx].backendItemId = backendItemId;
             }
         }
