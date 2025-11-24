@@ -6,11 +6,7 @@ import { clearStatus } from '@redux/status/statusSlice';
 import { useTheme } from '@resources/themes/themeContext';
 
 function AlertCloseButton({ onClick }) {
-  return (
-    <CloseButton
-      onClick={onClick}
-    />
-  );
+  return <CloseButton onClick={onClick} />;
 }
 
 function AlertSpace({ alertMessage, variant }) {
@@ -40,7 +36,7 @@ function AlertSpace({ alertMessage, variant }) {
             {alertMessage}
           </div>
         </Col>
-        <Col className='d-flex flex-column flex-grow-0 justify-content-center align-items-center p-0 pe-1'>
+        <Col className="d-flex flex-column flex-grow-0 justify-content-center align-items-center p-0 pe-1">
           <AlertCloseButton onClick={() => dispatch(clearStatus())} />
         </Col>
       </Row>

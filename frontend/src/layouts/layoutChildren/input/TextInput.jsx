@@ -14,7 +14,11 @@ function TextInput({
   const { mode, theme } = useTheme();
 
   return (
+<<<<<<< HEAD
     <div data-bs-mode={mode}>
+=======
+    <Form data-bs-mode={mode}>
+>>>>>>> 3149ca55a04fec907a83b454b939ba90fd77f470
       <Form.Group
         style={{ width: '100%' }}
         controlId={inputId}
@@ -46,7 +50,11 @@ function TextInput({
           </Form.Text>
         )}
       </Form.Group>
+<<<<<<< HEAD
     </div>
+=======
+    </Form>
+>>>>>>> 3149ca55a04fec907a83b454b939ba90fd77f470
   );
 }
 

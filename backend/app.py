@@ -15,7 +15,6 @@ from routes.catalog import categories_bp, products_bp, subcategories_bp
 from routes.customers import customers_bp
 from routes.events import events_bp, recom_feedback_bp
 from routes.payment import payment_bp
-from routes.shopping import order_bp
 from routes import cold_start
 import models
 from models.catalog import Category, Subcategory, Product
@@ -101,7 +100,6 @@ def create_app():
     app.register_blueprint(bulk_bp)
     app.register_blueprint(bulk_users_bp)
     app.register_blueprint(payment_bp)
-    app.register_blueprint(order_bp)
 
     # Serve product/media assets from backend/assets directory
     @app.route("/assets/<path:filename>")

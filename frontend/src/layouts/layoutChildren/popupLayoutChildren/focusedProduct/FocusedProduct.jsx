@@ -28,7 +28,8 @@ function FocusedProduct({
   const description = product?.description || 'No description available.';
   const price = product?.price;
   const score = product?.score;
-  const priceDisplay = typeof price === 'number' ? `$${price.toFixed(2)}` : '$0.00';
+  const priceDisplay =
+    typeof price === 'number' ? `$${price.toFixed(2)}` : '$0.00';
 
   const isDark = theme?.mode === 'dark';
 
@@ -91,10 +92,31 @@ function FocusedProduct({
 
             <div>
               <h2 style={{ margin: 0, fontSize: '1.1rem' }}>{name}</h2>
-              <div style={{ fontSize: '.8rem', marginTop: '.35rem', lineHeight: 1.3 }}>{description}</div>
-              <div className='mt-2' style={{ fontSize: '.75rem', fontWeight: 600 }}>Price: {priceDisplay}</div>
+              <div
+                style={{
+                  fontSize: '.8rem',
+                  marginTop: '.35rem',
+                  lineHeight: 1.3,
+                }}
+              >
+                {description}
+              </div>
+              <div
+                className="mt-2"
+                style={{ fontSize: '.75rem', fontWeight: 600 }}
+              >
+                Price: {priceDisplay}
+              </div>
               {typeof score === 'number' && (
-                <div style={{ fontSize: '.65rem', marginTop: '.25rem', color: '#444' }}>AI Match: {(score * 100).toFixed(0)}%</div>
+                <div
+                  style={{
+                    fontSize: '.65rem',
+                    marginTop: '.25rem',
+                    color: '#444',
+                  }}
+                >
+                  AI Match: {(score * 100).toFixed(0)}%
+                </div>
               )}
             </div>
 
@@ -125,10 +147,21 @@ function FocusedProduct({
           </Col>
 
           {/* Right column: recommendations grid */}
-          <Col md={7} className="overflow-auto d-flex flex-column gap-3" style={{ fontSize: '.75rem' }}>
+          <Col
+            md={7}
+            className="overflow-auto d-flex flex-column gap-3"
+            style={{ fontSize: '.75rem' }}
+          >
             <div>
-              <h5 className='mb-2' style={{ fontSize: '.85rem' }}>You may also like</h5>
-              <div style={{ fontSize: '.65rem', color: '#555' }}>Related product recommendations coming soon.</div>
+              <h5
+                className="mb-2"
+                style={{ fontSize: '.85rem' }}
+              >
+                You may also like
+              </h5>
+              <div style={{ fontSize: '.65rem', color: '#555' }}>
+                Related product recommendations coming soon.
+              </div>
             </div>
           </Col>
         </Row>

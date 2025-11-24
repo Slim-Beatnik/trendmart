@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import ProductGrid from './productsChildren/ProductGrid';
 import SearchbarRow from '../sectionSearchbar/SearchbarRow';
@@ -8,7 +8,11 @@ import { listProducts, getProductsByCategory } from '@api/catalog';
 import { normalizeProducts } from '@utils/helpers';
 import { useTheme } from '@resources/themes/themeContext';
 
-function FeaturedProducts({ activeCategoryId, activeCategoryName, onClearCategory }) {
+function FeaturedProducts({
+  activeCategoryId,
+  activeCategoryName,
+  onClearCategory,
+}) {
   const { theme } = useTheme();
   const [fullProducts, setFullProducts] = useState([]); // complete catalog cache
   const [categoryProducts, setCategoryProducts] = useState(null); // scoped list for active category
@@ -35,7 +39,9 @@ function FeaturedProducts({ activeCategoryId, activeCategoryName, onClearCategor
       }
     }
     run();
-    return () => { ignore = true; };
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   // Load category-specific products when selection changes
@@ -63,34 +69,46 @@ function FeaturedProducts({ activeCategoryId, activeCategoryName, onClearCategor
     }
     loadCategory(activeCategoryId);
     setPageIndex(0); // reset pagination on category change
-    return () => { ignore = true; };
+    return () => {
+      ignore = true;
+    };
   }, [activeCategoryId]);
 
-  const handleSearch = useCallback((value) => setSearch(value.trim().toLowerCase()), []);
+  const handleSearch = useCallback(
+    (value) => setSearch(value.trim().toLowerCase()),
+    []
+  );
   const handleView = useCallback((p) => setSelected(p), []);
   const handleClosePopup = useCallback(() => setSelected(null), []);
 
-  const sourceProducts = useMemo(() => (
-    categoryProducts ? categoryProducts : fullProducts
-  ), [categoryProducts, fullProducts]);
+  const sourceProducts = useMemo(
+    () => (categoryProducts ? categoryProducts : fullProducts),
+    [categoryProducts, fullProducts]
+  );
 
   // Featured selection: take top 10 (by score if present, otherwise original order)
   const featured = useMemo(() => {
     if (!sourceProducts.length) return [];
-    const withScore = [...sourceProducts].sort((a, b) => (b.score || 0) - (a.score || 0));
+    const withScore = [...sourceProducts].sort(
+      (a, b) => (b.score || 0) - (a.score || 0)
+    );
     return withScore.slice(0, 10);
   }, [sourceProducts]);
 
   // Global search across full catalog (ignores category scope by design)
   const searchResults = useMemo(() => {
     if (!search) return [];
-    return fullProducts.filter(p =>
-      (p.name && p.name.toLowerCase().includes(search)) ||
-      (p.description && p.description.toLowerCase().includes(search))
+    return fullProducts.filter(
+      (p) =>
+        (p.name && p.name.toLowerCase().includes(search)) ||
+        (p.description && p.description.toLowerCase().includes(search))
     );
   }, [fullProducts, search]);
 
-  const filteredProducts = useMemo(() => (search ? searchResults : featured), [search, searchResults, featured]);
+  const filteredProducts = useMemo(
+    () => (search ? searchResults : featured),
+    [search, searchResults, featured]
+  );
 
   // Pagination metrics
   const totalProducts = filteredProducts.length;
@@ -101,7 +119,7 @@ function FeaturedProducts({ activeCategoryId, activeCategoryName, onClearCategor
 
   // Clamp / reset page index when data set changes
   useEffect(() => {
-    setPageIndex(prev => Math.min(prev, totalPages - 1));
+    setPageIndex((prev) => Math.min(prev, totalPages - 1));
   }, [totalPages]);
   useEffect(() => {
     // Reset to first page on new search term for better UX
@@ -110,14 +128,20 @@ function FeaturedProducts({ activeCategoryId, activeCategoryName, onClearCategor
 
   // Placeholder handlers for future cart / buy integration
   const handleBuy = useCallback((p) => console.log('Buy', p.id), []);
-  const handleAddToCart = useCallback((p) => console.log('Add to cart', p.id), []);
-  const handleMoreLikeThis = useCallback((p) => console.log('More like', p.id), []);
+  const handleAddToCart = useCallback(
+    (p) => console.log('Add to cart', p.id),
+    []
+  );
+  const handleMoreLikeThis = useCallback(
+    (p) => console.log('More like', p.id),
+    []
+  );
 
   const handlePrevPage = useCallback(() => {
-    setPageIndex(prev => Math.max(0, prev - 1));
+    setPageIndex((prev) => Math.max(0, prev - 1));
   }, []);
   const handleNextPage = useCallback(() => {
-    setPageIndex(prev => Math.min(totalPages - 1, prev + 1));
+    setPageIndex((prev) => Math.min(totalPages - 1, prev + 1));
   }, [totalPages]);
 
   return (
@@ -125,15 +149,31 @@ function FeaturedProducts({ activeCategoryId, activeCategoryName, onClearCategor
       <SearchbarRow
         searchId="featuredSearch"
         placeholder="Search All Products"
-        sectionTitle={activeCategoryName ? `Category: ${activeCategoryName}` : 'Featured Products'}
+        sectionTitle={
+          activeCategoryName
+            ? `Category: ${activeCategoryName}`
+            : 'Featured Products'
+        }
         filterButton
         onSearch={handleSearch}
       />
 
       {activeCategoryId && !search && (
         <div className="d-flex align-items-center gap-2 px-1">
-          <span className="badge bg-secondary" style={{ fontSize: '.65rem' }}>Filtering by category</span>
-          <button type="button" className="btn btn-sm btn-outline-secondary" onClick={onClearCategory}>Clear</button>
+          <span
+            className="badge"
+            style={{ fontSize: '.65rem', ...theme.schemes.emphasis }}
+          >
+            Filtering by category
+          </span>
+          <button
+            type="button"
+            className="btn btn-sm"
+            style={{ ...theme.button.highlight }}
+            onClick={onClearCategory}
+          >
+            Clear
+          </button>
         </div>
       )}
 
@@ -145,7 +185,7 @@ function FeaturedProducts({ activeCategoryId, activeCategoryName, onClearCategor
             disabled={pageIndex === 0}
             className="btn btn-sm px-1"
             style={{
-              ...theme.buttons.emphasis
+              ...theme.buttons.emphasis,
             }}
           >
             Prev
@@ -159,7 +199,7 @@ function FeaturedProducts({ activeCategoryId, activeCategoryName, onClearCategor
             disabled={pageIndex >= totalPages - 1}
             className="btn btn-sm px-1"
             style={{
-              ...theme.buttons.emphasis
+              ...theme.buttons.emphasis,
             }}
           >
             Next

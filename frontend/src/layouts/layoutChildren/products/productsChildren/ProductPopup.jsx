@@ -19,37 +19,6 @@ function ProductPopup({
     onMoreLikeThis,
 }) {
     const { theme } = useTheme();
-    const dispatch = useDispatch();
-    const [adding, setAdding] = useState(false);
-
-    const handleAddToCartInternal = async (e) => {
-        e?.stopPropagation?.();
-        if (!product || adding) return;
-        setAdding(true);
-        dispatch(addItem({
-            productId: product.id,
-            name: product.name,
-            price: Number(product.price || 0),
-            imageUrl: product.imageUrl || '',
-            quantity: 1
-        }));
-        try {
-            const resp = await addToCartApi(product.id, 1);
-            const backendId = resp?.cart_item?.id;
-            if (backendId) {
-                dispatch(attachBackendId({ productId: product.id, backendItemId: backendId }));
-            }
-            // Use allowed generic source for analytics
-            logCartAdd(product, 'cold_start').catch(() => { });
-        } catch (e2) {
-            console.warn('Popup cart sync failed', e2);
-        } finally {
-            setAdding(false);
-        }
-        // Preserve passed prop handler if provided
-        onAddToCart?.(product);
-    };
-
     if (!product) return null;
 
     const { name, imageUrl, description, price, tags, score } = product;
@@ -68,7 +37,7 @@ function ProductPopup({
             </Modal.Header>
 
             <PopupCloseButton
-                onClose={onClose}
+                onClick={onClose}
                 style={{ zIndex: 999, margin: '4px' }}
             />
 
@@ -78,14 +47,14 @@ function ProductPopup({
                     <div
                         style={{
                             flex: '0 0 320px',
-                            background: '#e9eef2',
+                            background: theme.colors.whiteBg,
                             borderRadius: 6,
                             overflow: 'hidden',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             aspectRatio: '4 / 3',
-                            maxWidth: '100%'
+                            maxWidth: '100%',
                         }}
                     >
                         {imageUrl ? (
@@ -103,7 +72,10 @@ function ProductPopup({
 
                     {/* Details */}
                     <div className="flex-grow-1 d-flex flex-column gap-2">
-                        <div className="fw-semibold" style={{ fontSize: '.9rem' }}>
+                        <div
+                            className="fw-semibold"
+                            style={{ fontSize: '.9rem' }}
+                        >
                             Price: {priceDisplay}
                         </div>
 
@@ -112,12 +84,10 @@ function ProductPopup({
                             <div style={{ fontSize: '.7rem', color: '#333' }}>
                                 <span style={{ fontWeight: 600 }}>AI Match:</span>{' '}
                                 {(score * 100).toFixed(0)}%
-                                <span style={{ marginLeft: 6, fontSize: '.65rem', color: '#666' }}>
-                                    {score >= 0.8
-                                        ? 'High'
-                                        : score >= 0.55
-                                            ? 'Medium'
-                                            : 'Low'}
+                                <span
+                                    style={{ marginLeft: 6, fontSize: '.65rem', color: '#666' }}
+                                >
+                                    {score >= 0.8 ? 'High' : score >= 0.55 ? 'Medium' : 'Low'}
                                 </span>
                             </div>
                         ) : (
@@ -127,7 +97,9 @@ function ProductPopup({
                         )}
 
                         {tags && (
-                            <div style={{ fontSize: '.65rem', color: '#444' }}>Tags: {tags}</div>
+                            <div style={{ fontSize: '.65rem', color: '#444' }}>
+                                Tags: {tags}
+                            </div>
                         )}
 
                         <div style={{ fontSize: '.75rem', lineHeight: 1.3 }}>
@@ -136,8 +108,16 @@ function ProductPopup({
                     </div>
                 </div>
                 {/* More Like This placeholder */}
-                <div className="mt-4" aria-label="More like this section">
-                    <h6 className="mb-2" style={{ fontSize: '.8rem', fontWeight: 600 }}>You may also like</h6>
+                <div
+                    className="mt-4"
+                    aria-label="More like this section"
+                >
+                    <h6
+                        className="mb-2"
+                        style={{ fontSize: '.8rem', fontWeight: 600 }}
+                    >
+                        You may also like
+                    </h6>
                     <div style={{ fontSize: '.65rem', color: '#555' }}>
                         Similar product recommendations coming soon.
                     </div>
@@ -154,23 +134,27 @@ function ProductPopup({
                         Buy Now
                     </Button>
 
+                    {/* Right: TrendMart logo as Add-to-Cart */}
                     {onAddToCart && (
-                        <Button
-                            size='sm'
-                            variant='outline-primary'
-                            style={{ fontSize: '.7rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4, minWidth: '42px' }}
-                            disabled={adding}
-                            onClick={handleAddToCartInternal}
-                            aria-label='Add to cart'
+                        <button
+                            type="button"
+                            onClick={() => onAddToCart(product)}
+                            aria-label="Add to cart"
+                            className="border-0 p-0 m-0"
+                            style={{
+                                width: 56,
+                                height: 56,
+                                borderRadius: '50%',
+                                overflow: 'hidden',
+                                backgroundColor: theme.colors.primaryBg || '#0a1f45',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
                         >
-                            {adding ? (
-                                <Spinner size='sm' animation='border' />
-                            ) : (
-                                <div style={{ width: 20, height: 20, display: 'flex' }}>
-                                    <Logo details={false} />
-                                </div>
-                            )}
-                        </Button>
+                            {/* You can pass details={false} or true depending on look you want */}
+                            <Logo details={false} />
+                        </button>
                     )}
                     {onMoreLikeThis && (
                         <Button
@@ -181,7 +165,6 @@ function ProductPopup({
                             More Like This
                         </Button>
                     )}
-
                 </div>
             </Modal.Footer>
         </Modal>

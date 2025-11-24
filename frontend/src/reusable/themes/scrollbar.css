@@ -1,11 +1,14 @@
 /* Scrollbar container */
-.custom-scroll::-webkit-scrollbar {
+.custom-scroll::-webkit-scrollbar:horizontal {
   width: 12px;
+}
+.custom-scroll::-webkit-scrollbar:vertical {
+  height: 12px;
 }
 
 /* Scrollbar track */
 .custom-scroll::-webkit-scrollbar-track {
-  background: transparent;
+  background-color: transparent !important;
   border-radius: 12px;
 }
 
@@ -25,5 +28,5 @@
 /* Firefox support */
 .custom-scroll {
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb) transparent;
+  scrollbar-color: var(--scrollbar-thumb) transparent !important;
 }

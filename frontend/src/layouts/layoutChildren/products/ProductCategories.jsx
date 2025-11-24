@@ -4,8 +4,10 @@ import SearchbarRow from '../sectionSearchbar/SearchbarRow';
 import { Container } from 'react-bootstrap';
 import { listCategories } from '@api/catalog';
 import HoverCategory from './productsChildren/HoverCategory';
+import { useTheme } from '@resources/themes/themeContext';
 
 function ProductCategories({ onSelectCategory, activeCategoryId }) {
+  const { theme } = useTheme()
   const [categories, setCategories] = useState(null); // null = loading
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,7 +27,9 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
       }
     }
     fetchData();
-    return () => { ignore = true; };
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   const placeholderCategories = [
@@ -35,35 +39,54 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
     { id: 'ph-4', name: 'Category 4', slug: 'category-4' },
   ];
 
-  const displayedCategories = categories?.length ? categories : placeholderCategories;
+  const displayedCategories = categories?.length
+    ? categories
+    : placeholderCategories;
 
-  const handleSelect = useCallback((cat) => {
-    if (!onSelectCategory) return;
-    // toggle capability: clicking active again clears selection
-    if (activeCategoryId && cat.id === activeCategoryId) {
-      onSelectCategory(null);
-    } else {
-      onSelectCategory(cat);
-    }
-  }, [onSelectCategory, activeCategoryId]);
+  const handleSelect = useCallback(
+    (cat) => {
+      if (!onSelectCategory) return;
+      // toggle capability: clicking active again clears selection
+      if (activeCategoryId && cat.id === activeCategoryId) {
+        onSelectCategory(null);
+      } else {
+        onSelectCategory(cat);
+      }
+    },
+    [onSelectCategory, activeCategoryId]
+  );
 
   return (
-    <Container fluid className="p-0 m-0" style={{ height: '100%' }}>
-      <Stack direction="vertical" className="d-flex justify-content-start align-items-stretch gap-2 m-0 p-0 w-100">
-        <div className='d-flex flex-column ms-3 mt-2 mb-1'>
-          <SearchbarRow searchId="subcategorySearch" placeholder="Filter by category" />
+    <Container
+      fluid
+      className="p-0 m-0"
+      style={{ height: '100%' }}
+    >
+      <div className="d-flex flex-column ms-3">
+        <SearchbarRow
+          searchId="subcategorySearch"
+          placeholder="Filter by category"
+        />
+      </div>
+      <Stack
+        direction="vertical"
+        className="d-flex justify-content-start align-items-stretch gap-2 m-0 p-0 w-100"
+      >
           {activeCategoryId && (
             <button
               type="button"
-              className="btn btn-sm btn-outline-secondary mt-2 align-self-start"
+              className="btn btn-sm mt-2 align-self-start"
               onClick={() => onSelectCategory?.(null)}
             >
               Clear Category
             </button>
           )}
-        </div>
-        {loading && <div className="small text-muted px-3">Loading categories…</div>}
-        {error && !loading && <div className="small text-danger px-3">{error}</div>}
+        {loading && (
+          <div className="small text-muted px-3">Loading categories…</div>
+        )}
+        {error && !loading && (
+          <div className="small text-danger px-3">{error}</div>
+        )}
         {displayedCategories.map((cat) => {
           const active = activeCategoryId === cat.id;
           return (
@@ -74,10 +97,10 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
               style={{
                 cursor: 'pointer',
                 fontWeight: active ? 600 : 400,
-                background: active ? '#eef3f9' : 'transparent',
+                background: active ? theme.colors.lightBg : 'transparent',
                 padding: '.35rem .75rem',
                 borderRadius: 4,
-                border: active ? '1px solid #c5d4e6' : '1px solid transparent'
+                border: active ? `1px solid ${theme.colors.details}` : '1px solid transparent',
               }}
             >
               {cat.name}
@@ -90,4 +113,3 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
 }
 
 export default ProductCategories;
-
