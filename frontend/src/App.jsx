@@ -30,6 +30,7 @@ function App() {
         if (!ignore) dispatch(hydrateCart(items));
       } catch (e) {
         if (!ignore) dispatch(hydrateCart([]));
+        console.log(`error ${e}`)
       }
     };
     load();

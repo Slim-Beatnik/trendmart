@@ -36,7 +36,11 @@ function MasterLayout() {
       >
         <Col
           id="navbarContainer"
-          style={{ minWidth: '100%', marginBottom: '4vh' }}
+          style={{
+            height: '16vh',
+            minWidth: '100%',
+            marginBottom: '4vh',
+          }}
         >
           <Row
             className="h-50"

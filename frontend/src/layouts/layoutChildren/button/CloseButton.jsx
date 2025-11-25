@@ -5,7 +5,13 @@ function PopupCloseButton({ onClick }) {
   const { mode } = useTheme();
 
   return (
-    <div data-bs-theme={mode}>
+    <div
+      data-bs-theme={mode}
+      style={{
+        marginTop: '1rem',
+        marginRight: 'rem'
+      }}
+    >
       <CloseButton
         className="position-absolute top-0 end-0"
         style={{ zIndex: 999 }}

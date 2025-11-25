@@ -5,7 +5,7 @@ function PopupLayout({ children }) {
 
   return (
     <div
-      className="min-vw-100 position-absolute bottom-0 left-0 justify-content-start align-content-center m-0 p-0"
+      className=" d-flex min-vw-100 position-absolute bottom-0 left-0 justify-content-start align-items-center m-0 p-0"
       style={{
         backgroundColor: `${theme.colors.lightBg}80`,
         backdropFilter: 'blur(5px)',
