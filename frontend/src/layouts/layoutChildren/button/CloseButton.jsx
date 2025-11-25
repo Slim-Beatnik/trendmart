@@ -14,7 +14,7 @@ function PopupCloseButton({
 
   // Custom grey X icon (Bootstrap-like) encoded as data URI
   const greyX =
-    "url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23888'><path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/></svg>\")";
+    `url(data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill="${theme.colors.details}"><path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/></svg>")`;
 
   // Base chrome so the button is ALWAYS visible
   const baseChrome = {
@@ -57,7 +57,7 @@ function PopupCloseButton({
           backgroundImage: greyX,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          backgroundSize: '16px 16px',
+          backgroundSize: '24px 24px',
           filter: 'none', // keep icon grey, don’t let theme invert it
           ...variantStyle,
           ...style,

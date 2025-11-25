@@ -42,15 +42,16 @@ const styleValues = {
   transition: 'all 0.3s ease-in-out',
 };
 
-const baseBtn = {
+const baseBtn = (mode) => ({
   borderWidth: '1px',
   borderStyle: 'solid',
   borderColor: 'transparent',
   borderRadius: '.5rem',
-  padding: '.3rem 0rem',
+  padding: '.3rem .5rem',
   cursor: 'pointer',
   fontWeight: 700,
-};
+  textShadow: `2px 2px 3px ${colorPalette[mode].contrast}`,
+});
 
 const contrast = (mode) => ({
   background: colorPalette[mode].contrast,
