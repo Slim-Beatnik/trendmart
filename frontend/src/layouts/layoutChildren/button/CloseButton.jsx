@@ -62,7 +62,11 @@ function PopupCloseButton({
           ...variantStyle,
           ...style,
         }}
-        onClick={onClose}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onClose();
+        }}
       />
     </div>
   );

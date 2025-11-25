@@ -97,14 +97,7 @@ function NavBar({ setPopup }) {
       <Col className="d-flex align-items-center flex-grow-1 gap-3">
         <Navbar.Brand
           className="d-flex align-items-center p-0 m-0"
-<<<<<<< HEAD
           style={{ height: '8vh', cursor: 'pointer' }}
-=======
-          style={{
-            height: '8vh',
-            cursor: 'pointer',
-          }}
->>>>>>> 3149ca55a04fec907a83b454b939ba90fd77f470
           onClick={() => navigate('/')}
         >
           <Logo color={theme.colors.text} />
@@ -112,14 +105,7 @@ function NavBar({ setPopup }) {
         <h1
           id="title"
           className="mb-0 fs-3"
-<<<<<<< HEAD
-          style={{ fontWeight: 700, color: theme.colors.lightBg }}
-=======
-          style={{
-            fontWeight: 700,
-            color: theme.colors.text,
-          }}
->>>>>>> 3149ca55a04fec907a83b454b939ba90fd77f470
+          style={{ fontWeight: 700, color: theme.colors.text }}
         >
           TrendMart
         </h1>

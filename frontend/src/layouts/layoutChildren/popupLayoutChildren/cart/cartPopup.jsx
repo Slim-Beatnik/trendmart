@@ -8,6 +8,7 @@ import PopupCloseButton from '@children/button/CloseButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useTheme } from '@resources/themes/themeContext';
+import { useNavigate } from 'react-router-dom';
 import {
     selectCartItems,
     selectCartSubtotal,
@@ -25,6 +26,7 @@ function CartPopup({ setPopup }) {
     const tax = useSelector(selectCartTax);
     const total = useSelector(selectCartTotal);
     const { theme } = useTheme();
+    const navigate = useNavigate();
 
     const [loadingItemId, setLoadingItemId] = useState(null);
     const [errorMap, setErrorMap] = useState({});
@@ -201,12 +203,9 @@ function CartPopup({ setPopup }) {
                         style={{ ...theme.buttons.splash, fontSize: '.8rem' }}
                         disabled={items.length === 0}
                         onClick={() => {
-                            import('@children/popupLayoutChildren/checkout/ShippingPopup')
-                                .then(mod => {
-                                    const ShippingPopup = mod.default;
-                                    setPopup(<ShippingPopup />);
-                                })
-                                .catch(() => setPopup(null));
+                            // Use routed popup for consistency; clear any state popup first
+                            setPopup(null);
+                            navigate('/checkout/shipping');
                         }}
                     >
                         Proceed to Checkout

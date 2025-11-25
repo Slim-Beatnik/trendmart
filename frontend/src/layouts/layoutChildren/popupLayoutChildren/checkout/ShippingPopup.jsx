@@ -8,22 +8,49 @@ import ShippingAddressForm from './ShippingAddressForm';
 import { createOrder } from '@api/orders';
 import { validateCheckout } from '@api/checkout';
 import OrderSummary from './OrderSummary';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCartItems, attachBackendId } from '@redux/cart/cartSlice';
+import { addToCart as addToCartApi } from '@api/cart';
 
 function ShippingPopup() {
     const { theme } = useTheme();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [step, setStep] = useState('address'); // address | review
     const [validation, setValidation] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [creatingOrder, setCreatingOrder] = useState(false);
+    const cartItems = useSelector(selectCartItems);
+
+    const attemptResyncCart = useCallback(async () => {
+        // If we have optimistic items without backend IDs, push them to backend
+        const pending = cartItems.filter(ci => !ci.backendItemId);
+        if (!pending.length) return;
+        for (const item of pending) {
+            try {
+                const resp = await addToCartApi(item.productId, item.quantity);
+                if (resp?.id) {
+                    dispatch(attachBackendId({ productId: item.productId, backendItemId: resp.id }));
+                }
+            } catch (e) {
+                // Ignore; user will still see warning until manual retry or refresh
+                console.warn('Resync add failed for product', item.productId, e?.message);
+            }
+        }
+    }, [cartItems, dispatch]);
 
     const handleAddressComplete = async () => {
         setLoading(true);
         setError(null);
         try {
-            const data = await validateCheckout();
+            let data = await validateCheckout();
+            // If backend reports empty cart but we have local items, attempt resync then revalidate
+            if ((!data?.items || data.items.length === 0) && cartItems.length > 0) {
+                await attemptResyncCart();
+                data = await validateCheckout();
+            }
             setValidation(data);
             setStep('review');
         } catch {

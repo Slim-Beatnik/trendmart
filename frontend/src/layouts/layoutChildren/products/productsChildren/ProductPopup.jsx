@@ -37,7 +37,7 @@ function ProductPopup({
             </Modal.Header>
 
             <PopupCloseButton
-                onClick={onClose}
+                onClose={onClose}
                 style={{ zIndex: 999, margin: '4px' }}
             />
 

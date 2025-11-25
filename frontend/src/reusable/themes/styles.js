@@ -43,7 +43,9 @@ const styleValues = {
 };
 
 const baseBtn = {
-  border: 'rem solid transparent',
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: 'transparent',
   borderRadius: '.5rem',
   padding: '.3rem 0rem',
   cursor: 'pointer',

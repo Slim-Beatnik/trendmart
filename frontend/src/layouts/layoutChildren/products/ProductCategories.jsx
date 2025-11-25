@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Stack from 'react-bootstrap/Stack';
 import SearchbarRow from '../sectionSearchbar/SearchbarRow';
 import { Container } from 'react-bootstrap';
@@ -11,6 +12,8 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
   const [categories, setCategories] = useState(null); // null = loading
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     let ignore = false;
@@ -43,17 +46,28 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
     ? categories
     : placeholderCategories;
 
+  // Prepend synthetic "All Categories" option for direct full catalog access
+  const fullList = [{ id: '', name: 'All Categories', slug: 'all-categories' }, ...displayedCategories];
+
   const handleSelect = useCallback(
     (cat) => {
-      if (!onSelectCategory) return;
-      // toggle capability: clicking active again clears selection
-      if (activeCategoryId && cat.id === activeCategoryId) {
-        onSelectCategory(null);
-      } else {
-        onSelectCategory(cat);
+      if (!cat) return;
+      // Empty id = All Categories (unfiltered catalog)
+      if (cat.id === '') {
+        navigate('/products');
+        onSelectCategory?.(null);
+        return;
       }
+      // If selecting currently active one, toggle to unfiltered
+      if (activeCategoryId && cat.id === activeCategoryId) {
+        navigate('/products');
+        onSelectCategory?.(null);
+        return;
+      }
+      navigate(`/products?category=${encodeURIComponent(cat.id)}`);
+      onSelectCategory?.(cat);
     },
-    [onSelectCategory, activeCategoryId]
+    [activeCategoryId, navigate, onSelectCategory]
   );
 
   return (
@@ -72,23 +86,26 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
         direction="vertical"
         className="d-flex justify-content-start align-items-stretch gap-2 m-0 p-0 w-100"
       >
-          {activeCategoryId && (
-            <button
-              type="button"
-              className="btn btn-sm mt-2 align-self-start"
-              onClick={() => onSelectCategory?.(null)}
-            >
-              Clear Category
-            </button>
-          )}
+        {/* Always visible All Categories quick link (button alternative) */}
+        <button
+          type="button"
+          className="btn btn-sm mt-2 align-self-start"
+          onClick={() => {
+            onSelectCategory?.(null);
+            navigate('/products');
+          }}
+          style={{ fontSize: '.65rem' }}
+        >
+          All Categories
+        </button>
         {loading && (
           <div className="small text-muted px-3">Loading categories…</div>
         )}
         {error && !loading && (
           <div className="small text-danger px-3">{error}</div>
         )}
-        {displayedCategories.map((cat) => {
-          const active = activeCategoryId === cat.id;
+        {fullList.map((cat) => {
+          const active = (cat.id === '' && location.pathname === '/products' && !activeCategoryId) || (activeCategoryId === cat.id && cat.id !== '');
           return (
             <HoverCategory
               key={cat.id}

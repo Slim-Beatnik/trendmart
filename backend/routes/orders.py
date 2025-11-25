@@ -11,6 +11,19 @@ from schemas.shopping import CartSchema, CartItemSchema, OrderCreateSchema, Orde
 from schemas.payment import PaymentCreateSchema, PaymentSchema
 import time
 
+
+def _resolve_user_id():
+    identity = get_jwt_identity()
+    try:
+        return int(identity)
+    except Exception:
+        if isinstance(identity, str):
+            user = User.query.filter_by(email=identity).first()
+            if user:
+                return user.id
+        raise ValueError("invalid_identity")
+
+
 orders_bp = Blueprint('orders', __name__, url_prefix='/orders')
 checkout_bp = Blueprint('checkout', __name__, url_prefix='/checkout')
 
@@ -21,7 +34,7 @@ checkout_bp = Blueprint('checkout', __name__, url_prefix='/checkout')
 def create_order():
 
     try:
-        current_user_id = int(get_jwt_identity())
+        current_user_id = _resolve_user_id()
 
         # Get user's current cart
         cart = Cart.query.filter_by(user_id=current_user_id).first()
@@ -101,7 +114,7 @@ def get_order_details(order_id):
     Only allows users to view their own orders.
     """
     try:
-        current_user_id = int(get_jwt_identity())
+        current_user_id = _resolve_user_id()
 
         # Query the specific order for the current user
         order = Order.query.filter_by(
@@ -158,7 +171,7 @@ def get_user_orders():
     Returns orders sorted by most recent first.
     """
     try:
-        current_user_id = int(get_jwt_identity())
+        current_user_id = _resolve_user_id()
 
         # Query all orders for the current user, ordered by placed_at descending
         orders = Order.query.filter_by(user_id=current_user_id).order_by(
@@ -183,7 +196,7 @@ def get_user_orders():
 @jwt_required()
 def checkout_validate():
     try:
-        current_user_id = int(get_jwt_identity())
+        current_user_id = _resolve_user_id()
 
         # Get user's active cart
         cart = Cart.query.filter_by(user_id=current_user_id).first()

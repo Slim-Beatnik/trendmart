@@ -13,16 +13,10 @@ function TextInput({
 }) {
   const { mode, theme } = useTheme();
 
+  // Removed outer <Form> to prevent nesting when used inside parent forms.
   return (
-<<<<<<< HEAD
-    <div data-bs-mode={mode}>
-=======
-    <Form data-bs-mode={mode}>
->>>>>>> 3149ca55a04fec907a83b454b939ba90fd77f470
-      <Form.Group
-        style={{ width: '100%' }}
-        controlId={inputId}
-      >
+    <div data-bs-mode={mode} style={{ width: '100%' }}>
+      <Form.Group style={{ width: '100%' }} controlId={inputId}>
         <InputGroup>
           <Form.Control
             type={password ? 'password' : 'text'}
@@ -50,11 +44,7 @@ function TextInput({
           </Form.Text>
         )}
       </Form.Group>
-<<<<<<< HEAD
     </div>
-=======
-    </Form>
->>>>>>> 3149ca55a04fec907a83b454b939ba90fd77f470
   );
 }
 

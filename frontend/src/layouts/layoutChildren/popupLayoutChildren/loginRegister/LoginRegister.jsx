@@ -162,12 +162,7 @@ function LoginRegister({ setPopup }) {
             )}
           </Col>
         </Row>
-<<<<<<< HEAD
-        <Row >
-
-=======
         <Row>
->>>>>>> 3149ca55a04fec907a83b454b939ba90fd77f470
           <p
             className="mx-auto my-0 p-0"
             style={{ fontSize: '.8rem' }}

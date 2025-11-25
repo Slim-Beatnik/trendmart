@@ -3,14 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import { useTheme } from '@resources/themes/themeContext';
 import { useDispatch } from 'react-redux';
-import { addItem } from '@redux/cart/cartSlice';
+import { addItem, attachBackendId } from '@redux/cart/cartSlice';
 import { addToCart as addToCartApi } from '@api/cart';
 import { logCartAdd } from '@api/events';
-import { attachBackendId } from '@redux/cart/cartSlice';
-import { useSelector } from 'react-redux';
-import { selectCartTotal } from '@redux/cart/cartSlice';
 import { useState } from 'react';
-import Logo from '@children/logo/Logo';
 
 function ProductCard({
     product,
@@ -24,6 +20,9 @@ function ProductCard({
     const { theme } = useTheme();
     if (!product) return null;
 
+    const dispatch = useDispatch();
+    const [adding, setAdding] = useState(false);
+    const [addError, setAddError] = useState(null);
     const { id, name, imageUrl, description, price, score } = product;
     const priceDisplay = `$${Number(price || 0).toFixed(2)}`;
 
@@ -40,17 +39,35 @@ function ProductCard({
             }}
             onClick={() => onView?.(product)}
         >
-            <Card.Img
-                variant="top"
-                src={imageUrl || ''}
-                alt={name}
-                style={{
-                    height: 140,
-                    width: '100%',
-                    objectFit: 'contain',
-                    background: '#e9eef2',
-                }}
-            />
+            {imageUrl ? (
+                <Card.Img
+                    variant="top"
+                    src={imageUrl}
+                    alt={name}
+                    style={{
+                        height: 140,
+                        width: '100%',
+                        objectFit: 'contain',
+                        background: '#e9eef2',
+                    }}
+                />
+            ) : (
+                <div
+                    style={{
+                        height: 140,
+                        width: '100%',
+                        background: '#e9eef2',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '.65rem',
+                        color: '#555',
+                        fontStyle: 'italic',
+                    }}
+                >
+                    No Image
+                </div>
+            )}
             <Card.Body
                 className="d-flex flex-column p-2"
                 style={{ fontSize: '.75rem' }}
@@ -109,19 +126,49 @@ function ProductCard({
                         >
                             Buy
                         </Button>
-                        {onAddToCart && (
-                            <Button
-                                size="sm"
-                                variant="outline-primary"
-                                style={{ fontSize: '.7rem' }}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    onAddToCart?.(product);
-                                }}
-                            >
-                                Cart
-                            </Button>
-                        )}
+                        <Button
+                            size="sm"
+                            variant="outline-primary"
+                            style={{ fontSize: '.7rem' }}
+                            disabled={adding}
+                            onClick={async (e) => {
+                                e.stopPropagation();
+                                if (onAddToCart) {
+                                    onAddToCart(product);
+                                    return;
+                                }
+                                try {
+                                    setAddError(null);
+                                    setAdding(true);
+                                    // Optimistic local add
+                                    dispatch(addItem({
+                                        productId: id,
+                                        name,
+                                        price,
+                                        quantity: 1,
+                                        imageUrl
+                                    }));
+                                    const resp = await addToCartApi(id, 1);
+                                    if (resp?.id) {
+                                        dispatch(attachBackendId({ productId: id, backendItemId: resp.id }));
+                                    }
+                                    try { await logCartAdd(product); } catch { /* ignore */ }
+                                } catch (err) {
+                                    // Rollback could be implemented; for now rely on server hydration later
+                                    console.warn('Add to cart failed', err?.message);
+                                    setAddError(err?.response?.data?.message || err?.response?.data?.error || err?.message || 'Add failed');
+                                } finally {
+                                    setAdding(false);
+                                }
+                            }}
+                        >
+                            {adding ? 'Adding...' : 'Cart'}
+                        </Button>
+                    </div>
+                )}
+                {addError && (
+                    <div className="mt-2 text-danger" style={{ fontSize: '.6rem', lineHeight: 1.1 }}>
+                        {addError}
                     </div>
                 )}
             </Card.Body>

@@ -50,12 +50,13 @@ def create_app():
     ma.init_app(app)
     jwt.init_app(app)
 
-    # This line is to allow CORS for all domains
+    # Configure CORS with explicit origins when credentials are supported.
+    allowed_origin = os.environ.get("FRONTEND_ORIGIN", "http://localhost:3000")
     cors.init_app(
         app,
         resources={
             r"/*": {
-                "origins": "*",
+                "origins": [allowed_origin],
                 "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
                 "allow_headers": ["Content-Type", "Authorization"],
                 "supports_credentials": True,

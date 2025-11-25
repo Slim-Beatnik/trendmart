@@ -5,7 +5,7 @@ import Profile from '@children/popupLayoutChildren/profileSettings/Profile';
 import ProtectedURLs from '@children/securityWrapper/ProtectedURLs';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import StyleGuide from '@resources/themes/StyleGuide';
 import ShippingPopup from '@children/popupLayoutChildren/checkout/ShippingPopup';
 import PaymentPopup from '@children/popupLayoutChildren/checkout/PaymentPopup';
@@ -13,11 +13,12 @@ import OrderConfirmation from '@children/popupLayoutChildren/checkout/OrderConfi
 import { useDispatch, useSelector } from 'react-redux';
 import { hydrateCart } from '@redux/cart/cartSlice';
 import { getCart } from '@api/cart';
+import AllProductsPage from '@children/products/allProducts/AllProductsPage';
+import ProductFullPage from '@children/popupLayoutChildren/focusedProduct/ProductFullPage';
 
 function App() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  const [popup, setPopup] = useState(null);
 
   useEffect(() => {
     let ignore = false;
@@ -26,13 +27,8 @@ function App() {
       try {
         const data = await getCart();
         const items = Array.isArray(data?.items) ? data.items : [];
-        if (!ignore) {
-          // Always hydrate with the server items (may be empty) to avoid stale client state
-          dispatch(hydrateCart(items));
-        }
+        if (!ignore) dispatch(hydrateCart(items));
       } catch (e) {
-        console.warn('Cart hydration failed', e);
-        // On any error, assume empty cart to avoid keeping stale items
         if (!ignore) dispatch(hydrateCart([]));
       }
     };
@@ -43,84 +39,24 @@ function App() {
   return (
     <>
       <Routes>
-        <Route
-          path="/styleguide"
-          element={<StyleGuide />}
-        />
-        <Route
-          path="/"
-          element={<MasterLayout state={{ popup, setPopup }} />}
-        >
-            <Route
-              path="/product/:int"
-              element={
-                <FocusedProduct
-                  onAddToCart={null}
-                  onBuyNow={null}
-                  onWishlist={null}
-                  onMoreLikeThis={null}
-                  onClose={null}
-                />
-              }
-            />
+        <Route path="/styleguide" element={<StyleGuide />} />
+        {/* Standalone full catalog page */}
+        <Route path="/products" element={<AllProductsPage />} />
+        <Route path="/products/:int" element={<ProductFullPage />} />
+        {/* Home + popup routes */}
+        <Route path="/" element={<MasterLayout />}>
+          <Route
+            path="product/:int"
+            element={<FocusedProduct onAddToCart={null} onBuyNow={null} onWishlist={null} onMoreLikeThis={null} onClose={null} />}
+          />
           <Route element={<ProtectedURLs />}>
-
-            <Route path="/profile" element={<Navigate to="/profile/contact-info" />} />
-            <Route path="/profile/contact-info" element={<Profile />} />
-            <Route path="/profile/address" element={<Profile />} />
-            <Route path="/profile/security" element={<Profile />} />
-
-            <Route
-              path="/checkout/shipping"
-              element={<ShippingPopup />}
-            />
-            <Route
-              path="/product/:int"
-              element={
-                <FocusedProduct
-                  onAddToCart={null}
-                  onBuyNow={null}
-                  onWishlist={null}
-                  onMoreLikeThis={null}
-                  onClose={null}
-                />
-              }
-            />
-
-            <Route
-              path="/profile"
-              element={<Profile />}
-            >
-              <Route
-                index
-                element={<Address />}
-              />
-              {/* <Route
-                path="profile/contact-info"
-                element={<ContactInfo />}
-              /> */}
-              <Route
-                path="profile/address"
-                element={<Address />}
-              />
-              {/* <Route
-                path="profile/security"
-                element={<Security />}
-              /> */}
-            </Route>
-
-            <Route
-              path="/checkout/shipping"
-              element={<ShippingPopup />}
-            />
-            <Route
-              path="/checkout/payment/:orderId"
-              element={<PaymentPopup />}
-            />
-            <Route
-              path="/order-confirmation/:orderId"
-              element={<OrderConfirmation />}
-            />
+            <Route path="profile" element={<Navigate to="/profile/contact-info" replace />} />
+            <Route path="profile/contact-info" element={<Profile />} />
+            <Route path="profile/address" element={<Profile />} />
+            <Route path="profile/security" element={<Profile />} />
+            <Route path="checkout/shipping" element={<ShippingPopup />} />
+            <Route path="checkout/payment/:orderId" element={<PaymentPopup />} />
+            <Route path="order-confirmation/:orderId" element={<OrderConfirmation />} />
           </Route>
         </Route>
       </Routes>
