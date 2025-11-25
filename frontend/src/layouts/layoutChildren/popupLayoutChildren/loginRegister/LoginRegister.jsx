@@ -90,11 +90,11 @@ function LoginRegister({ setPopup }) {
     <Col
       className="d-flex flex-column flex-grow-0 position-relative justify-content-between align-items-center gap-1 px-2 py-4 m-auto"
       style={{
-        minHeight: '394px',
+        minHeight: '400px',
         minWidth: '288px',
         ...theme.schemes.darkText,
         borderRadius: theme.props.bR_less,
-        filter: 'drop-shadow(.5rem .5rem 1rem #0a1f44e8)',
+        filter: `drop-shadow(.5rem .5rem 1rem ${theme.colors.contrast}e8)`,
       }}
     >
       <PopupCloseButton onClose={() => setPopup(null)} />
