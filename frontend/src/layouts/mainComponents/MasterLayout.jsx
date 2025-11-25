@@ -1,18 +1,26 @@
-import { useState } from 'react';
-import { useOutlet } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useOutlet, useLocation } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import GlobalAlert from '../layoutChildren/alert/GlobalAlert.jsx';
 import MasterGrid from './MasterGrid.jsx';
-import NavBar from '../layoutChildren/navbar/NavBar.jsx';
+import NavBar from '../layoutChildren/navbar/NavBar';
 import PopupLayout from './PopupLayout.jsx';
 import { useTheme } from '@resources/themes/themeContext.js';
 
 function MasterLayout() {
   const routedPopup = useOutlet();
+  const location = useLocation();
   const { theme } = useTheme();
   const [popup, setPopup] = useState(null);
+
+  // Clear state-based popup when navigating to home to prevent stale overlays
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setPopup(null);
+    }
+  }, [location.pathname]);
 
   return (
     <>

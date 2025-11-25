@@ -16,6 +16,8 @@ if os.path.exists(TEST_DB_PATH):
 os.environ['DATABASE_URL'] = f'sqlite:///{TEST_DB_PATH}'
 # Ensure any alternative config import using SQLALCHEMY_DATABASE_URI picks up SQLite
 os.environ['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+os.environ.setdefault('STRIPE_SECRET_KEY', 'test_secret_key')
+os.environ.setdefault('STRIPE_PUBLISHABLE_KEY', 'test_publishable_key')
 
 
 class FakeCharge(SimpleNamespace):

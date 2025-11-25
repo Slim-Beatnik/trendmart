@@ -97,7 +97,7 @@ function LoginRegister({ setPopup }) {
         filter: 'drop-shadow(.5rem .5rem 1rem #0a1f44e8)',
       }}
     >
-      <PopupCloseButton onClick={() => setPopup(null)} />
+      <PopupCloseButton onClose={() => setPopup(null)} />
       <h1 className="text-center">
         {toggleForm === 'login' ? 'Login' : 'Register'}
       </h1>

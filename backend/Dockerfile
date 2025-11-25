@@ -71,3 +71,6 @@ EXPOSE 8000
 
 # --- For Gunicorn (production-style dev) ---
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:create_app()"]
+
+
+ENV HF_HOME=/app/hf_cache

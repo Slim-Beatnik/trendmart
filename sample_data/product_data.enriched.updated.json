@@ -1,0 +1,3697 @@
+{
+  "categories": [
+    {
+      "main_category": "Electronics",
+      "subcategories": [
+        {
+          "name": "Laptops",
+          "related_subcategories": [
+            "Phones",
+            "Gaming Consoles"
+          ],
+          "products": [
+            {
+              "id": 1,
+              "name": "ASUS ZenBook X14",
+              "description": "ASUS ZenBook X14 in the Electronics / Laptops category at $1299.99 (rated 4.5/5) featuring brand asus, Windows, core I7, 16gb, 1tb.",
+              "price": 1299.99,
+              "rating": 4.5,
+              "tags": [
+                "brand-asus",
+                "os-windows",
+                "cpu-core-i7",
+                "ram-16gb",
+                "ssd-1tb",
+                "display-120hz",
+                "use-business",
+                "weight-<1.5kg"
+              ],
+              "image_url": "https://imgur.com/a/zzQzLzI",
+              "image_thumb_url": "https://imgur.com/a/zzQzLzI",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 2,
+              "name": "HP Envy 15",
+              "description": "HP Envy 15 in the Electronics / Laptops category at $1149.50 (rated 4.5/5) featuring brand hp, Windows, core I7, 16gb, 512gb.",
+              "price": 1149.5,
+              "rating": 4.5,
+              "tags": [
+                "brand-hp",
+                "os-windows",
+                "cpu-core-i7",
+                "ram-16gb",
+                "ssd-512gb",
+                "panel-ips",
+                "use-creator",
+                "battery-long"
+              ],
+              "image_url": "https://imgur.com/a/oSYa3sC",
+              "image_thumb_url": "https://imgur.com/a/oSYa3sC",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 3,
+              "name": "Dell XPS 13",
+              "description": "Dell XPS 13 in the Electronics / Laptops category at $1399.99 (rated 4.5/5) featuring brand dell, Windows, core Ultra 7, 16gb, 1tb.",
+              "price": 1399.99,
+              "rating": 4.5,
+              "tags": [
+                "brand-dell",
+                "os-windows",
+                "cpu-core-ultra-7",
+                "ram-16gb",
+                "ssd-1tb",
+                "display-120hz",
+                "use-business",
+                "weight-<1.3kg"
+              ],
+              "image_url": "https://imgur.com/a/oBB00Ut",
+              "image_thumb_url": "https://imgur.com/a/oBB00Ut",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 4,
+              "name": "Acer Predator Helios 16",
+              "description": "Acer Predator Helios 16 in the Electronics / Laptops category at $1699.00 (rated 4.6/5) featuring brand acer, Windows, ryzen 7, RTX 4070, 16gb.",
+              "price": 1699.0,
+              "rating": 4.6,
+              "tags": [
+                "brand-acer",
+                "os-windows",
+                "cpu-ryzen-7",
+                "gpu-rtx-4070",
+                "ram-16gb",
+                "ssd-1tb",
+                "use-gaming",
+                "display-165hz"
+              ],
+              "image_url": "https://imgur.com/a/tscfMXP",
+              "image_thumb_url": "https://imgur.com/a/tscfMXP",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 5,
+              "name": "Lenovo Yoga 9i",
+              "description": "Lenovo Yoga 9i in the Electronics / Laptops category at $1249.00 (rated 4.5/5) featuring brand lenovo, Windows, 2 in 1, core I7, 16gb.",
+              "price": 1249.0,
+              "rating": 4.5,
+              "tags": [
+                "brand-lenovo",
+                "os-windows",
+                "2-in-1",
+                "cpu-core-i7",
+                "ram-16gb",
+                "ssd-512gb",
+                "stylus",
+                "use-student"
+              ],
+              "image_url": "https://imgur.com/a/IoW6ZkU",
+              "image_thumb_url": "https://imgur.com/a/IoW6ZkU",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 6,
+              "name": "Razer Blade 15 OLED",
+              "description": "Razer Blade 15 OLED in the Electronics / Laptops category at $2199.99 (rated 4.2/5) featuring brand razer, Windows, RTX 4070, core I7, 32gb.",
+              "price": 2199.99,
+              "rating": 4.2,
+              "tags": [
+                "brand-razer",
+                "os-windows",
+                "gpu-rtx-4070",
+                "cpu-core-i7",
+                "ram-32gb",
+                "ssd-1tb",
+                "panel-oled",
+                "use-gaming"
+              ],
+              "image_url": "https://imgur.com/a/OO5rFHY",
+              "image_thumb_url": "https://imgur.com/a/OO5rFHY",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 7,
+              "name": "Surface Laptop 5",
+              "description": "Surface Laptop 5 in the Electronics / Laptops category at $1399.00 (rated 4.6/5) featuring brand microsoft, Windows, core I7, 16gb, 512gb.",
+              "price": 1399.0,
+              "rating": 4.6,
+              "tags": [
+                "brand-microsoft",
+                "os-windows",
+                "cpu-core-i7",
+                "ram-16gb",
+                "ssd-512gb",
+                "use-business",
+                "weight-<1.5kg",
+                "battery-long"
+              ],
+              "image_url": "https://imgur.com/a/gzcu9Kl",
+              "image_thumb_url": "https://imgur.com/a/gzcu9Kl",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 8,
+              "name": "ASUS TUF A16",
+              "description": "ASUS TUF A16 in the Electronics / Laptops category at $1099.00 (rated 4.4/5) featuring brand asus, Windows, ryzen 7, RTX 4060, 16gb.",
+              "price": 1099.0,
+              "rating": 4.4,
+              "tags": [
+                "brand-asus",
+                "os-windows",
+                "cpu-ryzen-7",
+                "gpu-rtx-4060",
+                "ram-16gb",
+                "ssd-512gb",
+                "use-gaming",
+                "durable"
+              ],
+              "image_url": "https://imgur.com/a/BcSMdoD",
+              "image_thumb_url": "https://imgur.com/a/BcSMdoD",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 9,
+              "name": "Samsung Galaxy Book4",
+              "description": "Samsung Galaxy Book4 in the Electronics / Laptops category at $999.99 (rated 4.5/5) featuring brand samsung, Windows, core I5, 16gb, 512gb.",
+              "price": 999.99,
+              "rating": 4.5,
+              "tags": [
+                "brand-samsung",
+                "os-windows",
+                "cpu-core-i5",
+                "ram-16gb",
+                "ssd-512gb",
+                "wifi-wifi7",
+                "use-student",
+                "weight-<1.5kg"
+              ],
+              "image_url": "https://imgur.com/a/EdVJgU7",
+              "image_thumb_url": "https://imgur.com/a/EdVJgU7",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 10,
+              "name": "MSI Stealth 14",
+              "description": "MSI Stealth 14 in the Electronics / Laptops category at $1599.00 (rated 4.5/5) featuring brand msi, Windows, RTX 4060, core I7, 16gb.",
+              "price": 1599.0,
+              "rating": 4.5,
+              "tags": [
+                "brand-msi",
+                "os-windows",
+                "gpu-rtx-4060",
+                "cpu-core-i7",
+                "ram-16gb",
+                "ssd-1tb",
+                "use-gaming",
+                "display-144hz"
+              ],
+              "image_url": "https://imgur.com/a/uoVSwWF",
+              "image_thumb_url": "https://imgur.com/a/uoVSwWF",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 11,
+              "name": "Lenovo Legion Pro 5",
+              "description": "Lenovo Legion Pro 5 in the Electronics / Laptops category at $1799.00 (rated 4.5/5) featuring brand lenovo, Windows, ryzen 9, RTX 4070, 32gb.",
+              "price": 1799.0,
+              "rating": 4.5,
+              "tags": [
+                "brand-lenovo",
+                "os-windows",
+                "cpu-ryzen-9",
+                "gpu-rtx-4070",
+                "ram-32gb",
+                "ssd-1tb",
+                "use-gaming",
+                "cooling-advanced"
+              ],
+              "image_url": "https://imgur.com/a/9X4aw32",
+              "image_thumb_url": "https://imgur.com/a/9X4aw32",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 12,
+              "name": "HP Victus 16",
+              "description": "HP Victus 16 in the Electronics / Laptops category at $1049.00 (rated 4.7/5) featuring brand hp, Windows, RTX 4050, core I7, 16gb.",
+              "price": 1049.0,
+              "rating": 4.7,
+              "tags": [
+                "brand-hp",
+                "os-windows",
+                "gpu-rtx-4050",
+                "cpu-core-i7",
+                "ram-16gb",
+                "ssd-512gb",
+                "use-gaming",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/EzJvkQ0",
+              "image_thumb_url": "https://imgur.com/a/EzJvkQ0",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 13,
+              "name": "ASUS ROG Zephyrus G14",
+              "description": "ASUS ROG Zephyrus G14 in the Electronics / Laptops category at $1899.00 (rated 4.6/5) featuring brand asus, Windows, ryzen 9, RTX 4070, 32gb.",
+              "price": 1899.0,
+              "rating": 4.6,
+              "tags": [
+                "brand-asus",
+                "os-windows",
+                "cpu-ryzen-9",
+                "gpu-rtx-4070",
+                "ram-32gb",
+                "ssd-1tb",
+                "use-gaming",
+                "weight-<1.7kg"
+              ],
+              "image_url": "https://imgur.com/a/xZPVGNS",
+              "image_thumb_url": "https://imgur.com/a/xZPVGNS",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 14,
+              "name": "Dell Inspiron 14 Plus",
+              "description": "Dell Inspiron 14 Plus in the Electronics / Laptops category at $999.00 (rated 4.5/5) featuring brand dell, Windows, core I7, 16gb, 512gb.",
+              "price": 999.0,
+              "rating": 4.5,
+              "tags": [
+                "brand-dell",
+                "os-windows",
+                "cpu-core-i7",
+                "ram-16gb",
+                "ssd-512gb",
+                "use-student",
+                "display-120hz",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/3mvkWbF",
+              "image_thumb_url": "https://imgur.com/a/3mvkWbF",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 15,
+              "name": "Acer Swift Go 14",
+              "description": "Acer Swift Go 14 in the Electronics / Laptops category at $1099.00 (rated 4.4/5) featuring brand acer, Windows, core Ultra 7, 16gb, 1tb.",
+              "price": 1099.0,
+              "rating": 4.4,
+              "tags": [
+                "brand-acer",
+                "os-windows",
+                "cpu-core-ultra-7",
+                "ram-16gb",
+                "ssd-1tb",
+                "panel-oled",
+                "use-business",
+                "weight-<1.4kg"
+              ],
+              "image_url": "https://imgur.com/a/ZqlhOiU",
+              "image_thumb_url": "https://imgur.com/a/ZqlhOiU",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 16,
+              "name": "Gigabyte Aero 16 Creator",
+              "description": "Gigabyte Aero 16 Creator in the Electronics / Laptops category at $2099.00 (rated 4.3/5) featuring brand gigabyte, Windows, RTX 4070, core I7, 32gb.",
+              "price": 2099.0,
+              "rating": 4.3,
+              "tags": [
+                "brand-gigabyte",
+                "os-windows",
+                "gpu-rtx-4070",
+                "cpu-core-i7",
+                "ram-32gb",
+                "ssd-2tb",
+                "use-creator",
+                "display-165hz"
+              ],
+              "image_url": "https://imgur.com/a/YLIM9Mz",
+              "image_thumb_url": "https://imgur.com/a/YLIM9Mz",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 17,
+              "name": "Framework Laptop 13",
+              "description": "Framework Laptop 13 in the Electronics / Laptops category at $1249.00 (rated 4.5/5) featuring brand framework, Windows, modular, core I7, 16gb.",
+              "price": 1249.0,
+              "rating": 4.5,
+              "tags": [
+                "brand-framework",
+                "os-windows",
+                "modular",
+                "cpu-core-i7",
+                "ram-16gb",
+                "ssd-1tb",
+                "repairable",
+                "use-student"
+              ],
+              "image_url": "https://imgur.com/a/hC2pnCM",
+              "image_thumb_url": "https://imgur.com/a/hC2pnCM",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 18,
+              "name": "Apple MacBook Air 13 M3",
+              "description": "Apple MacBook Air 13 M3 in the Electronics / Laptops category at $1099.00 (rated 4.8/5) featuring brand apple, Macos, apple m3, 8gb, 256gb.",
+              "price": 1099.0,
+              "rating": 4.8,
+              "tags": [
+                "brand-apple",
+                "os-macos",
+                "cpu-apple-m3",
+                "ram-8gb",
+                "ssd-256gb",
+                "weight-<1.3kg",
+                "use-student",
+                "battery-long"
+              ],
+              "image_url": "https://imgur.com/a/Rdfn5Hg",
+              "image_thumb_url": "https://imgur.com/a/Rdfn5Hg",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 19,
+              "name": "Apple MacBook Pro 14 M3",
+              "description": "Apple MacBook Pro 14 M3 in the Electronics / Laptops category at $1799.00 (rated 4.5/5) featuring brand apple, Macos, apple m3, 16gb, 512gb.",
+              "price": 1799.0,
+              "rating": 4.5,
+              "tags": [
+                "brand-apple",
+                "os-macos",
+                "cpu-apple-m3",
+                "ram-16gb",
+                "ssd-512gb",
+                "panel-mini-led",
+                "use-creator",
+                "battery-long"
+              ],
+              "image_url": "https://imgur.com/a/IBtvB5Q",
+              "image_thumb_url": "https://imgur.com/a/IBtvB5Q",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 20,
+              "name": "Apple MacBook Pro 16 M3 Pro",
+              "description": "Apple MacBook Pro 16 M3 Pro in the Electronics / Laptops category at $2499.00 (rated 4.5/5) featuring brand apple, Macos, m3 pro, 32gb, 1tb.",
+              "price": 2499.0,
+              "rating": 4.5,
+              "tags": [
+                "brand-apple",
+                "os-macos",
+                "cpu-m3-pro",
+                "ram-32gb",
+                "ssd-1tb",
+                "use-creator",
+                "panel-mini-led",
+                "silent"
+              ],
+              "image_url": "https://imgur.com/a/VqWoolv",
+              "image_thumb_url": "https://imgur.com/a/VqWoolv",
+              "image_attribution": "Placeholder"
+            }
+          ]
+        },
+        {
+          "name": "Phones",
+          "related_subcategories": [
+            "Laptops",
+            "Gaming Consoles"
+          ],
+          "products": [
+            {
+              "id": 21,
+              "name": "Samsung Galaxy S24 Ultra",
+              "description": "Samsung Galaxy S24 Ultra in the Electronics / Phones category at $1299.99 (rated 4.6/5) featuring platform android, camera 200mp, ltpo, battery 5000mah, charge fast.",
+              "price": 1299.99,
+              "rating": 4.6,
+              "tags": [
+                "platform-android",
+                "camera-200mp",
+                "display-ltpo",
+                "battery-5000mah",
+                "charge-fast",
+                "ip68",
+                "mmwave",
+                "soc-snapdragon-8g3"
+              ],
+              "image_url": "https://imgur.com/a/PBpeMj6",
+              "image_thumb_url": "https://imgur.com/a/PBpeMj6",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 22,
+              "name": "Google Pixel 8 Pro",
+              "description": "Google Pixel 8 Pro in the Electronics / Phones category at $999.00 (rated 4.2/5) featuring platform android, camera 50mp, ai features, oled, battery 5050mah.",
+              "price": 999.0,
+              "rating": 4.2,
+              "tags": [
+                "platform-android",
+                "camera-50mp",
+                "ai-features",
+                "display-oled",
+                "battery-5050mah",
+                "wireless-charge",
+                "ip68",
+                "soc-tensor-g3"
+              ],
+              "image_url": "https://imgur.com/a/rKbxnIg",
+              "image_thumb_url": "https://imgur.com/a/rKbxnIg",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 23,
+              "name": "OnePlus 12",
+              "description": "OnePlus 12 in the Electronics / Phones category at $849.00 (rated 4.4/5) featuring platform android, charge super, ltpo, battery 5400mah, camera 50mp.",
+              "price": 849.0,
+              "rating": 4.4,
+              "tags": [
+                "platform-android",
+                "charge-super",
+                "display-ltpo",
+                "battery-5400mah",
+                "camera-50mp",
+                "soc-snapdragon-8g3",
+                "ip65",
+                "smooth"
+              ],
+              "image_url": "https://imgur.com/a/qtc9R0r",
+              "image_thumb_url": "https://imgur.com/a/qtc9R0r",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 24,
+              "name": "Nothing Phone (2)",
+              "description": "Nothing Phone (2) in the Electronics / Phones category at $699.99 (rated 4.6/5) featuring platform android, design glyph, oled, battery 4700mah, charge fast.",
+              "price": 699.99,
+              "rating": 4.6,
+              "tags": [
+                "platform-android",
+                "design-glyph",
+                "display-oled",
+                "battery-4700mah",
+                "charge-fast",
+                "camera-50mp",
+                "ip54",
+                "midrange"
+              ],
+              "image_url": "https://imgur.com/a/qmUkSpG",
+              "image_thumb_url": "https://imgur.com/a/qmUkSpG",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 25,
+              "name": "Sony Xperia 1 V",
+              "description": "Sony Xperia 1 V in the Electronics / Phones category at $1099.00 (rated 4.7/5) featuring platform android, camera pro, 4k oled, battery 5000mah, ip68.",
+              "price": 1099.0,
+              "rating": 4.7,
+              "tags": [
+                "platform-android",
+                "camera-pro",
+                "display-4k-oled",
+                "battery-5000mah",
+                "ip68",
+                "creator",
+                "mmwave",
+                "sd-slot-none"
+              ],
+              "image_url": "https://imgur.com/a/9iiJ2n3",
+              "image_thumb_url": "https://imgur.com/a/9iiJ2n3",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 26,
+              "name": "Motorola Edge+",
+              "description": "Motorola Edge+ in the Electronics / Phones category at $799.99 (rated 4.5/5) featuring platform android, oled, battery 5100mah, charge fast, camera 50mp.",
+              "price": 799.99,
+              "rating": 4.5,
+              "tags": [
+                "platform-android",
+                "display-oled",
+                "battery-5100mah",
+                "charge-fast",
+                "camera-50mp",
+                "ip68",
+                "value-flagship",
+                "mmwave"
+              ],
+              "image_url": "https://imgur.com/a/EwiIvqT",
+              "image_thumb_url": "https://imgur.com/a/EwiIvqT",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 27,
+              "name": "ASUS ROG Phone 8",
+              "description": "ASUS ROG Phone 8 in the Electronics / Phones category at $1099.00 (rated 4.6/5) featuring platform android, gaming, 165hz, battery 5500mah, cooling advanced.",
+              "price": 1099.0,
+              "rating": 4.6,
+              "tags": [
+                "platform-android",
+                "gaming",
+                "display-165hz",
+                "battery-5500mah",
+                "cooling-advanced",
+                "shoulder-triggers",
+                "soc-snapdragon-8g3",
+                "stereo"
+              ],
+              "image_url": "https://imgur.com/a/Sm98Rb8",
+              "image_thumb_url": "https://imgur.com/a/Sm98Rb8",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 28,
+              "name": "Samsung Galaxy S24",
+              "description": "Samsung Galaxy S24 in the Electronics / Phones category at $999.99 (rated 4.5/5) featuring platform android, ltpo, battery 4000mah, charge fast, camera 50mp.",
+              "price": 999.99,
+              "rating": 4.5,
+              "tags": [
+                "platform-android",
+                "display-ltpo",
+                "battery-4000mah",
+                "charge-fast",
+                "camera-50mp",
+                "ip68",
+                "mmwave",
+                "wifi7"
+              ],
+              "image_url": "https://imgur.com/a/YgpWCoQ",
+              "image_thumb_url": "https://imgur.com/a/YgpWCoQ",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 29,
+              "name": "Google Pixel 8",
+              "description": "Google Pixel 8 in the Electronics / Phones category at $799.00 (rated 4.7/5) featuring platform android, ai features, oled, battery 4575mah, wireless charge.",
+              "price": 799.0,
+              "rating": 4.7,
+              "tags": [
+                "platform-android",
+                "ai-features",
+                "display-oled",
+                "battery-4575mah",
+                "wireless-charge",
+                "ip68",
+                "midrange-premium",
+                "soc-tensor-g3"
+              ],
+              "image_url": "https://imgur.com/a/VLL9wfo",
+              "image_thumb_url": "https://imgur.com/a/VLL9wfo",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 30,
+              "name": "OnePlus 12R",
+              "description": "OnePlus 12R in the Electronics / Phones category at $599.00 (rated 4.3/5) featuring platform android, charge super, 120hz, battery 5500mah, camera 50mp.",
+              "price": 599.0,
+              "rating": 4.3,
+              "tags": [
+                "platform-android",
+                "charge-super",
+                "display-120hz",
+                "battery-5500mah",
+                "camera-50mp",
+                "midrange",
+                "stereo",
+                "wifi6e"
+              ],
+              "image_url": "https://imgur.com/a/dKqgiNQ",
+              "image_thumb_url": "https://imgur.com/a/dKqgiNQ",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 31,
+              "name": "Samsung Galaxy A55",
+              "description": "Samsung Galaxy A55 in the Electronics / Phones category at $499.99 (rated 4.6/5) featuring platform android, midrange, battery 5000mah, oled, camera 50mp.",
+              "price": 499.99,
+              "rating": 4.6,
+              "tags": [
+                "platform-android",
+                "midrange",
+                "battery-5000mah",
+                "display-oled",
+                "camera-50mp",
+                "ip67",
+                "value",
+                "nfc"
+              ],
+              "image_url": "https://imgur.com/a/TXCODv7",
+              "image_thumb_url": "https://imgur.com/a/TXCODv7",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 32,
+              "name": "Sony Xperia 10 V",
+              "description": "Sony Xperia 10 V in the Electronics / Phones category at $449.99 (rated 4.2/5) featuring platform android, midrange, battery 5000mah, oled, ip65.",
+              "price": 449.99,
+              "rating": 4.2,
+              "tags": [
+                "platform-android",
+                "midrange",
+                "battery-5000mah",
+                "display-oled",
+                "ip65",
+                "compact",
+                "value",
+                "stereo"
+              ],
+              "image_url": "https://imgur.com/a/4Qu2vV1",
+              "image_thumb_url": "https://imgur.com/a/4Qu2vV1",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 33,
+              "name": "Motorola Moto G Power",
+              "description": "Motorola Moto G Power in the Electronics / Phones category at $299.99 (rated 4.0/5) featuring platform android, budget, battery 6000mah, 120hz, value.",
+              "price": 299.99,
+              "rating": 4.0,
+              "tags": [
+                "platform-android",
+                "budget",
+                "battery-6000mah",
+                "display-120hz",
+                "value",
+                "nfc",
+                "sd-slot",
+                "stereo"
+              ],
+              "image_url": "https://imgur.com/a/NaTsdJk",
+              "image_thumb_url": "https://imgur.com/a/NaTsdJk",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 34,
+              "name": "Nothing Phone (2a)",
+              "description": "Nothing Phone (2a) in the Electronics / Phones category at $449.99 (rated 4.4/5) featuring platform android, midrange, design glyph, battery 5000mah, 120hz.",
+              "price": 449.99,
+              "rating": 4.4,
+              "tags": [
+                "platform-android",
+                "midrange",
+                "design-glyph",
+                "battery-5000mah",
+                "display-120hz",
+                "nfc",
+                "dual-sim",
+                "wifi6"
+              ],
+              "image_url": "https://imgur.com/a/XAo4sxx",
+              "image_thumb_url": "https://imgur.com/a/XAo4sxx",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 35,
+              "name": "Samsung Galaxy Z Flip5",
+              "description": "Samsung Galaxy Z Flip5 in the Electronics / Phones category at $999.99 (rated 4.3/5) featuring platform android, foldable, 120hz, battery 3700mah, compact.",
+              "price": 999.99,
+              "rating": 4.3,
+              "tags": [
+                "platform-android",
+                "foldable",
+                "display-120hz",
+                "battery-3700mah",
+                "compact",
+                "wireless-charge",
+                "ipx8",
+                "premium"
+              ],
+              "image_url": "https://imgur.com/a/cF8cgBx",
+              "image_thumb_url": "https://imgur.com/a/cF8cgBx",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 36,
+              "name": "Samsung Galaxy Z Fold5",
+              "description": "Samsung Galaxy Z Fold5 in the Electronics / Phones category at $1799.99 (rated 4.7/5) featuring platform android, foldable, 120hz, battery 4400mah, pen support.",
+              "price": 1799.99,
+              "rating": 4.7,
+              "tags": [
+                "platform-android",
+                "foldable",
+                "display-120hz",
+                "battery-4400mah",
+                "pen-support",
+                "wireless-charge",
+                "ipx8",
+                "productivity"
+              ],
+              "image_url": "https://imgur.com/a/e6HdCb1",
+              "image_thumb_url": "https://imgur.com/a/e6HdCb1",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 37,
+              "name": "OnePlus Nord N30",
+              "description": "OnePlus Nord N30 in the Electronics / Phones category at $299.00 (rated 4.6/5) featuring platform android, budget, 120hz, battery 5000mah, charge fast.",
+              "price": 299.0,
+              "rating": 4.6,
+              "tags": [
+                "platform-android",
+                "budget",
+                "display-120hz",
+                "battery-5000mah",
+                "charge-fast",
+                "nfc",
+                "stereo",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/jswOpW7",
+              "image_thumb_url": "https://imgur.com/a/jswOpW7",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 38,
+              "name": "Apple iPhone 15 Pro",
+              "description": "Apple iPhone 15 Pro in the Electronics / Phones category at $1199.00 (rated 4.3/5) featuring platform ios, camera 48mp, 120hz, battery ~3300mah, usb c.",
+              "price": 1199.0,
+              "rating": 4.3,
+              "tags": [
+                "platform-ios",
+                "camera-48mp",
+                "display-120hz",
+                "battery-~3300mah",
+                "usb-c",
+                "mmwave",
+                "ip68",
+                "titanium"
+              ],
+              "image_url": "https://imgur.com/a/CPTF3IO",
+              "image_thumb_url": "https://imgur.com/a/CPTF3IO",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 39,
+              "name": "Apple iPhone 15",
+              "description": "Apple iPhone 15 in the Electronics / Phones category at $899.00 (rated 4.7/5) featuring platform ios, camera 48mp, oled, battery ~3349mah, usb c.",
+              "price": 899.0,
+              "rating": 4.7,
+              "tags": [
+                "platform-ios",
+                "camera-48mp",
+                "display-oled",
+                "battery-~3349mah",
+                "usb-c",
+                "ip68",
+                "midrange-apple",
+                "mag-safe"
+              ],
+              "image_url": "https://imgur.com/a/aGkCX2a",
+              "image_thumb_url": "https://imgur.com/a/aGkCX2a",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 40,
+              "name": "Apple iPhone SE (3rd Gen)",
+              "description": "Apple iPhone SE (3rd Gen) in the Electronics / Phones category at $449.00 (rated 4.3/5) featuring platform ios, compact, touch id, lcd, battery ~2000mah.",
+              "price": 449.0,
+              "rating": 4.3,
+              "tags": [
+                "platform-ios",
+                "compact",
+                "touch-id",
+                "lcd",
+                "battery-~2000mah",
+                "budget",
+                "ip67",
+                "a15"
+              ],
+              "image_url": "https://imgur.com/a/bKEfcxY",
+              "image_thumb_url": "https://imgur.com/a/bKEfcxY",
+              "image_attribution": "Placeholder"
+            }
+          ]
+        },
+        {
+          "name": "Gaming Consoles",
+          "related_subcategories": [
+            "Laptops",
+            "Phones"
+          ],
+          "products": [
+            {
+              "id": 41,
+              "name": "Sony PlayStation 5",
+              "description": "Sony PlayStation 5 in the Electronics / Gaming Consoles category at $499.00 (rated 4.5/5) featuring ecosystem sony, gen current, storage 1tb, target 4k, home.",
+              "price": 499.0,
+              "rating": 4.5,
+              "tags": [
+                "ecosystem-sony",
+                "gen-current",
+                "storage-1tb",
+                "target-4k",
+                "home",
+                "blu-ray",
+                "ray-tracing",
+                "dualsense"
+              ],
+              "image_url": "https://imgur.com/a/I1m93tt",
+              "image_thumb_url": "https://imgur.com/a/I1m93tt",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 42,
+              "name": "Sony PlayStation 5 Digital",
+              "description": "Sony PlayStation 5 Digital in the Electronics / Gaming Consoles category at $449.00 (rated 4.4/5) featuring ecosystem sony, gen current, storage 1tb, target 4k, home.",
+              "price": 449.0,
+              "rating": 4.4,
+              "tags": [
+                "ecosystem-sony",
+                "gen-current",
+                "storage-1tb",
+                "target-4k",
+                "home",
+                "digital-only",
+                "ray-tracing",
+                "dualsense"
+              ],
+              "image_url": "https://imgur.com/a/zsbiZtI",
+              "image_thumb_url": "https://imgur.com/a/zsbiZtI",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 43,
+              "name": "Sony PlayStation 5 Pro",
+              "description": "Sony PlayStation 5 Pro in the Electronics / Gaming Consoles category at $699.00 (rated 4.5/5) featuring ecosystem sony, gen current, storage 2tb, target 4k120, home.",
+              "price": 699.0,
+              "rating": 4.5,
+              "tags": [
+                "ecosystem-sony",
+                "gen-current",
+                "storage-2tb",
+                "target-4k120",
+                "home",
+                "ray-tracing",
+                "upscaling",
+                "dualsense"
+              ],
+              "image_url": "https://imgur.com/a/zFsjzP6",
+              "image_thumb_url": "https://imgur.com/a/zFsjzP6",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 44,
+              "name": "Microsoft Xbox Series X",
+              "description": "Microsoft Xbox Series X in the Electronics / Gaming Consoles category at $499.00 (rated 4.7/5) featuring ecosystem microsoft, gen current, storage 1tb, target 4k, home.",
+              "price": 499.0,
+              "rating": 4.7,
+              "tags": [
+                "ecosystem-microsoft",
+                "gen-current",
+                "storage-1tb",
+                "target-4k",
+                "home",
+                "quick-resume",
+                "game-pass",
+                "ray-tracing"
+              ],
+              "image_url": "https://imgur.com/a/lK7CF25",
+              "image_thumb_url": "https://imgur.com/a/lK7CF25",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 45,
+              "name": "Microsoft Xbox Series S",
+              "description": "Microsoft Xbox Series S in the Electronics / Gaming Consoles category at $299.00 (rated 4.6/5) featuring ecosystem microsoft, gen current, storage 512gb, target 1440p, home.",
+              "price": 299.0,
+              "rating": 4.6,
+              "tags": [
+                "ecosystem-microsoft",
+                "gen-current",
+                "storage-512gb",
+                "target-1440p",
+                "home",
+                "compact",
+                "game-pass",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/9QJtH2f",
+              "image_thumb_url": "https://imgur.com/a/9QJtH2f",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 46,
+              "name": "Microsoft Xbox Series X 2TB",
+              "description": "Microsoft Xbox Series X 2TB in the Electronics / Gaming Consoles category at $599.00 (rated 4.6/5) featuring ecosystem microsoft, gen current, storage 2tb, target 4k, home.",
+              "price": 599.0,
+              "rating": 4.6,
+              "tags": [
+                "ecosystem-microsoft",
+                "gen-current",
+                "storage-2tb",
+                "target-4k",
+                "home",
+                "ray-tracing",
+                "quiet",
+                "bundle-ready"
+              ],
+              "image_url": "https://imgur.com/a/xmZICsq",
+              "image_thumb_url": "https://imgur.com/a/xmZICsq",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 47,
+              "name": "Nintendo Switch OLED",
+              "description": "Nintendo Switch OLED in the Electronics / Gaming Consoles category at $349.00 (rated 4.6/5) featuring ecosystem nintendo, portable, storage 64gb, target 1080p dock, family.",
+              "price": 349.0,
+              "rating": 4.6,
+              "tags": [
+                "ecosystem-nintendo",
+                "portable",
+                "storage-64gb",
+                "target-1080p-dock",
+                "family",
+                "exclusive",
+                "joy-con",
+                "oled"
+              ],
+              "image_url": "https://imgur.com/a/ArUyzrM",
+              "image_thumb_url": "https://imgur.com/a/ArUyzrM",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 48,
+              "name": "Nintendo Switch Lite",
+              "description": "Nintendo Switch Lite in the Electronics / Gaming Consoles category at $199.00 (rated 4.6/5) featuring ecosystem nintendo, portable, storage 32gb, target 720p, family.",
+              "price": 199.0,
+              "rating": 4.6,
+              "tags": [
+                "ecosystem-nintendo",
+                "portable",
+                "storage-32gb",
+                "target-720p",
+                "family",
+                "compact",
+                "value",
+                "color-variants"
+              ],
+              "image_url": "https://imgur.com/a/keRVEc8",
+              "image_thumb_url": "https://imgur.com/a/keRVEc8",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 49,
+              "name": "Nintendo Switch 2 (rumored)",
+              "description": "Nintendo Switch 2 (rumored) in the Electronics / Gaming Consoles category at $399.00 (rated 4.4/5) featuring ecosystem nintendo, portable, target 1080p, dockable, family.",
+              "price": 399.0,
+              "rating": 4.4,
+              "tags": [
+                "ecosystem-nintendo",
+                "portable",
+                "target-1080p",
+                "dockable",
+                "family",
+                "rumor",
+                "next-gen",
+                "tbd"
+              ],
+              "image_url": "https://imgur.com/a/bJJAyRx",
+              "image_thumb_url": "https://imgur.com/a/bJJAyRx",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 50,
+              "name": "Valve Steam Deck 512GB",
+              "description": "Valve Steam Deck 512GB in the Electronics / Gaming Consoles category at $649.00 (rated 4.4/5) featuring ecosystem steam, portable, storage 512gb, target 800p, pc gaming.",
+              "price": 649.0,
+              "rating": 4.4,
+              "tags": [
+                "ecosystem-steam",
+                "portable",
+                "storage-512gb",
+                "target-800p",
+                "pc-gaming",
+                "trackpads",
+                "linux",
+                "rdna2"
+              ],
+              "image_url": "https://imgur.com/a/RH64iso",
+              "image_thumb_url": "https://imgur.com/a/RH64iso",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 51,
+              "name": "Valve Steam Deck OLED 1TB",
+              "description": "Valve Steam Deck OLED 1TB in the Electronics / Gaming Consoles category at $699.00 (rated 4.4/5) featuring ecosystem steam, portable, storage 1tb, oled, pc gaming.",
+              "price": 699.0,
+              "rating": 4.4,
+              "tags": [
+                "ecosystem-steam",
+                "portable",
+                "storage-1tb",
+                "oled",
+                "pc-gaming",
+                "battery-longer",
+                "rdna2",
+                "dockable"
+              ],
+              "image_url": "https://imgur.com/a/urvDWsY",
+              "image_thumb_url": "https://imgur.com/a/urvDWsY",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 52,
+              "name": "ASUS ROG Ally X",
+              "description": "ASUS ROG Ally X in the Electronics / Gaming Consoles category at $699.00 (rated 4.6/5) featuring ecosystem windows, portable, target 1080p, storage 1tb, windows.",
+              "price": 699.0,
+              "rating": 4.6,
+              "tags": [
+                "ecosystem-windows",
+                "portable",
+                "target-1080p",
+                "storage-1tb",
+                "windows",
+                "game-pass",
+                "xbox-app",
+                "rdna3"
+              ],
+              "image_url": "https://imgur.com/a/KcDzDCV",
+              "image_thumb_url": "https://imgur.com/a/KcDzDCV",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 53,
+              "name": "Lenovo Legion Go",
+              "description": "Lenovo Legion Go in the Electronics / Gaming Consoles category at $749.00 (rated 4.4/5) featuring ecosystem windows, portable, detachable controllers, target 1440p, storage 1tb.",
+              "price": 749.0,
+              "rating": 4.4,
+              "tags": [
+                "ecosystem-windows",
+                "portable",
+                "detachable-controllers",
+                "target-1440p",
+                "storage-1tb",
+                "windows",
+                "rdna3",
+                "kickstand"
+              ],
+              "image_url": "https://imgur.com/a/GpxRhwn",
+              "image_thumb_url": "https://imgur.com/a/GpxRhwn",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 54,
+              "name": "AYANEO Air 1S",
+              "description": "AYANEO Air 1S in the Electronics / Gaming Consoles category at $999.00 (rated 4.9/5) featuring ecosystem windows, portable, oled, compact, storage 2tb.",
+              "price": 999.0,
+              "rating": 4.9,
+              "tags": [
+                "ecosystem-windows",
+                "portable",
+                "oled",
+                "compact",
+                "storage-2tb",
+                "rdna2",
+                "premium",
+                "fan"
+              ],
+              "image_url": "https://imgur.com/a/rIuAisF",
+              "image_thumb_url": "https://imgur.com/a/rIuAisF",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 55,
+              "name": "Logitech G Cloud",
+              "description": "Logitech G Cloud in the Electronics / Gaming Consoles category at $349.00 (rated 4.3/5) featuring ecosystem android, portable, cloud, battery long, lightweight.",
+              "price": 349.0,
+              "rating": 4.3,
+              "tags": [
+                "ecosystem-android",
+                "portable",
+                "cloud",
+                "battery-long",
+                "lightweight",
+                "game-pass",
+                "geforce-now",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/3U1RUrC",
+              "image_thumb_url": "https://imgur.com/a/3U1RUrC",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 56,
+              "name": "Retroid Pocket 3+",
+              "description": "Retroid Pocket 3+ in the Electronics / Gaming Consoles category at $199.00 (rated 4.3/5) featuring ecosystem android, portable, retro, emulator, compact.",
+              "price": 199.0,
+              "rating": 4.3,
+              "tags": [
+                "ecosystem-android",
+                "portable",
+                "retro",
+                "emulator",
+                "compact",
+                "value",
+                "sd-slot",
+                "community"
+              ],
+              "image_url": "https://imgur.com/a/MMLhJL4",
+              "image_thumb_url": "https://imgur.com/a/MMLhJL4",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 57,
+              "name": "Analogue Pocket",
+              "description": "Analogue Pocket in the Electronics / Gaming Consoles category at $219.00 (rated 4.7/5) featuring ecosystem analogue, portable, retro, fpga, collector.",
+              "price": 219.0,
+              "rating": 4.7,
+              "tags": [
+                "ecosystem-analogue",
+                "portable",
+                "retro",
+                "fpga",
+                "collector",
+                "premium",
+                "dockable",
+                "link-cable"
+              ],
+              "image_url": "https://imgur.com/a/avGE1F3",
+              "image_thumb_url": "https://imgur.com/a/avGE1F3",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 58,
+              "name": "Nintendo 3DS XL (refurb)",
+              "description": "Nintendo 3DS XL (refurb) in the Electronics / Gaming Consoles category at $189.00 (rated 4.8/5) featuring ecosystem nintendo, portable, retro, dual screen, collector.",
+              "price": 189.0,
+              "rating": 4.8,
+              "tags": [
+                "ecosystem-nintendo",
+                "portable",
+                "retro",
+                "dual-screen",
+                "collector",
+                "value",
+                "foldable",
+                "library"
+              ],
+              "image_url": "https://imgur.com/a/Q9Rn9SV",
+              "image_thumb_url": "https://imgur.com/a/Q9Rn9SV",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 59,
+              "name": "Playdate",
+              "description": "Playdate in the Electronics / Gaming Consoles category at $179.00 (rated 4.6/5) featuring ecosystem playdate, portable, crank, indie, mono.",
+              "price": 179.0,
+              "rating": 4.6,
+              "tags": [
+                "ecosystem-playdate",
+                "portable",
+                "crank",
+                "indie",
+                "mono",
+                "ultra-compact",
+                "fun",
+                "collector"
+              ],
+              "image_url": "https://imgur.com/a/3lOAS9Z",
+              "image_thumb_url": "https://imgur.com/a/3lOAS9Z",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 60,
+              "name": "Panic Playdate Season 1 Bundle",
+              "description": "Panic Playdate Season 1 Bundle in the Electronics / Gaming Consoles category at $199.00 (rated 4.7/5) featuring ecosystem playdate, portable, bundle, indie, crank.",
+              "price": 199.0,
+              "rating": 4.7,
+              "tags": [
+                "ecosystem-playdate",
+                "portable",
+                "bundle",
+                "indie",
+                "crank",
+                "mono",
+                "collector",
+                "exclusive"
+              ],
+              "image_url": "https://imgur.com/a/WygNNDf",
+              "image_thumb_url": "https://imgur.com/a/WygNNDf",
+              "image_attribution": "Placeholder"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "main_category": "Supplements",
+      "subcategories": [
+        {
+          "name": "Protein Powder",
+          "related_subcategories": [
+            "High-Protein Food"
+          ],
+          "products": [
+            {
+              "id": 61,
+              "name": "Optimum Nutrition Gold Standard Whey",
+              "description": "Optimum Nutrition Gold Standard Whey in the Supplements / Protein Powder category at $54.99 (rated 4.8/5) featuring form powder, protein whey, macro high protein, flavor chocolate, diet gluten free.",
+              "price": 54.99,
+              "rating": 4.8,
+              "tags": [
+                "form-powder",
+                "protein-whey",
+                "macro-high-protein",
+                "flavor-chocolate",
+                "diet-gluten-free",
+                "goal-muscle",
+                "sweetener-suclarose",
+                "non-gmo"
+              ],
+              "image_url": "https://imgur.com/a/CxReMWq",
+              "image_thumb_url": "https://imgur.com/a/CxReMWq",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 62,
+              "name": "MuscleTech NitroTech",
+              "description": "MuscleTech NitroTech in the Supplements / Protein Powder category at $49.99 (rated 4.5/5) featuring form powder, protein whey, goal recovery, flavor vanilla, macro high protein.",
+              "price": 49.99,
+              "rating": 4.5,
+              "tags": [
+                "form-powder",
+                "protein-whey",
+                "goal-recovery",
+                "flavor-vanilla",
+                "macro-high-protein",
+                "low-sugar",
+                "diet-gluten-free",
+                "non-gmo"
+              ],
+              "image_url": "https://imgur.com/a/MlaJWs4",
+              "image_thumb_url": "https://imgur.com/a/MlaJWs4",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 63,
+              "name": "Dymatize ISO100",
+              "description": "Dymatize ISO100 in the Supplements / Protein Powder category at $69.99 (rated 4.2/5) featuring form powder, protein isolate, macro high protein, low carb, flavor chocolate.",
+              "price": 69.99,
+              "rating": 4.2,
+              "tags": [
+                "form-powder",
+                "protein-isolate",
+                "macro-high-protein",
+                "low-carb",
+                "flavor-chocolate",
+                "goal-muscle",
+                "lactose-low",
+                "gluten-free"
+              ],
+              "image_url": "https://imgur.com/a/CMbyjSO",
+              "image_thumb_url": "https://imgur.com/a/CMbyjSO",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 64,
+              "name": "Ghost Whey Protein",
+              "description": "Ghost Whey Protein in the Supplements / Protein Powder category at $44.99 (rated 4.4/5) featuring form powder, protein whey, lifestyle, flavor cereal milk, macro high protein.",
+              "price": 44.99,
+              "rating": 4.4,
+              "tags": [
+                "form-powder",
+                "protein-whey",
+                "lifestyle",
+                "flavor-cereal-milk",
+                "macro-high-protein",
+                "low-sugar",
+                "goal-muscle",
+                "non-gmo"
+              ],
+              "image_url": "https://imgur.com/a/4nLtTIe",
+              "image_thumb_url": "https://imgur.com/a/4nLtTIe",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 65,
+              "name": "Gold Standard Casein",
+              "description": "Gold Standard Casein in the Supplements / Protein Powder category at $59.99 (rated 4.7/5) featuring form powder, protein casein, night, slow digesting, macro high protein.",
+              "price": 59.99,
+              "rating": 4.7,
+              "tags": [
+                "form-powder",
+                "protein-casein",
+                "night",
+                "slow-digesting",
+                "macro-high-protein",
+                "goal-recovery",
+                "low-sugar",
+                "gluten-free"
+              ],
+              "image_url": "https://imgur.com/a/aKXB641",
+              "image_thumb_url": "https://imgur.com/a/aKXB641",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 66,
+              "name": "Vega Plant Protein",
+              "description": "Vega Plant Protein in the Supplements / Protein Powder category at $39.99 (rated 4.2/5) featuring form powder, protein plant, diet vegan, non gmo, flavor vanilla.",
+              "price": 39.99,
+              "rating": 4.2,
+              "tags": [
+                "form-powder",
+                "protein-plant",
+                "diet-vegan",
+                "non-gmo",
+                "flavor-vanilla",
+                "macro-high-protein",
+                "gluten-free",
+                "low-sugar"
+              ],
+              "image_url": "https://imgur.com/a/h0nxut6",
+              "image_thumb_url": "https://imgur.com/a/h0nxut6",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 67,
+              "name": "Orgain Organic Protein",
+              "description": "Orgain Organic Protein in the Supplements / Protein Powder category at $29.99 (rated 4.5/5) featuring form powder, protein plant, organic, diet vegan, flavor chocolate.",
+              "price": 29.99,
+              "rating": 4.5,
+              "tags": [
+                "form-powder",
+                "protein-plant",
+                "organic",
+                "diet-vegan",
+                "flavor-chocolate",
+                "macro-high-protein",
+                "non-gmo",
+                "gluten-free"
+              ],
+              "image_url": "https://imgur.com/a/d22bqTk",
+              "image_thumb_url": "https://imgur.com/a/d22bqTk",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 68,
+              "name": "Isopure Zero Carb",
+              "description": "Isopure Zero Carb in the Supplements / Protein Powder category at $54.99 (rated 4.6/5) featuring form powder, protein isolate, zero carb, macro high protein, goal lean.",
+              "price": 54.99,
+              "rating": 4.6,
+              "tags": [
+                "form-powder",
+                "protein-isolate",
+                "zero-carb",
+                "macro-high-protein",
+                "goal-lean",
+                "gluten-free",
+                "lactose-low",
+                "sweetener"
+              ],
+              "image_url": "https://imgur.com/a/trIK2gD",
+              "image_thumb_url": "https://imgur.com/a/trIK2gD",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 69,
+              "name": "Legion Whey+",
+              "description": "Legion Whey+ in the Supplements / Protein Powder category at $59.99 (rated 4.4/5) featuring form powder, protein whey, grass fed, clean label, macro high protein.",
+              "price": 59.99,
+              "rating": 4.4,
+              "tags": [
+                "form-powder",
+                "protein-whey",
+                "grass-fed",
+                "clean-label",
+                "macro-high-protein",
+                "low-sugar",
+                "non-gmo",
+                "gluten-free"
+              ],
+              "image_url": "https://imgur.com/a/cfy2FIh",
+              "image_thumb_url": "https://imgur.com/a/cfy2FIh",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 70,
+              "name": "MyProtein Impact Whey",
+              "description": "MyProtein Impact Whey in the Supplements / Protein Powder category at $49.99 (rated 4.6/5) featuring form powder, protein whey, affordable, macro high protein, flavor strawberry.",
+              "price": 49.99,
+              "rating": 4.6,
+              "tags": [
+                "form-powder",
+                "protein-whey",
+                "affordable",
+                "macro-high-protein",
+                "flavor-strawberry",
+                "low-sugar",
+                "goal-muscle",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/6lmAZ6p",
+              "image_thumb_url": "https://imgur.com/a/6lmAZ6p",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 71,
+              "name": "Rule 1 R1 Whey Blend",
+              "description": "Rule 1 R1 Whey Blend in the Supplements / Protein Powder category at $44.99 (rated 4.6/5) featuring form powder, protein whey, macro high protein, value, low sugar.",
+              "price": 44.99,
+              "rating": 4.6,
+              "tags": [
+                "form-powder",
+                "protein-whey",
+                "macro-high-protein",
+                "value",
+                "low-sugar",
+                "goal-recovery",
+                "gluten-free",
+                "non-gmo"
+              ],
+              "image_url": "https://imgur.com/a/ltb2Krr",
+              "image_thumb_url": "https://imgur.com/a/ltb2Krr",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 72,
+              "sku": "KADPSP001",
+              "name": "Kaged Micropure Whey Isolate",
+              "description": "Kaged Micropure Whey Isolate in the Supplements / Protein Powder category at $64.99 (rated 4.9/5) featuring form powder, protein isolate, macro high protein, clean label, low carb.",
+              "price": 64.99,
+              "rating": 4.9,
+              "tags": [
+                "form-powder",
+                "protein-isolate",
+                "macro-high-protein",
+                "clean-label",
+                "low-carb",
+                "goal-lean",
+                "gluten-free",
+                "non-gmo"
+              ],
+              "image_url": "https://imgur.com/a/EaCfq3j",
+              "image_thumb_url": "https://imgur.com/a/EaCfq3j",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 73,
+              "sku": "GOLPSP001",
+              "name": "Garden of Life Sport Plant Protein",
+              "description": "Garden of Life Sport Plant Protein in the Supplements / Protein Powder category at $59.99 (rated 4.6/5) featuring form powder, protein plant, diet vegan, organic, nsf certified.",
+              "price": 59.99,
+              "rating": 4.6,
+              "tags": [
+                "form-powder",
+                "protein-plant",
+                "diet-vegan",
+                "organic",
+                "nsf-certified",
+                "macro-high-protein",
+                "low-sugar",
+                "goal-recovery"
+              ],
+              "image_url": "https://imgur.com/a/jbHtgzl",
+              "image_thumb_url": "https://imgur.com/a/jbHtgzl",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 74,
+              "name": "Transparent Labs Whey Isolate",
+              "description": "Transparent Labs Whey Isolate in the Supplements / Protein Powder category at $69.00 (rated 4.4/5) featuring form powder, protein isolate, macro high protein, no artificial, low carb.",
+              "price": 69.0,
+              "rating": 4.4,
+              "tags": [
+                "form-powder",
+                "protein-isolate",
+                "macro-high-protein",
+                "no-artificial",
+                "low-carb",
+                "goal-lean",
+                "gluten-free",
+                "non-gmo"
+              ],
+              "image_url": "https://imgur.com/a/mt2H1Yx",
+              "image_thumb_url": "https://imgur.com/a/mt2H1Yx",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 75,
+              "name": "PEScience Select Protein",
+              "description": "PEScience Select Protein in the Supplements / Protein Powder category at $39.99 (rated 4.4/5) featuring form powder, protein blend, macro high protein, flavor snickerdoodle, low sugar.",
+              "price": 39.99,
+              "rating": 4.4,
+              "tags": [
+                "form-powder",
+                "protein-blend",
+                "macro-high-protein",
+                "flavor-snickerdoodle",
+                "low-sugar",
+                "goal-muscle",
+                "gluten-free",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/876y49P",
+              "image_thumb_url": "https://imgur.com/a/876y49P",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 76,
+              "name": "MusclePharm Combat Protein",
+              "description": "MusclePharm Combat Protein in the Supplements / Protein Powder category at $44.99 (rated 4.3/5) featuring form powder, protein blend, macro high protein, sustained release, goal recovery.",
+              "price": 44.99,
+              "rating": 4.3,
+              "tags": [
+                "form-powder",
+                "protein-blend",
+                "macro-high-protein",
+                "sustained-release",
+                "goal-recovery",
+                "low-sugar",
+                "gluten-free",
+                "non-gmo"
+              ],
+              "image_url": "https://imgur.com/a/GLLXonN",
+              "image_thumb_url": "https://imgur.com/a/GLLXonN",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 77,
+              "name": "GNC AMP Wheybolic",
+              "description": "GNC AMP Wheybolic in the Supplements / Protein Powder category at $69.99 (rated 4.7/5) featuring form powder, protein whey, macro high protein, goal muscle, low lactose.",
+              "price": 69.99,
+              "rating": 4.7,
+              "tags": [
+                "form-powder",
+                "protein-whey",
+                "macro-high-protein",
+                "goal-muscle",
+                "low-lactose",
+                "gluten-free",
+                "nsf-certified",
+                "premium"
+              ],
+              "image_url": "https://imgur.com/a/sYhtXRP",
+              "image_thumb_url": "https://imgur.com/a/sYhtXRP",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 78,
+              "name": "Fairlife Core Power",
+              "description": "Fairlife Core Power in the Supplements / Protein Powder category at $8.99 (rated 4.4/5) featuring form drink, ready to drink, protein milk, macro high protein, low fat.",
+              "price": 8.99,
+              "rating": 4.4,
+              "tags": [
+                "form-drink",
+                "ready-to-drink",
+                "protein-milk",
+                "macro-high-protein",
+                "low-fat",
+                "goal-recovery",
+                "lactose-filtered",
+                "on-the-go"
+              ],
+              "image_url": "https://imgur.com/a/BYIP3Aj",
+              "image_thumb_url": "https://imgur.com/a/BYIP3Aj",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 79,
+              "name": "Premier Protein Shake",
+              "description": "Premier Protein Shake in the Supplements / Protein Powder category at $7.99 (rated 4.5/5) featuring form drink, ready to drink, macro high protein, low sugar, goal lean.",
+              "price": 7.99,
+              "rating": 4.5,
+              "tags": [
+                "form-drink",
+                "ready-to-drink",
+                "macro-high-protein",
+                "low-sugar",
+                "goal-lean",
+                "value",
+                "convenience",
+                "gluten-free"
+              ],
+              "image_url": "https://imgur.com/a/bqBWwMh",
+              "image_thumb_url": "https://imgur.com/a/bqBWwMh",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 80,
+              "name": "Optimum Nutrition Serious Mass",
+              "description": "Optimum Nutrition Serious Mass in the Supplements / Protein Powder category at $49.99 (rated 4.6/5) featuring form powder, gainer, macro high calorie, macro high protein, goal weight gain.",
+              "price": 49.99,
+              "rating": 4.6,
+              "tags": [
+                "form-powder",
+                "gainer",
+                "macro-high-calorie",
+                "macro-high-protein",
+                "goal-weight-gain",
+                "flavor-chocolate",
+                "value",
+                "gluten-free"
+              ],
+              "image_url": "https://imgur.com/a/SD6fwud",
+              "image_thumb_url": "https://imgur.com/a/SD6fwud",
+              "image_attribution": "Placeholder"
+            }
+          ]
+        },
+        {
+          "name": "Digestive Health",
+          "related_subcategories": [
+            "Vitamins"
+          ],
+          "products": [
+            {
+              "id": 81,
+              "name": "Culturelle Daily Probiotic",
+              "description": "Culturelle Daily Probiotic in the Supplements / Digestive Health category at $25.99 (rated 4.4/5) featuring form capsule, goal gut health, probiotic, daily, gluten free.",
+              "price": 25.99,
+              "rating": 4.4,
+              "tags": [
+                "form-capsule",
+                "goal-gut-health",
+                "probiotic",
+                "daily",
+                "gluten-free",
+                "non-gmo",
+                "value",
+                "shelf-stable"
+              ],
+              "image_url": "https://imgur.com/a/zS0U1bW",
+              "image_thumb_url": "https://imgur.com/a/zS0U1bW",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 82,
+              "name": "Align Digestive Probiotic",
+              "description": "Align Digestive Probiotic in the Supplements / Digestive Health category at $28.99 (rated 4.4/5) featuring form capsule, probiotic, goal digestive, daily, gluten free.",
+              "price": 28.99,
+              "rating": 4.4,
+              "tags": [
+                "form-capsule",
+                "probiotic",
+                "goal-digestive",
+                "daily",
+                "gluten-free",
+                "premium",
+                "non-gmo",
+                "doctor-recommended"
+              ],
+              "image_url": "https://imgur.com/a/AHdvNHO",
+              "image_thumb_url": "https://imgur.com/a/AHdvNHO",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 83,
+              "name": "NOW Super Enzymes",
+              "description": "NOW Super Enzymes in the Supplements / Digestive Health category at $19.99 (rated 4.1/5) featuring form capsule, enzyme, goal digestion, meal support, value.",
+              "price": 19.99,
+              "rating": 4.1,
+              "tags": [
+                "form-capsule",
+                "enzyme",
+                "goal-digestion",
+                "meal-support",
+                "value",
+                "non-gmo",
+                "gluten-free",
+                "vegetarian"
+              ],
+              "image_url": "https://imgur.com/a/ddmEkqQ",
+              "image_thumb_url": "https://imgur.com/a/ddmEkqQ",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 84,
+              "name": "Garden of Life Raw Probiotic",
+              "description": "Garden of Life Raw Probiotic in the Supplements / Digestive Health category at $34.99 (rated 4.3/5) featuring form capsule, probiotic, raw, organic, goal gut health.",
+              "price": 34.99,
+              "rating": 4.3,
+              "tags": [
+                "form-capsule",
+                "probiotic",
+                "raw",
+                "organic",
+                "goal-gut-health",
+                "refrigerated",
+                "gluten-free",
+                "non-gmo"
+              ],
+              "image_url": "https://imgur.com/a/9INVX9v",
+              "image_thumb_url": "https://imgur.com/a/9INVX9v",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 85,
+              "name": "Florastor Daily Probiotic",
+              "description": "Florastor Daily Probiotic in the Supplements / Digestive Health category at $35.99 (rated 4.4/5) featuring form capsule, probiotic yeast, goal gut health, daily, gluten free.",
+              "price": 35.99,
+              "rating": 4.4,
+              "tags": [
+                "form-capsule",
+                "probiotic-yeast",
+                "goal-gut-health",
+                "daily",
+                "gluten-free",
+                "non-gmo",
+                "shelf-stable",
+                "premium"
+              ],
+              "image_url": "https://imgur.com/a/TJZTdXX",
+              "image_thumb_url": "https://imgur.com/a/TJZTdXX",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 86,
+              "name": "BioSchwartz Digestive Enzymes",
+              "description": "BioSchwartz Digestive Enzymes in the Supplements / Digestive Health category at $21.99 (rated 4.6/5) featuring form capsule, enzyme, goal digestion, vegetarian, non gmo.",
+              "price": 21.99,
+              "rating": 4.6,
+              "tags": [
+                "form-capsule",
+                "enzyme",
+                "goal-digestion",
+                "vegetarian",
+                "non-gmo",
+                "value",
+                "gluten-free",
+                "clean-label"
+              ],
+              "image_url": "https://imgur.com/a/IineSwI",
+              "image_thumb_url": "https://imgur.com/a/IineSwI",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 87,
+              "name": "Nature’s Bounty Probiotic 10",
+              "description": "Nature’s Bounty Probiotic 10 in the Supplements / Digestive Health category at $17.99 (rated 4.7/5) featuring form capsule, probiotic, goal digestive, value, gluten free.",
+              "price": 17.99,
+              "rating": 4.7,
+              "tags": [
+                "form-capsule",
+                "probiotic",
+                "goal-digestive",
+                "value",
+                "gluten-free",
+                "non-gmo",
+                "daily",
+                "shelf-stable"
+              ],
+              "image_url": "https://imgur.com/a/M9GA3e6",
+              "image_thumb_url": "https://imgur.com/a/M9GA3e6",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 88,
+              "name": "Ritual Synbiotic+",
+              "description": "Ritual Synbiotic+ in the Supplements / Digestive Health category at $49.99 (rated 4.5/5) featuring form capsule, synbiotic, prebiotic+probiotic, goal gut health, vegan.",
+              "price": 49.99,
+              "rating": 4.5,
+              "tags": [
+                "form-capsule",
+                "synbiotic",
+                "prebiotic+probiotic",
+                "goal-gut-health",
+                "vegan",
+                "non-gmo",
+                "delayed-release",
+                "premium"
+              ],
+              "image_url": "https://imgur.com/a/4IIQkAk",
+              "image_thumb_url": "https://imgur.com/a/4IIQkAk",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 89,
+              "name": "Olly Probiotic Gummy",
+              "description": "Olly Probiotic Gummy in the Supplements / Digestive Health category at $14.99 (rated 4.6/5) featuring form gummy, probiotic, goal gut health, flavor berry, gluten free.",
+              "price": 14.99,
+              "rating": 4.6,
+              "tags": [
+                "form-gummy",
+                "probiotic",
+                "goal-gut-health",
+                "flavor-berry",
+                "gluten-free",
+                "non-gmo",
+                "kid-friendly",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/rjaGjAz",
+              "image_thumb_url": "https://imgur.com/a/rjaGjAz",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 90,
+              "name": "Seed Daily Synbiotic",
+              "description": "Seed Daily Synbiotic in the Supplements / Digestive Health category at $74.99 (rated 4.5/5) featuring form capsule, synbiotic, goal gut health, vegan, non gmo.",
+              "price": 74.99,
+              "rating": 4.5,
+              "tags": [
+                "form-capsule",
+                "synbiotic",
+                "goal-gut-health",
+                "vegan",
+                "non-gmo",
+                "delayed-release",
+                "refill",
+                "premium"
+              ],
+              "image_url": "https://imgur.com/a/vJHbDYl",
+              "image_thumb_url": "https://imgur.com/a/vJHbDYl",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 91,
+              "name": "Physician’s Choice Probiotic",
+              "description": "Physician’s Choice Probiotic in the Supplements / Digestive Health category at $29.99 (rated 4.7/5) featuring form capsule, probiotic, goal gut health, vegan, non gmo.",
+              "price": 29.99,
+              "rating": 4.7,
+              "tags": [
+                "form-capsule",
+                "probiotic",
+                "goal-gut-health",
+                "vegan",
+                "non-gmo",
+                "shelf-stable",
+                "gluten-free",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/9Dw7ta5",
+              "image_thumb_url": "https://imgur.com/a/9Dw7ta5",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 92,
+              "name": "Renew Life Ultimate Flora",
+              "description": "Renew Life Ultimate Flora in the Supplements / Digestive Health category at $32.99 (rated 4.7/5) featuring form capsule, probiotic, goal digestive, daily, gluten free.",
+              "price": 32.99,
+              "rating": 4.7,
+              "tags": [
+                "form-capsule",
+                "probiotic",
+                "goal-digestive",
+                "daily",
+                "gluten-free",
+                "non-gmo",
+                "refrigerated",
+                "premium"
+              ],
+              "image_url": "https://imgur.com/a/CIVFtWk",
+              "image_thumb_url": "https://imgur.com/a/CIVFtWk",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 93,
+              "name": "Jarrow Saccharomyces Boulardii",
+              "description": "Jarrow Saccharomyces Boulardii in the Supplements / Digestive Health category at $19.49 (rated 4.6/5) featuring form capsule, probiotic yeast, goal gut health, gluten free, non gmo.",
+              "price": 19.49,
+              "rating": 4.6,
+              "tags": [
+                "form-capsule",
+                "probiotic-yeast",
+                "goal-gut-health",
+                "gluten-free",
+                "non-gmo",
+                "value",
+                "travel-friendly",
+                "shelf-stable"
+              ],
+              "image_url": "https://imgur.com/a/7Tyug3G",
+              "image_thumb_url": "https://imgur.com/a/7Tyug3G",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 94,
+              "name": "Digest Gold Enzymes",
+              "description": "Digest Gold Enzymes in the Supplements / Digestive Health category at $29.99 (rated 4.3/5) featuring form capsule, enzyme, goal digestion, gluten free, non gmo.",
+              "price": 29.99,
+              "rating": 4.3,
+              "tags": [
+                "form-capsule",
+                "enzyme",
+                "goal-digestion",
+                "gluten-free",
+                "non-gmo",
+                "vegan",
+                "premium",
+                "clean-label"
+              ],
+              "image_url": "https://imgur.com/a/lhWmQpX",
+              "image_thumb_url": "https://imgur.com/a/lhWmQpX",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 95,
+              "name": "Nature Made Probiotic",
+              "description": "Nature Made Probiotic in the Supplements / Digestive Health category at $18.99 (rated 4.7/5) featuring form capsule, probiotic, goal digestive, value, non gmo.",
+              "price": 18.99,
+              "rating": 4.7,
+              "tags": [
+                "form-capsule",
+                "probiotic",
+                "goal-digestive",
+                "value",
+                "non-gmo",
+                "gluten-free",
+                "daily",
+                "shelf-stable"
+              ],
+              "image_url": "https://imgur.com/a/X7opJFr",
+              "image_thumb_url": "https://imgur.com/a/X7opJFr",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 96,
+              "name": "Garden of Life Dr. Formulated Probiotic",
+              "description": "Garden of Life Dr. Formulated Probiotic in the Supplements / Digestive Health category at $36.99 (rated 4.6/5) featuring form capsule, probiotic, goal gut health, vegan, non gmo.",
+              "price": 36.99,
+              "rating": 4.6,
+              "tags": [
+                "form-capsule",
+                "probiotic",
+                "goal-gut-health",
+                "vegan",
+                "non-gmo",
+                "refrigerated",
+                "premium",
+                "gluten-free"
+              ],
+              "image_url": "https://imgur.com/a/Be6UsfN",
+              "image_thumb_url": "https://imgur.com/a/Be6UsfN",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 97,
+              "name": "Phillips' Colon Health",
+              "description": "Phillips' Colon Health in the Supplements / Digestive Health category at $16.99 (rated 4.7/5) featuring form capsule, probiotic, goal regularity, value, gluten free.",
+              "price": 16.99,
+              "rating": 4.7,
+              "tags": [
+                "form-capsule",
+                "probiotic",
+                "goal-regularity",
+                "value",
+                "gluten-free",
+                "non-gmo",
+                "daily",
+                "shelf-stable"
+              ],
+              "image_url": "https://imgur.com/a/wHOQnaB",
+              "image_thumb_url": "https://imgur.com/a/wHOQnaB",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 98,
+              "name": "Nature’s Way Probiotic Pearls",
+              "description": "Nature’s Way Probiotic Pearls in the Supplements / Digestive Health category at $21.49 (rated 4.5/5) featuring form softgel, probiotic, goal gut health, enteric coated, gluten free.",
+              "price": 21.49,
+              "rating": 4.5,
+              "tags": [
+                "form-softgel",
+                "probiotic",
+                "goal-gut-health",
+                "enteric-coated",
+                "gluten-free",
+                "non-gmo",
+                "travel-friendly",
+                "daily"
+              ],
+              "image_url": "https://imgur.com/a/dc88KzS",
+              "image_thumb_url": "https://imgur.com/a/dc88KzS",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 99,
+              "name": "Digestive Advantage Probiotic",
+              "description": "Digestive Advantage Probiotic in the Supplements / Digestive Health category at $19.99 (rated 4.9/5) featuring form capsule, probiotic, goal digestive, value, gluten free.",
+              "price": 19.99,
+              "rating": 4.9,
+              "tags": [
+                "form-capsule",
+                "probiotic",
+                "goal-digestive",
+                "value",
+                "gluten-free",
+                "non-gmo",
+                "daily",
+                "shelf-stable"
+              ],
+              "image_url": "https://imgur.com/a/qXNXE8o",
+              "image_thumb_url": "https://imgur.com/a/qXNXE8o",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 100,
+              "name": "Primal Harvest Probiotics",
+              "description": "Primal Harvest Probiotics in the Supplements / Digestive Health category at $39.95 (rated 4.4/5) featuring form capsule, probiotic, goal gut health, vegan, non gmo.",
+              "price": 39.95,
+              "rating": 4.4,
+              "tags": [
+                "form-capsule",
+                "probiotic",
+                "goal-gut-health",
+                "vegan",
+                "non-gmo",
+                "gluten-free",
+                "premium",
+                "shelf-stable"
+              ],
+              "image_url": "https://imgur.com/a/HUdhe5H",
+              "image_thumb_url": "https://imgur.com/a/HUdhe5H",
+              "image_attribution": "Placeholder"
+            }
+          ]
+        },
+        {
+          "name": "Vitamins",
+          "related_subcategories": [
+            "Digestive Health"
+          ],
+          "products": [
+            {
+              "id": 101,
+              "name": "Centrum Adult Multivitamin",
+              "description": "Centrum Adult Multivitamin in the Supplements / Vitamins category at $15.99 (rated 4.8/5) featuring form tablet, daily, multivitamin, goal immune, goal energy.",
+              "price": 15.99,
+              "rating": 4.8,
+              "tags": [
+                "form-tablet",
+                "daily",
+                "multivitamin",
+                "goal-immune",
+                "goal-energy",
+                "value",
+                "non-gmo",
+                "gluten-free"
+              ],
+              "image_url": "https://imgur.com/a/dfaqijl",
+              "image_thumb_url": "https://imgur.com/a/dfaqijl",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 102,
+              "name": "Nature Made Vitamin D3 2000 IU",
+              "description": "Nature Made Vitamin D3 2000 IU in the Supplements / Vitamins category at $12.99 (rated 4.5/5) featuring form softgel, vitamin d, goal bone health, goal immune, value.",
+              "price": 12.99,
+              "rating": 4.5,
+              "tags": [
+                "form-softgel",
+                "vitamin-d",
+                "goal-bone-health",
+                "goal-immune",
+                "value",
+                "non-gmo",
+                "gluten-free",
+                "daily"
+              ],
+              "image_url": "https://imgur.com/a/OLhW38V",
+              "image_thumb_url": "https://imgur.com/a/OLhW38V",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 103,
+              "name": "One A Day Men’s",
+              "description": "One A Day Men’s in the Supplements / Vitamins category at $11.99 (rated 4.4/5) featuring form tablet, men, multivitamin, goal energy, goal immune.",
+              "price": 11.99,
+              "rating": 4.4,
+              "tags": [
+                "form-tablet",
+                "men",
+                "multivitamin",
+                "goal-energy",
+                "goal-immune",
+                "value",
+                "gluten-free",
+                "non-gmo"
+              ],
+              "image_url": "https://imgur.com/a/Kx6lPMT",
+              "image_thumb_url": "https://imgur.com/a/Kx6lPMT",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 104,
+              "name": "SmartyPants Women’s Multi",
+              "description": "SmartyPants Women’s Multi in the Supplements / Vitamins category at $19.99 (rated 4.3/5) featuring form gummy, women, multivitamin, goal immune, flavor fruit.",
+              "price": 19.99,
+              "rating": 4.3,
+              "tags": [
+                "form-gummy",
+                "women",
+                "multivitamin",
+                "goal-immune",
+                "flavor-fruit",
+                "non-gmo",
+                "gluten-free",
+                "daily"
+              ],
+              "image_url": "https://imgur.com/a/BK45zPX",
+              "image_thumb_url": "https://imgur.com/a/BK45zPX",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 105,
+              "name": "Kirkland Signature Daily Multi",
+              "description": "Kirkland Signature Daily Multi in the Supplements / Vitamins category at $17.49 (rated 4.5/5) featuring form tablet, daily, multivitamin, value, goal immune.",
+              "price": 17.49,
+              "rating": 4.5,
+              "tags": [
+                "form-tablet",
+                "daily",
+                "multivitamin",
+                "value",
+                "goal-immune",
+                "non-gmo",
+                "gluten-free",
+                "bulk"
+              ],
+              "image_url": "https://imgur.com/a/hkr39vE",
+              "image_thumb_url": "https://imgur.com/a/hkr39vE",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 106,
+              "name": "Garden of Life Vitamin Code Women",
+              "description": "Garden of Life Vitamin Code Women in the Supplements / Vitamins category at $39.99 (rated 4.8/5) featuring form capsule, women, raw, goal immune, non gmo.",
+              "price": 39.99,
+              "rating": 4.8,
+              "tags": [
+                "form-capsule",
+                "women",
+                "raw",
+                "goal-immune",
+                "non-gmo",
+                "gluten-free",
+                "organic",
+                "premium"
+              ],
+              "image_url": "https://imgur.com/a/3db6wVX",
+              "image_thumb_url": "https://imgur.com/a/3db6wVX",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 107,
+              "name": "Ritual Essential for Women",
+              "description": "Ritual Essential for Women in the Supplements / Vitamins category at $32.99 (rated 4.7/5) featuring form capsule, women, vegan, goal immune, traceable.",
+              "price": 32.99,
+              "rating": 4.7,
+              "tags": [
+                "form-capsule",
+                "women",
+                "vegan",
+                "goal-immune",
+                "traceable",
+                "non-gmo",
+                "gluten-free",
+                "delayed-release"
+              ],
+              "image_url": "https://imgur.com/a/gzZhINp",
+              "image_thumb_url": "https://imgur.com/a/gzZhINp",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 108,
+              "name": "Thorne Basic Nutrients 2/Day",
+              "description": "Thorne Basic Nutrients 2/Day in the Supplements / Vitamins category at $44.99 (rated 4.6/5) featuring form capsule, premium, multivitamin, goal immune, goal energy.",
+              "price": 44.99,
+              "rating": 4.6,
+              "tags": [
+                "form-capsule",
+                "premium",
+                "multivitamin",
+                "goal-immune",
+                "goal-energy",
+                "nsf-certified",
+                "gluten-free",
+                "non-gmo"
+              ],
+              "image_url": "https://imgur.com/a/09BVR3w",
+              "image_thumb_url": "https://imgur.com/a/09BVR3w",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 109,
+              "name": "Nature’s Way Alive! Once Daily",
+              "description": "Nature’s Way Alive! Once Daily in the Supplements / Vitamins category at $21.99 (rated 4.0/5) featuring form tablet, daily, multivitamin, goal energy, goal immune.",
+              "price": 21.99,
+              "rating": 4.0,
+              "tags": [
+                "form-tablet",
+                "daily",
+                "multivitamin",
+                "goal-energy",
+                "goal-immune",
+                "value",
+                "gluten-free",
+                "non-gmo"
+              ],
+              "image_url": "https://imgur.com/a/Z3Jy9Nu",
+              "image_thumb_url": "https://imgur.com/a/Z3Jy9Nu",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 110,
+              "name": "Olly Men’s Multivitamin Gummies",
+              "description": "Olly Men’s Multivitamin Gummies in the Supplements / Vitamins category at $14.99 (rated 4.6/5) featuring form gummy, men, flavor berry, goal immune, non gmo.",
+              "price": 14.99,
+              "rating": 4.6,
+              "tags": [
+                "form-gummy",
+                "men",
+                "flavor-berry",
+                "goal-immune",
+                "non-gmo",
+                "gluten-free",
+                "daily",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/YIlUhOz",
+              "image_thumb_url": "https://imgur.com/a/YIlUhOz",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 111,
+              "name": "MegaFood Blood Builder",
+              "description": "MegaFood Blood Builder in the Supplements / Vitamins category at $29.99 (rated 4.6/5) featuring form tablet, iron, whole food, goal energy, non gmo.",
+              "price": 29.99,
+              "rating": 4.6,
+              "tags": [
+                "form-tablet",
+                "iron",
+                "whole-food",
+                "goal-energy",
+                "non-gmo",
+                "gluten-free",
+                "vegan",
+                "gentle"
+              ],
+              "image_url": "https://imgur.com/a/tXfuIQf",
+              "image_thumb_url": "https://imgur.com/a/tXfuIQf",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 112,
+              "name": "Nature Made B12 1000 mcg",
+              "description": "Nature Made B12 1000 mcg in the Supplements / Vitamins category at $11.49 (rated 4.4/5) featuring form tablet, vitamin b12, goal energy, goal metabolism, value.",
+              "price": 11.49,
+              "rating": 4.4,
+              "tags": [
+                "form-tablet",
+                "vitamin-b12",
+                "goal-energy",
+                "goal-metabolism",
+                "value",
+                "gluten-free",
+                "non-gmo",
+                "daily"
+              ],
+              "image_url": "https://imgur.com/a/0S2EBH0",
+              "image_thumb_url": "https://imgur.com/a/0S2EBH0",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 113,
+              "name": "Solgar Vitamin C 1000",
+              "description": "Solgar Vitamin C 1000 in the Supplements / Vitamins category at $13.99 (rated 4.4/5) featuring form tablet, vitamin c, goal immune, non gmo, gluten free.",
+              "price": 13.99,
+              "rating": 4.4,
+              "tags": [
+                "form-tablet",
+                "vitamin-c",
+                "goal-immune",
+                "non-gmo",
+                "gluten-free",
+                "value",
+                "vegan",
+                "antioxidant"
+              ],
+              "image_url": "https://imgur.com/a/kIe1dO8",
+              "image_thumb_url": "https://imgur.com/a/kIe1dO8",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 114,
+              "name": "Jamieson Vitamin D3 1000 IU",
+              "description": "Jamieson Vitamin D3 1000 IU in the Supplements / Vitamins category at $9.99 (rated 4.5/5) featuring form softgel, vitamin d, goal bone health, goal immune, value.",
+              "price": 9.99,
+              "rating": 4.5,
+              "tags": [
+                "form-softgel",
+                "vitamin-d",
+                "goal-bone-health",
+                "goal-immune",
+                "value",
+                "non-gmo",
+                "gluten-free",
+                "daily"
+              ],
+              "image_url": "https://imgur.com/a/SrLu1DM",
+              "image_thumb_url": "https://imgur.com/a/SrLu1DM",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 115,
+              "name": "New Chapter Every Man’s One Daily",
+              "description": "New Chapter Every Man’s One Daily in the Supplements / Vitamins category at $26.99 (rated 4.8/5) featuring form tablet, men, multivitamin, fermented, goal immune.",
+              "price": 26.99,
+              "rating": 4.8,
+              "tags": [
+                "form-tablet",
+                "men",
+                "multivitamin",
+                "fermented",
+                "goal-immune",
+                "non-gmo",
+                "gluten-free",
+                "premium"
+              ],
+              "image_url": "https://imgur.com/a/JgHdWYE",
+              "image_thumb_url": "https://imgur.com/a/JgHdWYE",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 116,
+              "name": "Rainbow Light Women’s One",
+              "description": "Rainbow Light Women’s One in the Supplements / Vitamins category at $24.99 (rated 4.3/5) featuring form tablet, women, multivitamin, goal immune, non gmo.",
+              "price": 24.99,
+              "rating": 4.3,
+              "tags": [
+                "form-tablet",
+                "women",
+                "multivitamin",
+                "goal-immune",
+                "non-gmo",
+                "gluten-free",
+                "vegan",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/EvHDtlo",
+              "image_thumb_url": "https://imgur.com/a/EvHDtlo",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 117,
+              "name": "Emergen-C 1000mg Vitamin C",
+              "description": "Emergen-C 1000mg Vitamin C in the Supplements / Vitamins category at $12.49 (rated 4.4/5) featuring form drink, vitamin c, goal immune, flavor orange, non gmo.",
+              "price": 12.49,
+              "rating": 4.4,
+              "tags": [
+                "form-drink",
+                "vitamin-c",
+                "goal-immune",
+                "flavor-orange",
+                "non-gmo",
+                "gluten-free",
+                "on-the-go",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/UByGBeE",
+              "image_thumb_url": "https://imgur.com/a/UByGBeE",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 118,
+              "name": "Nature Made Magnesium 250 mg",
+              "description": "Nature Made Magnesium 250 mg in the Supplements / Vitamins category at $10.99 (rated 4.8/5) featuring form tablet, mineral, goal sleep, goal muscle, value.",
+              "price": 10.99,
+              "rating": 4.8,
+              "tags": [
+                "form-tablet",
+                "mineral",
+                "goal-sleep",
+                "goal-muscle",
+                "value",
+                "gluten-free",
+                "non-gmo",
+                "daily"
+              ],
+              "image_url": "https://imgur.com/a/1UOWa82",
+              "image_thumb_url": "https://imgur.com/a/1UOWa82",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 119,
+              "name": "Zinc Picolinate 50 mg",
+              "description": "Zinc Picolinate 50 mg in the Supplements / Vitamins category at $8.99 (rated 4.4/5) featuring form capsule, mineral, goal immune, value, gluten free.",
+              "price": 8.99,
+              "rating": 4.4,
+              "tags": [
+                "form-capsule",
+                "mineral",
+                "goal-immune",
+                "value",
+                "gluten-free",
+                "non-gmo",
+                "vegan",
+                "daily"
+              ],
+              "image_url": "https://imgur.com/a/46zp6j9",
+              "image_thumb_url": "https://imgur.com/a/46zp6j9",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 120,
+              "name": "Vitafusion Women’s Gummy Vitamins",
+              "description": "Vitafusion Women’s Gummy Vitamins in the Supplements / Vitamins category at $15.49 (rated 4.4/5) featuring form gummy, women, flavor berry, goal immune, value.",
+              "price": 15.49,
+              "rating": 4.4,
+              "tags": [
+                "form-gummy",
+                "women",
+                "flavor-berry",
+                "goal-immune",
+                "value",
+                "gluten-free",
+                "non-gmo",
+                "daily"
+              ],
+              "image_url": "https://imgur.com/a/TWmxQHL",
+              "image_thumb_url": "https://imgur.com/a/TWmxQHL",
+              "image_attribution": "Placeholder"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "main_category": "Food",
+      "subcategories": [
+        {
+          "name": "High-Protein Food",
+          "related_subcategories": [
+            "Protein Powder"
+          ],
+          "products": [
+            {
+              "id": 121,
+              "name": "Quest Protein Bar (4-pack)",
+              "description": "Quest Protein Bar (4-pack) in the Food / High-Protein Food category at $9.99 (rated 4.5/5) featuring form bar, macro high protein, low sugar, diet gluten free, flavor chocolate.",
+              "price": 9.99,
+              "rating": 4.5,
+              "tags": [
+                "form-bar",
+                "macro-high-protein",
+                "low-sugar",
+                "diet-gluten-free",
+                "flavor-chocolate",
+                "snack",
+                "on-the-go",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/VYxId5K",
+              "image_thumb_url": "https://imgur.com/a/VYxId5K",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 122,
+              "name": "Kodiak Power Cakes Mix",
+              "description": "Kodiak Power Cakes Mix in the Food / High-Protein Food category at $6.99 (rated 4.3/5) featuring form mix, breakfast, macro high protein, whole grain, diet high fiber.",
+              "price": 6.99,
+              "rating": 4.3,
+              "tags": [
+                "form-mix",
+                "breakfast",
+                "macro-high-protein",
+                "whole-grain",
+                "diet-high-fiber",
+                "value",
+                "easy",
+                "family"
+              ],
+              "image_url": "https://imgur.com/a/hj6xNZX",
+              "image_thumb_url": "https://imgur.com/a/hj6xNZX",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 123,
+              "name": "Fairlife Protein Shake (2-pack)",
+              "description": "Fairlife Protein Shake (2-pack) in the Food / High-Protein Food category at $8.99 (rated 4.5/5) featuring form drink, ready to drink, macro high protein, low fat, lactose filtered.",
+              "price": 8.99,
+              "rating": 4.5,
+              "tags": [
+                "form-drink",
+                "ready-to-drink",
+                "macro-high-protein",
+                "low-fat",
+                "lactose-filtered",
+                "on-the-go",
+                "breakfast",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/IpIwkHl",
+              "image_thumb_url": "https://imgur.com/a/IpIwkHl",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 124,
+              "name": "Pure Protein Cookies (4-pack)",
+              "description": "Pure Protein Cookies (4-pack) in the Food / High-Protein Food category at $7.99 (rated 4.3/5) featuring form cookie, protein snack, macro high protein, low sugar, snack.",
+              "price": 7.99,
+              "rating": 4.3,
+              "tags": [
+                "form-cookie",
+                "protein-snack",
+                "macro-high-protein",
+                "low-sugar",
+                "snack",
+                "on-the-go",
+                "value",
+                "dessert"
+              ],
+              "image_url": "https://imgur.com/a/Iybf8Eq",
+              "image_thumb_url": "https://imgur.com/a/Iybf8Eq",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 125,
+              "name": "RXBar Protein Bar (4-pack)",
+              "description": "RXBar Protein Bar (4-pack) in the Food / High-Protein Food category at $7.49 (rated 4.7/5) featuring form bar, clean label, macro high protein, whole food, gluten free.",
+              "price": 7.49,
+              "rating": 4.7,
+              "tags": [
+                "form-bar",
+                "clean-label",
+                "macro-high-protein",
+                "whole-food",
+                "gluten-free",
+                "snack",
+                "flavor-chocolate",
+                "low-ingredient"
+              ],
+              "image_url": "https://imgur.com/a/VgiBU9b",
+              "image_thumb_url": "https://imgur.com/a/VgiBU9b",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 126,
+              "name": "think! Protein Bar (4-pack)",
+              "description": "think! Protein Bar (4-pack) in the Food / High-Protein Food category at $6.99 (rated 4.5/5) featuring form bar, macro high protein, gluten free, low sugar, snack.",
+              "price": 6.99,
+              "rating": 4.5,
+              "tags": [
+                "form-bar",
+                "macro-high-protein",
+                "gluten-free",
+                "low-sugar",
+                "snack",
+                "value",
+                "flavor-peanut-butter",
+                "on-the-go"
+              ],
+              "image_url": "https://imgur.com/a/mCbwjqK",
+              "image_thumb_url": "https://imgur.com/a/mCbwjqK",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 127,
+              "name": "Tasty Bite Lentil Bowl",
+              "description": "Tasty Bite Lentil Bowl in the Food / High-Protein Food category at $4.99 (rated 4.9/5) featuring form bowl, plant protein, meal, diet vegan, macro protein.",
+              "price": 4.99,
+              "rating": 4.9,
+              "tags": [
+                "form-bowl",
+                "plant-protein",
+                "meal",
+                "diet-vegan",
+                "macro-protein",
+                "microwave",
+                "convenience",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/KAezYqP",
+              "image_thumb_url": "https://imgur.com/a/KAezYqP",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 128,
+              "name": "Egglife Egg White Wraps",
+              "description": "Egglife Egg White Wraps in the Food / High-Protein Food category at $5.99 (rated 4.6/5) featuring form wrap, low carb, macro high protein, gluten free, keto.",
+              "price": 5.99,
+              "rating": 4.6,
+              "tags": [
+                "form-wrap",
+                "low-carb",
+                "macro-high-protein",
+                "gluten-free",
+                "keto",
+                "meal-prep",
+                "sandwich",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/rHxiZTH",
+              "image_thumb_url": "https://imgur.com/a/rHxiZTH",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 129,
+              "name": "Kirkland Protein Shake (4-pack)",
+              "description": "Kirkland Protein Shake (4-pack) in the Food / High-Protein Food category at $9.49 (rated 4.8/5) featuring form drink, ready to drink, macro high protein, value, on the go.",
+              "price": 9.49,
+              "rating": 4.8,
+              "tags": [
+                "form-drink",
+                "ready-to-drink",
+                "macro-high-protein",
+                "value",
+                "on-the-go",
+                "low-sugar",
+                "convenience",
+                "bulk"
+              ],
+              "image_url": "https://imgur.com/a/uxZTRYm",
+              "image_thumb_url": "https://imgur.com/a/uxZTRYm",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 130,
+              "name": "Oikos Triple Zero Yogurt (4)",
+              "description": "Oikos Triple Zero Yogurt (4) in the Food / High-Protein Food category at $6.99 (rated 4.2/5) featuring form yogurt, macro high protein, low sugar, snack, breakfast.",
+              "price": 6.99,
+              "rating": 4.2,
+              "tags": [
+                "form-yogurt",
+                "macro-high-protein",
+                "low-sugar",
+                "snack",
+                "breakfast",
+                "diet-gluten-free",
+                "value",
+                "on-the-go"
+              ],
+              "image_url": "https://imgur.com/a/DeIB0Jw",
+              "image_thumb_url": "https://imgur.com/a/DeIB0Jw",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 131,
+              "name": "Chobani Zero Sugar Yogurt (4)",
+              "description": "Chobani Zero Sugar Yogurt (4) in the Food / High-Protein Food category at $6.49 (rated 4.5/5) featuring form yogurt, low sugar, macro protein, snack, breakfast.",
+              "price": 6.49,
+              "rating": 4.5,
+              "tags": [
+                "form-yogurt",
+                "low-sugar",
+                "macro-protein",
+                "snack",
+                "breakfast",
+                "diet-gluten-free",
+                "value",
+                "flavor-vanilla"
+              ],
+              "image_url": "https://imgur.com/a/5e1rrqL",
+              "image_thumb_url": "https://imgur.com/a/5e1rrqL",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 132,
+              "name": "Applegate Turkey Breast (8oz)",
+              "description": "Applegate Turkey Breast (8oz) in the Food / High-Protein Food category at $6.99 (rated 4.6/5) featuring form deli, macro protein, low fat, gluten free, meal prep.",
+              "price": 6.99,
+              "rating": 4.6,
+              "tags": [
+                "form-deli",
+                "macro-protein",
+                "low-fat",
+                "gluten-free",
+                "meal-prep",
+                "sandwich",
+                "keto",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/yAOBwgN",
+              "image_thumb_url": "https://imgur.com/a/yAOBwgN",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 133,
+              "name": "Bumble Bee Tuna Pouch (4)",
+              "description": "Bumble Bee Tuna Pouch (4) in the Food / High-Protein Food category at $5.99 (rated 4.8/5) featuring form pouch, tuna, macro protein, omega 3, ready to eat.",
+              "price": 5.99,
+              "rating": 4.8,
+              "tags": [
+                "form-pouch",
+                "tuna",
+                "macro-protein",
+                "omega-3",
+                "ready-to-eat",
+                "on-the-go",
+                "value",
+                "salad"
+              ],
+              "image_url": "https://imgur.com/a/tlH5ZuL",
+              "image_thumb_url": "https://imgur.com/a/tlH5ZuL",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 134,
+              "name": "Sargento String Cheese (12)",
+              "description": "Sargento String Cheese (12) in the Food / High-Protein Food category at $6.99 (rated 4.2/5) featuring form cheese, macro protein, snack, low carb, gluten free.",
+              "price": 6.99,
+              "rating": 4.2,
+              "tags": [
+                "form-cheese",
+                "macro-protein",
+                "snack",
+                "low-carb",
+                "gluten-free",
+                "kids",
+                "on-the-go",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/GcrgGNK",
+              "image_thumb_url": "https://imgur.com/a/GcrgGNK",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 135,
+              "name": "Vital Farms Hard-Boiled Eggs (6)",
+              "description": "Vital Farms Hard-Boiled Eggs (6) in the Food / High-Protein Food category at $4.99 (rated 4.7/5) featuring form egg, macro protein, ready to eat, keto, snack.",
+              "price": 4.99,
+              "rating": 4.7,
+              "tags": [
+                "form-egg",
+                "macro-protein",
+                "ready-to-eat",
+                "keto",
+                "snack",
+                "breakfast",
+                "gluten-free",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/Rw47TK7",
+              "image_thumb_url": "https://imgur.com/a/Rw47TK7",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 136,
+              "name": "Barilla Protein+ Pasta (14oz)",
+              "description": "Barilla Protein+ Pasta (14oz) in the Food / High-Protein Food category at $2.99 (rated 4.6/5) featuring form pasta, macro protein, whole grain, meal, value.",
+              "price": 2.99,
+              "rating": 4.6,
+              "tags": [
+                "form-pasta",
+                "macro-protein",
+                "whole-grain",
+                "meal",
+                "value",
+                "family",
+                "vegetarian",
+                "fiber"
+              ],
+              "image_url": "https://imgur.com/a/G23FgrS",
+              "image_thumb_url": "https://imgur.com/a/G23FgrS",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 137,
+              "name": "Ohio Beef Jerky (4oz)",
+              "description": "Ohio Beef Jerky (4oz) in the Food / High-Protein Food category at $7.99 (rated 4.8/5) featuring form jerky, macro protein, low carb, snack, keto.",
+              "price": 7.99,
+              "rating": 4.8,
+              "tags": [
+                "form-jerky",
+                "macro-protein",
+                "low-carb",
+                "snack",
+                "keto",
+                "gluten-free",
+                "on-the-go",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/JqzdmXm",
+              "image_thumb_url": "https://imgur.com/a/JqzdmXm",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 138,
+              "name": "KIND Protein Bars (4)",
+              "description": "KIND Protein Bars (4) in the Food / High-Protein Food category at $7.49 (rated 4.6/5) featuring form bar, macro high protein, low sugar, snack, gluten free.",
+              "price": 7.49,
+              "rating": 4.6,
+              "tags": [
+                "form-bar",
+                "macro-high-protein",
+                "low-sugar",
+                "snack",
+                "gluten-free",
+                "whole-nuts",
+                "flavor-chocolate",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/JjFOnmV",
+              "image_thumb_url": "https://imgur.com/a/JjFOnmV",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 139,
+              "name": "Siggi’s Skyr (4)",
+              "description": "Siggi’s Skyr (4) in the Food / High-Protein Food category at $5.99 (rated 4.5/5) featuring form yogurt, macro protein, low sugar, snack, breakfast.",
+              "price": 5.99,
+              "rating": 4.5,
+              "tags": [
+                "form-yogurt",
+                "macro-protein",
+                "low-sugar",
+                "snack",
+                "breakfast",
+                "gluten-free",
+                "value",
+                "flavor-plain"
+              ],
+              "image_url": "https://imgur.com/a/PvienTh",
+              "image_thumb_url": "https://imgur.com/a/PvienTh",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 140,
+              "name": "MorningStar Farms Grillers (8)",
+              "description": "MorningStar Farms Grillers (8) in the Food / High-Protein Food category at $7.99 (rated 4.4/5) featuring form veggie burger, plant protein, meal, vegetarian, macro protein.",
+              "price": 7.99,
+              "rating": 4.4,
+              "tags": [
+                "form-veggie-burger",
+                "plant-protein",
+                "meal",
+                "vegetarian",
+                "macro-protein",
+                "freezer",
+                "value",
+                "quick"
+              ],
+              "image_url": "https://imgur.com/a/56fqw9v",
+              "image_thumb_url": "https://imgur.com/a/56fqw9v",
+              "image_attribution": "Placeholder"
+            }
+          ]
+        },
+        {
+          "name": "Junk Food / Chips / Snacks",
+          "related_subcategories": [
+            "High-Protein Food"
+          ],
+          "products": [
+            {
+              "id": 141,
+              "name": "Doritos Nacho Cheese (9.25oz)",
+              "description": "Doritos Nacho Cheese (9.25oz) in the Food / Junk Food / Chips / Snacks category at $3.99 (rated 4.3/5) featuring chips, snack, flavor cheese, corn, popular.",
+              "price": 3.99,
+              "rating": 4.3,
+              "tags": [
+                "chips",
+                "snack",
+                "flavor-cheese",
+                "corn",
+                "popular",
+                "shareable",
+                "party",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/5MUrEE5",
+              "image_thumb_url": "https://imgur.com/a/5MUrEE5",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 142,
+              "name": "Lay’s Classic (8oz)",
+              "description": "Lay’s Classic (8oz) in the Food / Junk Food / Chips / Snacks category at $3.79 (rated 4.5/5) featuring chips, snack, potato, original, shareable.",
+              "price": 3.79,
+              "rating": 4.5,
+              "tags": [
+                "chips",
+                "snack",
+                "potato",
+                "original",
+                "shareable",
+                "party",
+                "value",
+                "familiar"
+              ],
+              "image_url": "https://imgur.com/a/TFLnCcF",
+              "image_thumb_url": "https://imgur.com/a/TFLnCcF",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 143,
+              "name": "Cheetos Crunchy (8.5oz)",
+              "description": "Cheetos Crunchy (8.5oz) in the Food / Junk Food / Chips / Snacks category at $3.99 (rated 4.5/5) featuring snack, cheese, corn, kids, popular.",
+              "price": 3.99,
+              "rating": 4.5,
+              "tags": [
+                "snack",
+                "cheese",
+                "corn",
+                "kids",
+                "popular",
+                "shareable",
+                "party",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/JYvURWT",
+              "image_thumb_url": "https://imgur.com/a/JYvURWT",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 144,
+              "name": "Pringles Original (5.2oz)",
+              "description": "Pringles Original (5.2oz) in the Food / Junk Food / Chips / Snacks category at $2.99 (rated 4.9/5) featuring stackable, snack, potato, tube, shareable.",
+              "price": 2.99,
+              "rating": 4.9,
+              "tags": [
+                "stackable",
+                "snack",
+                "potato",
+                "tube",
+                "shareable",
+                "value",
+                "original",
+                "familiar"
+              ],
+              "image_url": "https://imgur.com/a/oZee8Jg",
+              "image_thumb_url": "https://imgur.com/a/oZee8Jg",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 145,
+              "name": "Ruffles Cheddar & Sour Cream (8oz)",
+              "description": "Ruffles Cheddar & Sour Cream (8oz) in the Food / Junk Food / Chips / Snacks category at $4.29 (rated 4.4/5) featuring chips, flavor cheddar sour cream, ridged, snack, shareable.",
+              "price": 4.29,
+              "rating": 4.4,
+              "tags": [
+                "chips",
+                "flavor-cheddar-sour-cream",
+                "ridged",
+                "snack",
+                "shareable",
+                "party",
+                "popular",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/mF4TPPL",
+              "image_thumb_url": "https://imgur.com/a/mF4TPPL",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 146,
+              "name": "Popcorners Sea Salt (7oz)",
+              "description": "Popcorners Sea Salt (7oz) in the Food / Junk Food / Chips / Snacks category at $3.49 (rated 4.6/5) featuring popcorn, snack, light, gluten free, shareable.",
+              "price": 3.49,
+              "rating": 4.6,
+              "tags": [
+                "popcorn",
+                "snack",
+                "light",
+                "gluten-free",
+                "shareable",
+                "value",
+                "kosher",
+                "baked"
+              ],
+              "image_url": "https://imgur.com/a/3Vyf6SM",
+              "image_thumb_url": "https://imgur.com/a/3Vyf6SM",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 147,
+              "name": "Smartfood White Cheddar (6.75oz)",
+              "description": "Smartfood White Cheddar (6.75oz) in the Food / Junk Food / Chips / Snacks category at $4.19 (rated 4.2/5) featuring popcorn, snack, cheese, shareable, popular.",
+              "price": 4.19,
+              "rating": 4.2,
+              "tags": [
+                "popcorn",
+                "snack",
+                "cheese",
+                "shareable",
+                "popular",
+                "value",
+                "gluten-free",
+                "party"
+              ],
+              "image_url": "https://imgur.com/a/owTfqnV",
+              "image_thumb_url": "https://imgur.com/a/owTfqnV",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 148,
+              "name": "Combos Cheddar Pretzel (6.3oz)",
+              "description": "Combos Cheddar Pretzel (6.3oz) in the Food / Junk Food / Chips / Snacks category at $2.99 (rated 4.4/5) featuring pretzel, snack, filled, cheese, road trip.",
+              "price": 2.99,
+              "rating": 4.4,
+              "tags": [
+                "pretzel",
+                "snack",
+                "filled",
+                "cheese",
+                "road-trip",
+                "value",
+                "shareable",
+                "party"
+              ],
+              "image_url": "https://imgur.com/a/3fVZCNh",
+              "image_thumb_url": "https://imgur.com/a/3fVZCNh",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 149,
+              "name": "Sun Chips Harvest Cheddar (7oz)",
+              "description": "Sun Chips Harvest Cheddar (7oz) in the Food / Junk Food / Chips / Snacks category at $3.69 (rated 4.6/5) featuring multigrain, snack, cheddar, shareable, value.",
+              "price": 3.69,
+              "rating": 4.6,
+              "tags": [
+                "multigrain",
+                "snack",
+                "cheddar",
+                "shareable",
+                "value",
+                "baked",
+                "popular",
+                "whole-grain"
+              ],
+              "image_url": "https://imgur.com/a/2UOPJwd",
+              "image_thumb_url": "https://imgur.com/a/2UOPJwd",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 150,
+              "name": "Takis Fuego (9.9oz)",
+              "description": "Takis Fuego (9.9oz) in the Food / Junk Food / Chips / Snacks category at $3.49 (rated 4.7/5) featuring spicy, rolled, chips, lime, popular.",
+              "price": 3.49,
+              "rating": 4.7,
+              "tags": [
+                "spicy",
+                "rolled",
+                "chips",
+                "lime",
+                "popular",
+                "party",
+                "shareable",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/cmQ5En2",
+              "image_thumb_url": "https://imgur.com/a/cmQ5En2",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 151,
+              "name": "Kettle Brand Sea Salt (8.5oz)",
+              "description": "Kettle Brand Sea Salt (8.5oz) in the Food / Junk Food / Chips / Snacks category at $3.99 (rated 4.8/5) featuring chips, kettle cooked, snack, sea salt, crunchy.",
+              "price": 3.99,
+              "rating": 4.8,
+              "tags": [
+                "chips",
+                "kettle-cooked",
+                "snack",
+                "sea-salt",
+                "crunchy",
+                "shareable",
+                "value",
+                "kosher"
+              ],
+              "image_url": "https://imgur.com/a/6ao3lrb",
+              "image_thumb_url": "https://imgur.com/a/6ao3lrb",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 152,
+              "name": "Herr’s Jalapeño (8oz)",
+              "description": "Herr’s Jalapeño (8oz) in the Food / Junk Food / Chips / Snacks category at $3.49 (rated 4.5/5) featuring chips, spicy, snack, jalapeno, shareable.",
+              "price": 3.49,
+              "rating": 4.5,
+              "tags": [
+                "chips",
+                "spicy",
+                "snack",
+                "jalapeno",
+                "shareable",
+                "value",
+                "crunchy",
+                "party"
+              ],
+              "image_url": "https://imgur.com/a/sTcH6Np",
+              "image_thumb_url": "https://imgur.com/a/sTcH6Np",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 153,
+              "name": "Cape Cod Original (8.5oz)",
+              "description": "Cape Cod Original (8.5oz) in the Food / Junk Food / Chips / Snacks category at $3.99 (rated 4.3/5) featuring chips, kettle cooked, snack, original, shareable.",
+              "price": 3.99,
+              "rating": 4.3,
+              "tags": [
+                "chips",
+                "kettle-cooked",
+                "snack",
+                "original",
+                "shareable",
+                "value",
+                "crunchy",
+                "classic"
+              ],
+              "image_url": "https://imgur.com/a/6S1pmuO",
+              "image_thumb_url": "https://imgur.com/a/6S1pmuO",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 154,
+              "name": "Pirate’s Booty Aged White Cheddar (7oz)",
+              "description": "Pirate’s Booty Aged White Cheddar (7oz) in the Food / Junk Food / Chips / Snacks category at $3.99 (rated 4.6/5) featuring puffed, snack, cheese, gluten free, shareable.",
+              "price": 3.99,
+              "rating": 4.6,
+              "tags": [
+                "puffed",
+                "snack",
+                "cheese",
+                "gluten-free",
+                "shareable",
+                "kids",
+                "value",
+                "baked"
+              ],
+              "image_url": "https://imgur.com/a/cjQ8EdV",
+              "image_thumb_url": "https://imgur.com/a/cjQ8EdV",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 155,
+              "name": "Popchips Sea Salt (5oz)",
+              "description": "Popchips Sea Salt (5oz) in the Food / Junk Food / Chips / Snacks category at $3.49 (rated 4.6/5) featuring chips, baked, snack, light, shareable.",
+              "price": 3.49,
+              "rating": 4.6,
+              "tags": [
+                "chips",
+                "baked",
+                "snack",
+                "light",
+                "shareable",
+                "value",
+                "kosher",
+                "gluten-free"
+              ],
+              "image_url": "https://imgur.com/a/NusspUE",
+              "image_thumb_url": "https://imgur.com/a/NusspUE",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 156,
+              "name": "Bugles Original (7.5oz)",
+              "description": "Bugles Original (7.5oz) in the Food / Junk Food / Chips / Snacks category at $2.99 (rated 4.6/5) featuring corn, snack, nostalgia, shareable, value.",
+              "price": 2.99,
+              "rating": 4.6,
+              "tags": [
+                "corn",
+                "snack",
+                "nostalgia",
+                "shareable",
+                "value",
+                "party",
+                "baked",
+                "crunchy"
+              ],
+              "image_url": "https://imgur.com/a/Q0LOoUO",
+              "image_thumb_url": "https://imgur.com/a/Q0LOoUO",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 157,
+              "name": "Cheez-It Original (7oz)",
+              "description": "Cheez-It Original (7oz) in the Food / Junk Food / Chips / Snacks category at $3.29 (rated 4.4/5) featuring cracker, snack, cheese, shareable, party.",
+              "price": 3.29,
+              "rating": 4.4,
+              "tags": [
+                "cracker",
+                "snack",
+                "cheese",
+                "shareable",
+                "party",
+                "popular",
+                "value",
+                "baked"
+              ],
+              "image_url": "https://imgur.com/a/TJkqDJC",
+              "image_thumb_url": "https://imgur.com/a/TJkqDJC",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 158,
+              "name": "Goldfish Cheddar (6.6oz)",
+              "description": "Goldfish Cheddar (6.6oz) in the Food / Junk Food / Chips / Snacks category at $2.49 (rated 4.7/5) featuring cracker, snack, kids, cheese, shareable.",
+              "price": 2.49,
+              "rating": 4.7,
+              "tags": [
+                "cracker",
+                "snack",
+                "kids",
+                "cheese",
+                "shareable",
+                "value",
+                "baked",
+                "familiar"
+              ],
+              "image_url": "https://imgur.com/a/KsfYBQy",
+              "image_thumb_url": "https://imgur.com/a/KsfYBQy",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 159,
+              "name": "Tostitos Scoops (10oz)",
+              "description": "Tostitos Scoops (10oz) in the Food / Junk Food / Chips / Snacks category at $4.29 (rated 4.5/5) featuring chips, snack, corn, dipping, party.",
+              "price": 4.29,
+              "rating": 4.5,
+              "tags": [
+                "chips",
+                "snack",
+                "corn",
+                "dipping",
+                "party",
+                "shareable",
+                "value",
+                "popular"
+              ],
+              "image_url": "https://imgur.com/a/d6JJlm5",
+              "image_thumb_url": "https://imgur.com/a/d6JJlm5",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 160,
+              "name": "Fritos Original (9.25oz)",
+              "description": "Fritos Original (9.25oz) in the Food / Junk Food / Chips / Snacks category at $3.49 (rated 4.6/5) featuring corn, chips, snack, classic, shareable.",
+              "price": 3.49,
+              "rating": 4.6,
+              "tags": [
+                "corn",
+                "chips",
+                "snack",
+                "classic",
+                "shareable",
+                "value",
+                "party",
+                "popular"
+              ],
+              "image_url": "https://imgur.com/a/RyqLIeW",
+              "image_thumb_url": "https://imgur.com/a/RyqLIeW",
+              "image_attribution": "Placeholder"
+            }
+          ]
+        },
+        {
+          "name": "Sardines / Canned Goods",
+          "related_subcategories": [
+            "High-Protein Food"
+          ],
+          "products": [
+            {
+              "id": 161,
+              "name": "King Oscar Sardines in Olive Oil",
+              "description": "King Oscar Sardines in Olive Oil in the Food / Sardines / Canned Goods category at $2.99 (rated 4.8/5) featuring sardines, omega 3, seafood, protein, pantry.",
+              "price": 2.99,
+              "rating": 4.8,
+              "tags": [
+                "sardines",
+                "omega-3",
+                "seafood",
+                "protein",
+                "pantry",
+                "ready-to-eat",
+                "value",
+                "imported"
+              ],
+              "image_url": "https://imgur.com/a/hRhC8js",
+              "image_thumb_url": "https://imgur.com/a/hRhC8js",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 162,
+              "name": "Wild Planet Albacore Tuna",
+              "description": "Wild Planet Albacore Tuna in the Food / Sardines / Canned Goods category at $3.99 (rated 4.6/5) featuring tuna, sustainable, omega 3, protein, can.",
+              "price": 3.99,
+              "rating": 4.6,
+              "tags": [
+                "tuna",
+                "sustainable",
+                "omega-3",
+                "protein",
+                "can",
+                "wild-caught",
+                "non-gmo",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/7XplpWC",
+              "image_thumb_url": "https://imgur.com/a/7XplpWC",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 163,
+              "name": "Chicken of the Sea Pink Salmon Pouch",
+              "description": "Chicken of the Sea Pink Salmon Pouch in the Food / Sardines / Canned Goods category at $2.49 (rated 4.6/5) featuring salmon, pouch, protein, ready to eat, omega 3.",
+              "price": 2.49,
+              "rating": 4.6,
+              "tags": [
+                "salmon",
+                "pouch",
+                "protein",
+                "ready-to-eat",
+                "omega-3",
+                "value",
+                "salad",
+                "low-fat"
+              ],
+              "image_url": "https://imgur.com/a/TkAvDFV",
+              "image_thumb_url": "https://imgur.com/a/TkAvDFV",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 164,
+              "name": "Bumble Bee Chunk Light Tuna",
+              "description": "Bumble Bee Chunk Light Tuna in the Food / Sardines / Canned Goods category at $1.99 (rated 4.9/5) featuring tuna, can, protein, value, pantry.",
+              "price": 1.99,
+              "rating": 4.9,
+              "tags": [
+                "tuna",
+                "can",
+                "protein",
+                "value",
+                "pantry",
+                "ready-to-eat",
+                "omega-3",
+                "classic"
+              ],
+              "image_url": "https://imgur.com/a/UPNlC13",
+              "image_thumb_url": "https://imgur.com/a/UPNlC13",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 165,
+              "name": "StarKist Tuna Creations Lemon Pepper",
+              "description": "StarKist Tuna Creations Lemon Pepper in the Food / Sardines / Canned Goods category at $1.79 (rated 4.5/5) featuring tuna, flavored, pouch, protein, ready to eat.",
+              "price": 1.79,
+              "rating": 4.5,
+              "tags": [
+                "tuna",
+                "flavored",
+                "pouch",
+                "protein",
+                "ready-to-eat",
+                "omega-3",
+                "value",
+                "on-the-go"
+              ],
+              "image_url": "https://imgur.com/a/p14j0bo",
+              "image_thumb_url": "https://imgur.com/a/p14j0bo",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 166,
+              "name": "Wild Planet Sardines in Water",
+              "description": "Wild Planet Sardines in Water in the Food / Sardines / Canned Goods category at $2.99 (rated 4.4/5) featuring sardines, wild caught, protein, omega 3, low sodium.",
+              "price": 2.99,
+              "rating": 4.4,
+              "tags": [
+                "sardines",
+                "wild-caught",
+                "protein",
+                "omega-3",
+                "low-sodium",
+                "value",
+                "ready-to-eat",
+                "pantry"
+              ],
+              "image_url": "https://imgur.com/a/A1DPQAv",
+              "image_thumb_url": "https://imgur.com/a/A1DPQAv",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 167,
+              "name": "Goya Black Beans",
+              "description": "Goya Black Beans in the Food / Sardines / Canned Goods category at $1.89 (rated 4.5/5) featuring beans, fiber, can, vegan, protein.",
+              "price": 1.89,
+              "rating": 4.5,
+              "tags": [
+                "beans",
+                "fiber",
+                "can",
+                "vegan",
+                "protein",
+                "pantry",
+                "value",
+                "gluten-free"
+              ],
+              "image_url": "https://imgur.com/a/1swMNri",
+              "image_thumb_url": "https://imgur.com/a/1swMNri",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 168,
+              "name": "Bush’s Best Garbanzo Beans",
+              "description": "Bush’s Best Garbanzo Beans in the Food / Sardines / Canned Goods category at $1.69 (rated 4.8/5) featuring beans, chickpeas, fiber, can, vegan.",
+              "price": 1.69,
+              "rating": 4.8,
+              "tags": [
+                "beans",
+                "chickpeas",
+                "fiber",
+                "can",
+                "vegan",
+                "protein",
+                "value",
+                "gluten-free"
+              ],
+              "image_url": "https://imgur.com/a/HER4Dz8",
+              "image_thumb_url": "https://imgur.com/a/HER4Dz8",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 169,
+              "name": "Campbell’s Chicken Noodle Soup",
+              "description": "Campbell’s Chicken Noodle Soup in the Food / Sardines / Canned Goods category at $1.99 (rated 4.5/5) featuring soup, can, comfort, pantry, value.",
+              "price": 1.99,
+              "rating": 4.5,
+              "tags": [
+                "soup",
+                "can",
+                "comfort",
+                "pantry",
+                "value",
+                "ready-to-heat",
+                "family",
+                "classic"
+              ],
+              "image_url": "https://imgur.com/a/2mRzcrB",
+              "image_thumb_url": "https://imgur.com/a/2mRzcrB",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 170,
+              "name": "Progresso Lentil Soup",
+              "description": "Progresso Lentil Soup in the Food / Sardines / Canned Goods category at $2.29 (rated 4.6/5) featuring soup, can, fiber, vegan, pantry.",
+              "price": 2.29,
+              "rating": 4.6,
+              "tags": [
+                "soup",
+                "can",
+                "fiber",
+                "vegan",
+                "pantry",
+                "value",
+                "ready-to-heat",
+                "hearty"
+              ],
+              "image_url": "https://imgur.com/a/8oCCfi2",
+              "image_thumb_url": "https://imgur.com/a/8oCCfi2",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 171,
+              "name": "Hormel Premium Chicken Breast",
+              "description": "Hormel Premium Chicken Breast in the Food / Sardines / Canned Goods category at $3.29 (rated 4.7/5) featuring chicken, canned, protein, ready to eat, value.",
+              "price": 3.29,
+              "rating": 4.7,
+              "tags": [
+                "chicken",
+                "canned",
+                "protein",
+                "ready-to-eat",
+                "value",
+                "pantry",
+                "salad",
+                "sandwich"
+              ],
+              "image_url": "https://imgur.com/a/nXijrv2",
+              "image_thumb_url": "https://imgur.com/a/nXijrv2",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 172,
+              "name": "Spam Classic",
+              "description": "Spam Classic in the Food / Sardines / Canned Goods category at $3.49 (rated 4.4/5) featuring pork, classic, can, protein, pantry.",
+              "price": 3.49,
+              "rating": 4.4,
+              "tags": [
+                "pork",
+                "classic",
+                "can",
+                "protein",
+                "pantry",
+                "value",
+                "fried",
+                "breakfast"
+              ],
+              "image_url": "https://imgur.com/a/b1ITT3k",
+              "image_thumb_url": "https://imgur.com/a/b1ITT3k",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 173,
+              "name": "Libby’s Corned Beef",
+              "description": "Libby’s Corned Beef in the Food / Sardines / Canned Goods category at $5.49 (rated 4.2/5) featuring beef, canned, protein, pantry, value.",
+              "price": 5.49,
+              "rating": 4.2,
+              "tags": [
+                "beef",
+                "canned",
+                "protein",
+                "pantry",
+                "value",
+                "hearty",
+                "imported",
+                "classic"
+              ],
+              "image_url": "https://imgur.com/a/nPMtnJG",
+              "image_thumb_url": "https://imgur.com/a/nPMtnJG",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 174,
+              "name": "Crown Prince Kipper Snacks",
+              "description": "Crown Prince Kipper Snacks in the Food / Sardines / Canned Goods category at $2.99 (rated 4.6/5) featuring herring, smoked, omega 3, protein, can.",
+              "price": 2.99,
+              "rating": 4.6,
+              "tags": [
+                "herring",
+                "smoked",
+                "omega-3",
+                "protein",
+                "can",
+                "pantry",
+                "imported",
+                "value"
+              ],
+              "image_url": "https://imgur.com/a/w1DwaeR",
+              "image_thumb_url": "https://imgur.com/a/w1DwaeR",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 175,
+              "name": "Brunswick Sardines in Mustard",
+              "description": "Brunswick Sardines in Mustard in the Food / Sardines / Canned Goods category at $1.99 (rated 4.5/5) featuring sardines, flavored, omega 3, protein, pantry.",
+              "price": 1.99,
+              "rating": 4.5,
+              "tags": [
+                "sardines",
+                "flavored",
+                "omega-3",
+                "protein",
+                "pantry",
+                "value",
+                "can",
+                "ready-to-eat"
+              ],
+              "image_url": "https://imgur.com/a/frmRKBD",
+              "image_thumb_url": "https://imgur.com/a/frmRKBD",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 176,
+              "name": "Chicken of the Sea Mackerel",
+              "description": "Chicken of the Sea Mackerel in the Food / Sardines / Canned Goods category at $2.49 (rated 4.4/5) featuring mackerel, omega 3, protein, can, value.",
+              "price": 2.49,
+              "rating": 4.4,
+              "tags": [
+                "mackerel",
+                "omega-3",
+                "protein",
+                "can",
+                "value",
+                "pantry",
+                "wild-caught",
+                "ready-to-eat"
+              ],
+              "image_url": "https://imgur.com/a/Kd5AnHB",
+              "image_thumb_url": "https://imgur.com/a/Kd5AnHB",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 177,
+              "name": "Ortiz Bonito del Norte Tuna",
+              "description": "Ortiz Bonito del Norte Tuna in the Food / Sardines / Canned Goods category at $6.99 (rated 4.7/5) featuring tuna, premium, olive oil, protein, imported.",
+              "price": 6.99,
+              "rating": 4.7,
+              "tags": [
+                "tuna",
+                "premium",
+                "olive-oil",
+                "protein",
+                "imported",
+                "omega-3",
+                "jar",
+                "gourmet"
+              ],
+              "image_url": "https://imgur.com/a/DSpwuHl",
+              "image_thumb_url": "https://imgur.com/a/DSpwuHl",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 178,
+              "name": "Century Tuna Hot & Spicy",
+              "description": "Century Tuna Hot & Spicy in the Food / Sardines / Canned Goods category at $2.19 (rated 4.6/5) featuring tuna, spicy, protein, can, value.",
+              "price": 2.19,
+              "rating": 4.6,
+              "tags": [
+                "tuna",
+                "spicy",
+                "protein",
+                "can",
+                "value",
+                "ready-to-eat",
+                "omega-3",
+                "pantry"
+              ],
+              "image_url": "https://imgur.com/a/nqrJ0Rp",
+              "image_thumb_url": "https://imgur.com/a/nqrJ0Rp",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 179,
+              "name": "Starkist Salmon Creations Teriyaki",
+              "description": "Starkist Salmon Creations Teriyaki in the Food / Sardines / Canned Goods category at $2.19 (rated 4.3/5) featuring salmon, flavored, pouch, protein, ready to eat.",
+              "price": 2.19,
+              "rating": 4.3,
+              "tags": [
+                "salmon",
+                "flavored",
+                "pouch",
+                "protein",
+                "ready-to-eat",
+                "value",
+                "omega-3",
+                "on-the-go"
+              ],
+              "image_url": "https://imgur.com/a/L0Qs5MJ",
+              "image_thumb_url": "https://imgur.com/a/L0Qs5MJ",
+              "image_attribution": "Placeholder"
+            },
+            {
+              "id": 180,
+              "sku": "TJST001",
+              "name": "Trader Joe’s Smoked Trout",
+              "description": "Delicious smoked trout packed with protein and omega-3s, perfect for salads or snacks.",
+              "price": 3.99,
+              "rating": 4.6,
+              "tags": [
+                "trout",
+                "smoked",
+                "protein",
+                "can",
+                "omega-3",
+                "premium",
+                "pantry",
+                "imported"
+              ],
+              "image_url": "https://imgur.com/a/eOAFmhQ",
+              "image_thumb_url": "https://imgur.com/a/eOAFmhQ",
+              "image_attribution": "Placeholder"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

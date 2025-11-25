@@ -1,13 +1,19 @@
 // Cart API clients
-// Endpoints: /cart (GET, POST), /cart/items (POST), /cart/items/:itemId (PATCH, DELETE), /cart/clear (DELETE)
+// Back-end implemented endpoints:
+//   GET    /cart/            -> Get current user's cart items (JWT)
+//   DELETE /cart/clear       -> Clear current user's cart (JWT)
+//   POST   /cart/items/<id>  -> Add product by id with quantity (legacy; not used here)
+//   PATCH  /cart/items/<id>  -> Update cart item quantity
+//   DELETE /cart/items/<id>  -> Remove cart item
+// NOTE: Legacy DELETE /cart?user_id= still exists server-side for compatibility.
 // All endpoints require JWT (withCredentials enabled in api instance).
 
 import api from './api';
 
 // Create a new cart
+// Legacy createCart removed: server auto-creates cart on first add; keep stub if needed.
 export async function createCart() {
-  const { data } = await api.post('/cart/');
-  return data;
+  return { message: 'Cart auto-created on first item add.' };
 }
 
 // Retrieve the current cart
@@ -18,8 +24,8 @@ export async function getCart() {
 
 // Add an item to the cart
 export async function addToCart(productId, quantity = 1) {
-  const { data } = await api.post(`/cart/items`, {
-    product_id: productId,
+  // Backend expects POST /cart/items/<productId> with JSON { quantity }
+  const { data } = await api.post(`/cart/items/${productId}`, {
     quantity,
   });
   return data;

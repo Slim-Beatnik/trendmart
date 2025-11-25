@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { useTheme } from '@resources/themes/themeContext';
 import logoUrl from '/logo.svg?url';
-import CloseButton from '../../button/CloseButton';
+import PopupCloseButton from '@children/button/CloseButton';
 
 function FocusedProduct({
   product = {},
@@ -31,6 +31,8 @@ function FocusedProduct({
   const priceDisplay =
     typeof price === 'number' ? `$${price.toFixed(2)}` : '$0.00';
 
+  const isDark = theme?.mode === 'dark';
+
   return (
     <Card
       role="dialog"
@@ -40,25 +42,16 @@ function FocusedProduct({
       style={{
         width: '100%',
         height: '100%',
-        backgroundColor: '#fffffb',
-        color: '#222',
+        backgroundColor: isDark ? '#000' : '#fffffb',
+        color: isDark ? '#eee' : '#222',
         borderRadius: theme.props.bR_less,
       }}
     >
       {/* Close button */}
-      <CloseButton
-        onClick={onClose}
-        aria-label="Close"
-        className="position-absolute"
-        style={{
-          right: 12,
-          top: 8,
-          background: '#e8eef6',
-          border: '1px solid #9ab',
-          borderRadius: theme.props.bR_less,
-          padding: '.25rem .5rem',
-          fontWeight: 600,
-        }}
+      <PopupCloseButton
+        onClose={onClose}
+        ariaLabel="Close"
+        variant="darkBlue"
       />
       <Card.Body className="h-100">
         <Row className="h-100">

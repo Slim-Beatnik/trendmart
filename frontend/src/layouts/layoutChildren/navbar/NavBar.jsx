@@ -10,20 +10,22 @@ import LoginRegister from '@children/popupLayoutChildren/loginRegister/LoginRegi
 import { useTheme } from '@resources/themes/themeContext';
 import Logo from '../logo/Logo';
 import HoverLink from './HoverLink';
+import { selectCartQuantity } from '@redux/cart/cartSlice';
+import CartPopup from '../popupLayoutChildren/cart/CartPopup';
+console.debug('[NavBar] CartPopup import resolved');
 
 function NavBar({ setPopup }) {
   const { theme } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const cartQuantity = useSelector(selectCartQuantity);
 
   const handleLogout = async () => {
     try {
       await dispatch(logoutUser()).unwrap();
-      navigate('/'); // Redirect to home page after successful logout
-    } catch (error) {
-      console.error('Logout failed:', error);
-      // Still redirect even if logout API call fails
+      navigate('/');
+    } catch {
       navigate('/');
     }
   };
@@ -40,14 +42,10 @@ function NavBar({ setPopup }) {
 
   const UserWelcome = () => {
     const userEmail = user?.email || 'User';
-
     return (
       <div className="d-flex align-items-center gap-3">
         <span
-          style={{
-            color: theme.colors.lightBg || 'white',
-            fontSize: '.9rem',
-          }}
+          style={{ color: theme.colors.lightBg || 'white', fontSize: '.9rem' }}
           className="d-none d-sm-inline"
         >
           Welcome, <strong>{userEmail}</strong>
@@ -65,6 +63,28 @@ function NavBar({ setPopup }) {
     );
   };
 
+  const CartButton = () => {
+    const hasItems = cartQuantity > 0;
+    return (
+      <Button
+        variant={hasItems ? 'outline-light' : 'secondary'}
+        className="position-relative px-3 py-1 d-flex align-items-center gap-1"
+        style={{ fontSize: '.8rem' }}
+        onClick={() => setPopup(<CartPopup setPopup={setPopup} />)}
+      >
+        <span style={{ fontWeight: 600 }}>Cart</span>
+        {hasItems && (
+          <span
+            className="position-absolute top-0 end-0 translate-middle badge rounded-pill bg-danger"
+            style={{ fontSize: '.6rem', padding: '0.25rem 0.4rem' }}
+          >
+            {cartQuantity}
+          </span>
+        )}
+      </Button>
+    );
+  };
+
   return (
     <Navbar
       expand="md"
@@ -74,14 +94,10 @@ function NavBar({ setPopup }) {
         borderRadius: `${Array(2).fill(theme.props.bR_more).join(' ')} 0 0`,
       }}
     >
-      {/* LEFT: Logo + Brand */}
       <Col className="d-flex align-items-center flex-grow-1 gap-3">
         <Navbar.Brand
           className="d-flex align-items-center p-0 m-0"
-          style={{
-            height: '8vh',
-            cursor: 'pointer',
-          }}
+          style={{ height: '8vh', cursor: 'pointer' }}
           onClick={() => navigate('/')}
         >
           <Logo color={theme.colors.text} />
@@ -89,25 +105,22 @@ function NavBar({ setPopup }) {
         <h1
           id="title"
           className="mb-0 fs-3"
-          style={{
-            fontWeight: 700,
-            color: theme.colors.text,
-          }}
+          style={{ fontWeight: 700, color: theme.colors.text }}
         >
           TrendMart
         </h1>
       </Col>
 
-      {/* CENTER HoverLinkS */}
       <Nav className="d-none d-md-flex gap-4 ms-auto me-4">
         <HoverLink linksTo="/">Home</HoverLink>
         {isAuthenticated && <HoverLink linksTo="/profile">Profile</HoverLink>}
-
         <HoverLink linksTo="/contact">Contact</HoverLink>
       </Nav>
 
-      {/* RIGHT: Authenticated or Login Button */}
-      {isAuthenticated ? <UserWelcome /> : <LogRegLinkBtn />}
+      <div className="d-flex align-items-center gap-2">
+        <CartButton />
+        {isAuthenticated ? <UserWelcome /> : <LogRegLinkBtn />}
+      </div>
     </Navbar>
   );
 }

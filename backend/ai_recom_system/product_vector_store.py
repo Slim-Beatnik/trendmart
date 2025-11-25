@@ -1,178 +1,129 @@
 import numpy as np
-import json
 from typing import List, Dict, Any, Tuple, Optional
 from .helpers.text_builder import create_product_text
 from .embeddings_backend import make_backend, BaseEmbeddingBackend
 
 
 class ProductVectorStore:
-    '''A simple in-memory vector store for product embeddings.'''
+    """In-memory vector store with vectorized similarity & query embedding cache."""
 
     def __init__(self, model_name: str = 'all-MiniLM-L6-v2', backend: BaseEmbeddingBackend | None = None):
-        '''Initialize the vector store with a specified embedding backend.
-
-        Args:
-            model_name: Name of the sentence transformer model to use (when using HF backend).
-            backend: Optional embedding backend; if None, chosen via env (HF vs Ollama).
-        '''
         self.model_name = model_name
         self.backend = backend or make_backend()
         self.products: List[Dict[str, Any]] = []
         self.product_embeddings: List[List[float]] = []
-
-        # Mapping from product ID to index in embeddings list
         self.id_to_index: Dict[int, int] = {}
+        self._emb_matrix: Optional[np.ndarray] = None
+        # Query embedding cache (FIFO simple eviction)
+        self._query_cache: Dict[str, List[float]] = {}
+        self._query_cache_order: List[str] = []
+        self._query_cache_limit = 500
 
+    # -----------------------------
+    # Product ingestion
+    # -----------------------------
     def add_products(self, products: List[Dict[str, Any]], category_info: Dict[str, Any] = None):
-        '''Add products to the vector store and compute their embeddings.
-
-        Args:
-            products: List of product dictionaries to add.
-            category_info: Optional dictionary mapping product IDs to category details.
-        '''
         for product in products:
             if category_info:
                 product['category_info'] = category_info.get(product['id'], '')
                 product['main_category'] = category_info.get(
-                    product['id'], '').get('main_category', '')
+                    product['id'], {}).get('main_category', '')
 
-            # Create text representation and compute embedding
-            product_text = self.create_product_text(product)
-            embedding = self.backend.embed(product_text)
-
+            text = self.create_product_text(product)
+            emb = self.backend.embed(text)
+            # normalize vector shape
+            if isinstance(emb, list) and emb and isinstance(emb[0], (list, tuple)):
+                emb = list(emb[0])
             self.products.append(product)
-            self.product_embeddings.append(embedding)
+            self.product_embeddings.append(emb)
             self.id_to_index[product['id']] = len(self.products) - 1
-
-        # Print confirmation message for testing purposes
-        print(
-            f"Successfully added {len(products)} products. Total products: {len(self.products)}")
+        self._rebuild_matrix()
 
     def set_products_and_embeddings(self, products: List[Dict[str, Any]], embeddings: List[List[float]]):
-        """Directly set products and their precomputed embeddings.
-
-        Args:
-            products: List of product dicts.
-            embeddings: List of embedding vectors aligned by index with products.
-
-        Raises:
-            ValueError: if lengths don't match or embeddings are malformed.
-        """
         if len(products) != len(embeddings):
             raise ValueError(
-                "products and embeddings must have the same length")
-        # Basic validation that each embedding is a list/sequence of numbers
+                'products and embeddings must have the same length')
         for i, emb in enumerate(embeddings):
             if not isinstance(emb, (list, tuple)) or (emb and not isinstance(emb[0], (int, float))):
                 raise ValueError(
-                    f"embedding at index {i} is not a numeric vector")
-
+                    f'embedding at index {i} is not a numeric vector')
         self.products = list(products)
-        self.product_embeddings = [list(vec) for vec in embeddings]
-        self.id_to_index = {}
+        self.product_embeddings = [list(e) for e in embeddings]
+        self.id_to_index.clear()
         for idx, p in enumerate(self.products):
             if 'id' in p:
                 self.id_to_index[p['id']] = idx
+        self._rebuild_matrix()
 
+    def _rebuild_matrix(self):
+        if not self.product_embeddings:
+            self._emb_matrix = None
+            return
+        self._emb_matrix = np.array(self.product_embeddings, dtype='float32')
+
+    # -----------------------------
+    # Embedding helpers
+    # -----------------------------
+    def _embed_cached(self, text: str) -> List[float]:
+        key = text.strip().lower()
+        cached = self._query_cache.get(key)
+        if cached is not None:
+            return cached
+        vec = self.backend.embed(text)
+        if isinstance(vec, list) and vec and isinstance(vec[0], (list, tuple)):
+            vec = list(vec[0])
+        self._query_cache[key] = vec
+        self._query_cache_order.append(key)
+        if len(self._query_cache_order) > self._query_cache_limit:
+            old = self._query_cache_order.pop(0)
+            self._query_cache.pop(old, None)
+        return vec
+
+    # -----------------------------
+    # Public API
+    # -----------------------------
     def create_product_text(self, product: Dict[str, Any]) -> str:
-        """Delegate to the helper text builder to compose embedding text."""
         return create_product_text(product)
 
-    def search_similar_products(self, query: str, top_k: int = 10,
-                                exclude_ids: List[int] = None) -> List[Tuple[Dict[str, Any], float]]:
-        """
-        Search for products similar to the query using semantic similarity.
-
-        Args:
-            query: Search query (can be natural language)
-            top_k: Number of results to return
-            exclude_ids: Product IDs to exclude from results
-
-        Returns:
-            List of tuples (product, similarity_score)
-        """
-        if not self.products:
+    def search_similar_products(self, query: str, top_k: int = 10, exclude_ids: Optional[List[int]] = None) -> List[Tuple[Dict[str, Any], float]]:
+        if not self.products or self._emb_matrix is None:
             return []
-
-        # Generate query embedding
-        query_embedding = self.backend.embed(query)
-
-        # Calculate similarities with all products
-        similarities = []
-        for i, product_embedding in enumerate(self.product_embeddings):
-            # Calculate cosine similarity
-            similarity = self._cosine_similarity(
-                query_embedding, product_embedding)
-            similarities.append((i, similarity))
-
-        # Sort by similarity (highest first)
-        similarities.sort(key=lambda x: x[1], reverse=True)
-
-        # Filter results and build response
-        results = []
-        exclude_indices = set()
-
-        # Convert exclude_ids to indices
+        q = np.array(self._embed_cached(query), dtype='float32')
+        if q.ndim != 1:
+            q = q.flatten()
+        M = self._emb_matrix
+        q_norm = np.linalg.norm(q) or 1e-9
+        m_norms = np.linalg.norm(M, axis=1)
+        sims = (M @ q) / ((m_norms * q_norm).clip(min=1e-9))
         if exclude_ids:
-            exclude_indices = {
-                self.id_to_index[pid] for pid in exclude_ids if pid in self.id_to_index}
-
-        for i, similarity in similarities:
-            if len(results) >= top_k:
-                break
-
-            if i not in exclude_indices:
-                product = self.products[i]
-                results.append((product, similarity))
-
-        return results
-
-    def _cosine_similarity(self, vec1, vec2):
-        """Calculate cosine similarity between two vectors."""
-        # Convert to numpy arrays
-        vec1 = np.array(vec1)
-        vec2 = np.array(vec2)
-
-        # Calculate cosine similarity
-        dot_product = np.dot(vec1, vec2)
-        norm1 = np.linalg.norm(vec1)
-        norm2 = np.linalg.norm(vec2)
-
-        if norm1 == 0 or norm2 == 0:
-            return 0
-
-        return dot_product / (norm1 * norm2)
+            for pid in exclude_ids:
+                idx = self.id_to_index.get(pid)
+                if idx is not None:
+                    sims[idx] = -1.0
+        k = min(top_k, len(sims))
+        if k <= 0:
+            return []
+        top_idx = np.argpartition(-sims, range(k))[:k]
+        top_idx = top_idx[np.argsort(-sims[top_idx])]
+        return [(self.products[i], float(sims[i])) for i in top_idx]
 
     def get_product_by_id(self, product_id: int) -> Optional[Dict[str, Any]]:
-        # Get product by ID.
-        if product_id in self.id_to_index:
-            index = self.id_to_index[product_id]
-            return self.products[index]
-        return None
+        idx = self.id_to_index.get(product_id)
+        if idx is None:
+            return None
+        return self.products[idx]
 
     def find_similar_to_product(self, product_id: int, top_k: int = 10) -> List[Tuple[Dict[str, Any], float]]:
-        """
-        Find products similar to a given product.
-
-        Args:
-            product_id: ID of the reference product
-            top_k: Number of similar products to return
-
-        Returns:
-            List of tuples (product, similarity_score)
-        """
-        product = self.get_product_by_id(product_id)
-        if not product:
+        prod = self.get_product_by_id(product_id)
+        if not prod:
             return []
-
-        # Create text from the product and search for similar ones
-        product_text = self.create_product_text(product)
-        return self.search_similar_products(product_text, top_k + 1, exclude_ids=[product_id])
+        text = self.create_product_text(prod)
+        return self.search_similar_products(text, top_k + 1, exclude_ids=[product_id])
 
     def get_stats(self) -> Dict[str, Any]:
-        # Get statistics about the vector store.
         return {
             'total_products': len(self.products),
-            'embedding_dimension': len(self.product_embeddings[0]) if self.product_embeddings else 0,
-            'model_name': self.model_name
+            'embedding_dimension': int(self._emb_matrix.shape[1]) if isinstance(self._emb_matrix, np.ndarray) else 0,
+            'model_name': self.model_name,
+            'query_cache_size': len(self._query_cache),
         }

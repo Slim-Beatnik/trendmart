@@ -19,6 +19,23 @@ class CartItemSchema(BaseSchema):
         include_fk = True
     product_id = fields.Int(required=True)
     quantity = fields.Int(required=True, validate=lambda n: n > 0)
+    # Expose price snapshot stored on cart item
+    price_per_unit = fields.Float(dump_only=True)
+    # Convenience fields for frontend display
+    product_name = fields.Method('get_product_name', dump_only=True)
+    product_image_url = fields.Method('get_product_image_url', dump_only=True)
+
+    def get_product_name(self, obj):
+        try:
+            return getattr(obj.product, 'name', None)
+        except Exception:
+            return None
+
+    def get_product_image_url(self, obj):
+        try:
+            return getattr(obj.product, 'image_url', None)
+        except Exception:
+            return None
 
 
 class CartSchema(BaseSchema):
@@ -103,7 +120,9 @@ class CartCreateSchema(BaseSchema):
     """
     class Meta:
         model = Cart
-        exclude = ('id', 'created_at', 'updated_at', 'items')
+        # Cart does not have created_at/updated_at fields; exclude real analytics + rel fields
+        exclude = ('id', 'cart_created_at', 'abandoned_flag',
+                   'last_updated_at', 'items')
     user_id = fields.Int(required=True)
 
 
@@ -125,7 +144,8 @@ class CartItemCreateSchema(BaseSchema):
     """
     class Meta:
         model = CartItem
-        exclude = ('id', 'cart_id', 'created_at', 'updated_at')
+        # CartItem has no created_at/updated_at columns
+        exclude = ('id', 'cart_id')
     product_id = fields.Int(required=True)
     quantity = fields.Int(required=True, validate=lambda n: n > 0)
     price_per_unit = fields.Float(required=True, validate=lambda p: p >= 0)
@@ -149,8 +169,8 @@ class OrderCreateSchema(BaseSchema):
     """
     class Meta:
         model = Order
-        exclude = ('id', 'created_at', 'updated_at', 'status',
-                   'subtotal', 'tax_total', 'total', 'placed_at', 'items')
+        exclude = ('id', 'status', 'subtotal', 'tax_total',
+                   'total', 'placed_at', 'items', 'payment')
     user_id = fields.Int(required=True)
 
 
@@ -173,7 +193,7 @@ class OrderItemCreateSchema(BaseSchema):
     """
     class Meta:
         model = OrderItem
-        exclude = ('id', 'order_id', 'created_at', 'updated_at')
+        exclude = ('id', 'order_id')
     product_id = fields.Int(required=True)
     quantity = fields.Int(required=True, validate=lambda n: n > 0)
     price_per_unit = fields.Float(required=True, validate=lambda p: p >= 0)

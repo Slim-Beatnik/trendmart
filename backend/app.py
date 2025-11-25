@@ -50,13 +50,14 @@ def create_app():
     ma.init_app(app)
     jwt.init_app(app)
 
-    # This line is to allow CORS for all domains
+    # Configure CORS with explicit origins when credentials are supported.
+    allowed_origin = os.environ.get("FRONTEND_ORIGIN", "http://localhost:3000")
     cors.init_app(
         app,
         resources={
             r"/*": {
-                "origins": "*",
-                "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+                "origins": [allowed_origin],
+                "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
                 "allow_headers": ["Content-Type", "Authorization"],
                 "supports_credentials": True,
             },
@@ -110,6 +111,15 @@ def create_app():
     app.register_blueprint(orders_bp)
     app.register_blueprint(checkout_bp)
     app.register_blueprint(cart_bp)
+
+    # Optional warmup: load recommendation vector store early to avoid first-request latency.
+    try:
+        from ai_recom_system.rag_service import load_simple_index
+        vs = load_simple_index()
+        app.logger.info(
+            f"[warmup] recommendation store products={len(getattr(vs,'products',[]))}")
+    except Exception as e:
+        app.logger.warning(f"[warmup] recommendation store failed: {e}")
 
     # Serve the raw swagger.yaml
 

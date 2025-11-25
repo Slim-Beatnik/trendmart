@@ -49,18 +49,19 @@ function OrderConfirmation() {
         total_cents: Math.round(Number(order.total || 0) * 100)
     } : null;
 
+    const isDark = theme?.mode === 'dark';
+
     return (
         <Card className='p-3 shadow position-relative m-auto'
             style={{
                 width: 'min(92vw, 640px)',
                 maxHeight: '90vh',
-                backgroundColor: '#fffffb',
-                color: '#222',
+                backgroundColor: isDark ? '#000' : '#fffffb',
+                color: isDark ? '#eee' : '#222',
                 borderRadius: 4,
-                ...theme.schemes.darkText,
             }}
         >
-            <PopupCloseButton onClick={() => navigate(-1)} />
+            <PopupCloseButton onClose={() => navigate('/', { replace: true })} variant="darkBlue" ariaLabel="Close confirmation" />
             <Card.Body className='d-flex flex-column gap-3' style={{ overflowY: 'auto' }}>
                 <h3 className='m-0'>Order Confirmation</h3>
                 {loading && <div>Loading confirmation…</div>}

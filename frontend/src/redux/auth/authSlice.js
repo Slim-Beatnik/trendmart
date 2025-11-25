@@ -45,6 +45,10 @@ export const createUser = createAsyncThunk(
       );
 
       // Expect { user: {...} }
+      const token = response.data?.access_token;
+      if (token) {
+        setAuthToken(token);
+      }
       return response.data.user;
     } catch (error) {
       dispatch(
@@ -68,6 +72,7 @@ export const checkAuthStatus = createAsyncThunk(
       // Expect { user }
       return response.data.user;
     } catch (error) {
+      setAuthToken(null);
       return rejectWithValue(error.response?.data);
     }
   }
@@ -84,6 +89,7 @@ export const logoutUser = createAsyncThunk(
           variant: 'info',
         })
       );
+      setAuthToken(null);
       return null;
     } catch (error) {
       dispatch(
@@ -92,6 +98,7 @@ export const logoutUser = createAsyncThunk(
           variant: 'error',
         })
       );
+      setAuthToken(null);
       return rejectWithValue(error.response?.data);
     }
   }

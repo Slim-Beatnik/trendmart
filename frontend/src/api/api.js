@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:8000';
+export const AUTH_TOKEN_KEY = 'tm_access_token';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -10,20 +11,30 @@ const api = axios.create({
 });
 
 // Bootstrap from localStorage on load
-const BOOT_KEY = 'tm_access_token';
 const bootToken =
-  typeof window !== 'undefined' ? localStorage.getItem(BOOT_KEY) : null;
+  typeof window !== 'undefined' ? localStorage.getItem(AUTH_TOKEN_KEY) : null;
 if (bootToken) {
   api.defaults.headers.common.Authorization = `Bearer ${bootToken}`;
 }
 
+// Automatically clear the auth header when a 401 response is received
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error?.response?.status === 401) {
+      setAuthToken(null);
+    }
+    return Promise.reject(error);
+  }
+);
+
 // Helper to set/clear the auth header and persist the token
 export function setAuthToken(token) {
   if (token) {
-    localStorage.setItem(BOOT_KEY, token);
+    localStorage.setItem(AUTH_TOKEN_KEY, token);
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
   } else {
-    localStorage.removeItem(BOOT_KEY);
+    localStorage.removeItem(AUTH_TOKEN_KEY);
     delete api.defaults.headers.common.Authorization;
   }
 }

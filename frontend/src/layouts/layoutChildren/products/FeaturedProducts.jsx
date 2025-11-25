@@ -7,6 +7,10 @@ import ProductPopup from './productsChildren/ProductPopup';
 import { listProducts, getProductsByCategory } from '@api/catalog';
 import { normalizeProducts } from '@utils/helpers';
 import { useTheme } from '@resources/themes/themeContext';
+import { useDispatch } from 'react-redux';
+import { addItem, attachBackendId } from '@redux/cart/cartSlice';
+import { addToCart as addToCartApi } from '@api/cart';
+import { logCartAdd } from '@api/events';
 
 function FeaturedProducts({
   activeCategoryId,
@@ -14,6 +18,7 @@ function FeaturedProducts({
   onClearCategory,
 }) {
   const { theme } = useTheme();
+  const dispatch = useDispatch();
   const [fullProducts, setFullProducts] = useState([]); // complete catalog cache
   const [categoryProducts, setCategoryProducts] = useState(null); // scoped list for active category
   const [loading, setLoading] = useState(false);
@@ -126,11 +131,38 @@ function FeaturedProducts({
     setPageIndex(0);
   }, [search]);
 
-  // Placeholder handlers for future cart / buy integration
+  // Buy handler placeholder
   const handleBuy = useCallback((p) => console.log('Buy', p.id), []);
+  // Real add-to-cart handler (optimistic + backend sync)
   const handleAddToCart = useCallback(
-    (p) => console.log('Add to cart', p.id),
-    []
+    async (p) => {
+      if (!p) return;
+      try {
+        // Optimistic local add
+        dispatch(addItem({
+          productId: p.id,
+          name: p.name,
+          price: p.price,
+          quantity: 1,
+          imageUrl: p.imageUrl,
+        }));
+        // Backend add (attach backend id if success)
+        try {
+          const resp = await addToCartApi(p.id, 1);
+          if (resp?.id) {
+            dispatch(attachBackendId({ productId: p.id, backendItemId: resp.id }));
+          }
+        } catch (apiErr) {
+          // 401 or other failure: keep optimistic item; hydration later can reconcile
+          console.warn('Add to cart API failed', apiErr?.message);
+        }
+        // Fire analytics/log (non-blocking)
+        try { await logCartAdd(p); } catch { /* ignore */ }
+      } catch (err) {
+        console.warn('Add to cart failed', err?.message);
+      }
+    },
+    [dispatch]
   );
   const handleMoreLikeThis = useCallback(
     (p) => console.log('More like', p.id),
