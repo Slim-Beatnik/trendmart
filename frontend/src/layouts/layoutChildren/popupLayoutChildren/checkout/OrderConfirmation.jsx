@@ -67,7 +67,7 @@ function OrderConfirmation() {
       }}
     >
       <PopupCloseButton
-        onClose={() => navigate('/', { replace: true })}
+        onClick={() => navigate('/', { replace: true })}
         variant="darkBlue"
         ariaLabel="Close confirmation"
       />

@@ -110,7 +110,7 @@ function ShippingPopup() {
       }}
     >
       <PopupCloseButton
-        onClose={() => navigate('/', { replace: true })}
+        onCick={() => navigate('/', { replace: true })}
         ariaLabel="Close checkout"
         variant="darkBlue"
       />

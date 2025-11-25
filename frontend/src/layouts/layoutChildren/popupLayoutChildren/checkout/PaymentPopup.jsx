@@ -108,7 +108,7 @@ function PaymentPopup() {
       }}
     >
       <PopupCloseButton
-        onClose={() => navigate('/', { replace: true })}
+        onClick={() => navigate('/', { replace: true })}
         ariaLabel="Close payment"
         variant="darkBlue"
       />

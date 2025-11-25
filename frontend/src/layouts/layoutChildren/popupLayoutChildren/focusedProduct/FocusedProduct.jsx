@@ -49,7 +49,7 @@ function FocusedProduct({
     >
       {/* Close button */}
       <PopupCloseButton
-        onClose={onClose}
+        onClick={onClose}
         ariaLabel="Close"
         variant="darkBlue"
       />
