@@ -203,9 +203,7 @@ const Address = () => {
 
   return (
     <>
-      <div
-      className="d-flex justify-content-between align-items-center mb-4 h-100"
-      >
+      <div className="d-flex justify-content-between align-items-center mb-4 h-100">
         {!showAddForm && (
           <Button
             variant="success"
@@ -320,7 +318,10 @@ const Address = () => {
                   type="submit"
                   disabled={saving}
                   className="d-flex align-items-center gap-2"
-                  style={{ backgroundColor: theme.colors.emphasis, color: theme.colors.text }}
+                  style={{
+                    backgroundColor: theme.colors.emphasis,
+                    color: theme.colors.text,
+                  }}
                 >
                   {saving && (
                     <Spinner
@@ -332,7 +333,10 @@ const Address = () => {
                 </Button>
 
                 <Button
-                  style={{ backgroundColor: theme.colors.highlight, color: theme.colors.text }}
+                  style={{
+                    backgroundColor: theme.colors.highlight,
+                    color: theme.colors.text,
+                  }}
                   type="button"
                   onClick={resetForm}
                 >

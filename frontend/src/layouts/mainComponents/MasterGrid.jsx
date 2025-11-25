@@ -36,7 +36,7 @@ function MasterGrid() {
           borderRight: `.13rem solid ${theme.colors.details}`,
         }}
       >
-        <ChildrenMayScroll direction='vertical' >
+        <ChildrenMayScroll direction="vertical">
           <ProductCategories
             onSelectCategory={handleSelectCategory}
             activeCategoryId={activeCategoryId}

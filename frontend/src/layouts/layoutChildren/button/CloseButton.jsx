@@ -9,7 +9,7 @@ function PopupCloseButton({ onClick }) {
       data-bs-theme={mode}
       style={{
         marginTop: '1rem',
-        marginRight: 'rem'
+        marginRight: 'rem',
       }}
     >
       <CloseButton

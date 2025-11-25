@@ -37,7 +37,8 @@ function StripePaymentSection({
       } catch (e) {
         const unauthorized = e?.response?.status === 401;
         const payload = e?.response?.data || {};
-        const baseMessage = payload.message || payload.error || 'Unable to initialize payment.';
+        const baseMessage =
+          payload.message || payload.error || 'Unable to initialize payment.';
         const detail = payload.details ? `${payload.details}` : '';
         setNeedAuth(unauthorized);
         setErr(`${baseMessage}${detail}`);
@@ -77,11 +78,21 @@ function StripePaymentSection({
         <div>Simulated payment mode. No card entry required.</div>
         <button
           className="btn btn-dark"
-          onClick={() => onPaymentComplete?.({ client_secret: clientSecret, status: 'completed' })}
+          onClick={() =>
+            onPaymentComplete?.({
+              client_secret: clientSecret,
+              status: 'completed',
+            })
+          }
         >
           Complete Payment
         </button>
-        <button className="btn btn-outline-secondary" onClick={onBack}>Back</button>
+        <button
+          className="btn btn-outline-secondary"
+          onClick={onBack}
+        >
+          Back
+        </button>
       </div>
     );
   }

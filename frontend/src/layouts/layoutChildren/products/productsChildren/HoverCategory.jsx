@@ -17,12 +17,11 @@ function HoverLink({ children, linksTo }) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        color:
-          hover
+        color: hover
+          ? theme.colors.splash
+          : isActive
             ? theme.colors.splash
-            : isActive
-              ? theme.colors.splash
-              : theme.colors.text,
+            : theme.colors.text,
         opacity: isActive ? 1 : 0.7,
         transition: 'color 0.2s ease, opacity 0.2s ease',
       }}

@@ -13,9 +13,10 @@ export async function getStripeConfig() {
 
 // Create a payment intent for a specific order
 export async function createPaymentIntent(orderIdOrOptions, currency = 'usd') {
-  const opts = typeof orderIdOrOptions === 'object'
-    ? orderIdOrOptions
-    : { orderId: orderIdOrOptions, currency };
+  const opts =
+    typeof orderIdOrOptions === 'object'
+      ? orderIdOrOptions
+      : { orderId: orderIdOrOptions, currency };
 
   const payload = {
     order_id: opts.orderId,

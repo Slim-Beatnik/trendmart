@@ -47,7 +47,7 @@ const Profile = () => {
 
   const activeTab = getTabFromURL();
 
-    const fetchCurrentUser = async () => {
+  const fetchCurrentUser = async () => {
     try {
       const user = await getCurrentUser();
       console.log('Current user fetched:', user);
@@ -115,7 +115,9 @@ const Profile = () => {
 
     try {
       setSaving(true);
-      dispatch(setStatus({ message: 'Saving profile changes...', variant: 'info' }));
+      dispatch(
+        setStatus({ message: 'Saving profile changes...', variant: 'info' })
+      );
 
       await upsertProfile(contactInfo);
 
@@ -158,7 +160,10 @@ const Profile = () => {
           borderRight: `.13rem solid ${theme.colors.details}`,
         }}
       >
-        <Nav variant="pills" className="flex-column">
+        <Nav
+          variant="pills"
+          className="flex-column"
+        >
           <h3>Profile</h3>
 
           <HoverCategory
@@ -168,11 +173,17 @@ const Profile = () => {
             Contact
           </HoverCategory>
 
-          <Nav.Link eventKey="address" onClick={() => navigate('/profile/address')}>
+          <Nav.Link
+            eventKey="address"
+            onClick={() => navigate('/profile/address')}
+          >
             Address
           </Nav.Link>
 
-          <Nav.Link eventKey="security" onClick={() => navigate('/profile/security')}>
+          <Nav.Link
+            eventKey="security"
+            onClick={() => navigate('/profile/security')}
+          >
             Security
           </Nav.Link>
         </Nav>

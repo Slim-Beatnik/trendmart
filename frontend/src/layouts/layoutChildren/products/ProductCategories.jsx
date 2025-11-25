@@ -8,7 +8,7 @@ import HoverCategory from './productsChildren/HoverCategory';
 import { useTheme } from '@resources/themes/themeContext';
 
 function ProductCategories({ onSelectCategory, activeCategoryId }) {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
   const [categories, setCategories] = useState(null); // null = loading
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -47,7 +47,10 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
     : placeholderCategories;
 
   // Prepend synthetic "All Categories" option for direct full catalog access
-  const fullList = [{ id: '', name: 'All Categories', slug: 'all-categories' }, ...displayedCategories];
+  const fullList = [
+    { id: '', name: 'All Categories', slug: 'all-categories' },
+    ...displayedCategories,
+  ];
 
   const handleSelect = useCallback(
     (cat) => {
@@ -105,7 +108,11 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
           <div className="small text-danger px-3">{error}</div>
         )}
         {fullList.map((cat) => {
-          const active = (cat.id === '' && location.pathname === '/products' && !activeCategoryId) || (activeCategoryId === cat.id && cat.id !== '');
+          const active =
+            (cat.id === '' &&
+              location.pathname === '/products' &&
+              !activeCategoryId) ||
+            (activeCategoryId === cat.id && cat.id !== '');
           return (
             <HoverCategory
               key={cat.id}
@@ -117,7 +124,9 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
                 background: active ? theme.colors.lightBg : 'transparent',
                 padding: '.35rem .75rem',
                 borderRadius: 4,
-                border: active ? `1px solid ${theme.colors.details}` : '1px solid transparent',
+                border: active
+                  ? `1px solid ${theme.colors.details}`
+                  : '1px solid transparent',
               }}
             >
               {cat.name}

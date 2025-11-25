@@ -162,7 +162,7 @@ function LoginRegister({ setPopup }) {
             )}
           </Col>
         </Row>
-        <Row className='d-flex flex-row justify-content-center gap-1 align-items-end text-center'>
+        <Row className="d-flex flex-row justify-content-center gap-1 align-items-end text-center">
           <p
             className="mx-auto my-0 p-0"
             style={{ fontSize: '.8rem' }}
