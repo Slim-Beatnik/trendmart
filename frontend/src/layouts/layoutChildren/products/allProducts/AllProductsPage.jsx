@@ -181,6 +181,7 @@ function AllProductsPage() {
           minHeight: '100vh',
           backgroundImage: `radial-gradient(circle farthest-corner at bottom, ${theme.colors.details} 60%, ${theme.colors.lightBg}44 100%)`,
           backgroundColor: theme.colors.lightBg,
+          color: theme.colors.highlight
         }}
       >
         <div
@@ -193,7 +194,7 @@ function AllProductsPage() {
           className="d-flex flex-column w-100 h-100"
           style={{
             padding: '0.75rem',
-            background: theme.mode === 'dark' ? '#010409' : '#f7f9fb',
+            background: theme.colors.lightBg,
             fontSize: '.75rem',
             borderRadius: theme.props?.bR_more || 8,
           }}
@@ -287,8 +288,8 @@ function AllProductsPage() {
 
               {error && (
                 <div
-                  className="text-danger mb-2"
-                  style={{ fontSize: '.65rem' }}
+                  className="mb-2"
+                  style={{ fontSize: '.65rem', color: theme.alerts.error }}
                 >
                   {error}
                 </div>

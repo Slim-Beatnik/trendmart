@@ -14,14 +14,13 @@ function ProductFiltersPanel({
   onClear,
 }) {
   const { theme } = useTheme();
-  const isDark = theme?.mode === 'dark';
 
   return (
     <div
       className="d-flex flex-column gap-2 p-2 rounded shadow-sm"
       style={{
-        background: isDark ? '#0d1117' : '#ffffff',
-        border: isDark ? '1px solid #1f2a37' : '1px solid #d8dee4',
+        background: theme.colors.emphasis,
+        border: `2px solid ${theme.colors.details}`,
         fontSize: '.75rem',
       }}
     >

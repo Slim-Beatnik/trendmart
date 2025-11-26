@@ -14,14 +14,14 @@ function ProductFiltersPanel({
   onClear,
 }) {
   const { theme } = useTheme();
-  const isDark = theme?.mode === 'dark';
 
   return (
     <div
       className="d-flex flex-column gap-2 p-2 rounded shadow-sm"
       style={{
-        background: isDark ? '#0d1117' : '#ffffff',
-        border: isDark ? '1px solid #1f2a37' : '1px solid #d8dee4',
+        backgroundColor: theme.colors.splash,
+        color: theme.colors.text,
+        border: `2px solid ${theme.colors.details}`,
         fontSize: '.75rem',
       }}
     >
@@ -94,7 +94,11 @@ function ProductFiltersPanel({
         <Button
           variant="outline-secondary"
           size="sm"
-          style={{ fontSize: '.65rem', ...theme.buttons.muted }}
+          style={{
+            fontSize: '.65rem',
+            ...theme.buttons.muted,
+            color: theme.colors.text
+          }}
           onClick={onClear}
         >
           Clear Filters
