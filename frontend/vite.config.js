@@ -20,7 +20,10 @@ export default defineConfig({
       '@redux': path.resolve(__dirname, './src/redux'),
       '@main': path.resolve(__dirname, './src/layouts/mainComponents'),
       '@children': path.resolve(__dirname, './src/layouts/layoutChildren'),
-      '@popupChildren': path.resolve(__dirname, './src/layouts/layoutChildren/popupLayoutChildren'),
+      '@popupChildren': path.resolve(
+        __dirname,
+        './src/layouts/layoutChildren/popupLayoutChildren'
+      ),
       '@api': path.resolve(__dirname, './src/api'),
       '@utils': path.resolve(__dirname, './src/utils'),
     },

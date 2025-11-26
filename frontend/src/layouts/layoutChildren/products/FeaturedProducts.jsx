@@ -139,25 +139,33 @@ function FeaturedProducts({
       if (!p) return;
       try {
         // Optimistic local add
-        dispatch(addItem({
-          productId: p.id,
-          name: p.name,
-          price: p.price,
-          quantity: 1,
-          imageUrl: p.imageUrl,
-        }));
+        dispatch(
+          addItem({
+            productId: p.id,
+            name: p.name,
+            price: p.price,
+            quantity: 1,
+            imageUrl: p.imageUrl,
+          })
+        );
         // Backend add (attach backend id if success)
         try {
           const resp = await addToCartApi(p.id, 1);
           if (resp?.id) {
-            dispatch(attachBackendId({ productId: p.id, backendItemId: resp.id }));
+            dispatch(
+              attachBackendId({ productId: p.id, backendItemId: resp.id })
+            );
           }
         } catch (apiErr) {
           // 401 or other failure: keep optimistic item; hydration later can reconcile
           console.warn('Add to cart API failed', apiErr?.message);
         }
         // Fire analytics/log (non-blocking)
-        try { await logCartAdd(p); } catch { /* ignore */ }
+        try {
+          await logCartAdd(p);
+        } catch {
+          /* ignore */
+        }
       } catch (err) {
         console.warn('Add to cart failed', err?.message);
       }
@@ -215,12 +223,13 @@ function FeaturedProducts({
             type="button"
             onClick={handlePrevPage}
             disabled={pageIndex === 0}
-            className="btn btn-sm px-1"
+            className="btn btn-sm px-1 pt-0"
             style={{
               ...theme.buttons.emphasis,
+              paddingBottom: '.06rem',
             }}
           >
-            Prev
+            &#10229;
           </Button>
           <span className="small">
             Page {totalProducts === 0 ? 0 : pageIndex + 1} of {totalPages}
@@ -229,12 +238,13 @@ function FeaturedProducts({
             type="button"
             onClick={handleNextPage}
             disabled={pageIndex >= totalPages - 1}
-            className="btn btn-sm px-1"
+            className="btn btn-sm px-1 pt-0"
             style={{
               ...theme.buttons.emphasis,
+              paddingBottom: '.06rem',
             }}
           >
-            Next
+            &#10230;
           </Button>
         </div>
 

@@ -1,5 +1,6 @@
 /* Additional responsive tweaks for product cards */
-.card img {}
+.card img {
+}
 
 /* @media (max-width: 576px) {
     .featured-scroll {
@@ -8,10 +9,9 @@
 } */
 
 @media (min-width: 992px) {
-
-    /* Slightly tighter grid on large screens */
-    .row.g-3>[class*='col-'] {
-        padding-left: .5rem;
-        padding-right: .5rem;
-    }
+  /* Slightly tighter grid on large screens */
+  .row.g-3 > [class*='col-'] {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }

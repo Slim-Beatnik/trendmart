@@ -3,9 +3,9 @@ import { useOutlet, useLocation } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import GlobalAlert from '../layoutChildren/alert/GlobalAlert.jsx';
+import GlobalAlert from '@children/alert/GlobalAlert.jsx';
 import MasterGrid from './MasterGrid.jsx';
-import NavBar from '../layoutChildren/navbar/NavBar';
+import NavBar from '@children/navbar/NavBar';
 import PopupLayout from './PopupLayout.jsx';
 import { useTheme } from '@resources/themes/themeContext.js';
 
@@ -36,7 +36,11 @@ function MasterLayout() {
       >
         <Col
           id="navbarContainer"
-          style={{ minWidth: '100%', marginBottom: '4vh' }}
+          style={{
+            height: '16vh',
+            minWidth: '100%',
+            marginBottom: '2vh',
+          }}
         >
           <Row
             className="h-50"
@@ -61,11 +65,11 @@ function MasterLayout() {
         <Row
           id="mGrid-popupContainer"
           className="pb-2"
-          style={{}}
+          style={{ height: '79vh' }}
         >
           <Col
-            className="w-100 m-0 p-0"
-            style={{ borderRadius: theme.props.bR_more }}
+            className="w-100 h-100 m-0 p-0"
+            style={{ borderRadius: theme.props.bR_more, overflow: 'hidden' }}
           >
             <MasterGrid />
           </Col>

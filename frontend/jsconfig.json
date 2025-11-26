@@ -6,8 +6,9 @@
       "@resources/*": ["src/reusable/*"],
       "@main/*": ["src/layouts/mainComponents"],
       "@children/*": ["src/layouts/layoutChildren"],
+      "@popupChildren/*": ["src/layouts/layoutChildren/popupLayoutChildren"],
       "@api/*": ["src/api"],
-      "@utils/*": ["src/utils"]
+      "@utils/*": ["src/utils"],
     }
   }
 }

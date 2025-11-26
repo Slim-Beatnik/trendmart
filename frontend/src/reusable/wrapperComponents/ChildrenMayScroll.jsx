@@ -2,8 +2,13 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useTheme } from '@resources/themes/themeContext';
 import '@resources/themes/scrollbar.css';
 
-const ChildrenMayScroll = ({ children, direction = "vertical", className = "", style = {} }) => {
-  const { theme } = useTheme()
+const ChildrenMayScroll = ({
+  children,
+  direction = 'vertical',
+  className = '',
+  style = {},
+}) => {
+  const { theme } = useTheme();
   const containerRef = useRef(null);
   const [overflow, setOverflow] = useState(false);
 
@@ -12,7 +17,7 @@ const ChildrenMayScroll = ({ children, direction = "vertical", className = "", s
     if (!el) return;
 
     const checkOverflow = () => {
-      if (direction === "vertical") {
+      if (direction === 'vertical') {
         setOverflow(el.scrollHeight > el.clientHeight);
       } else {
         setOverflow(el.scrollWidth > el.clientWidth);
@@ -29,15 +34,22 @@ const ChildrenMayScroll = ({ children, direction = "vertical", className = "", s
 
   return (
     <div
+      id={`childrenMayScroll-${direction}`}
       ref={containerRef}
-      className={`${className} ${overflow ? "custom-scroll" : ""}`}
+      className={`${className} ${overflow ? 'custom-scroll' : ''}`}
       style={{
-        "--scrollbar-thumb": theme.colors.details,
-        "--scrollbar-thumb-hover": `${theme.colors.details}ea`,
-        overflowY: direction === "vertical" ? (overflow ? "auto" : "hidden") : "hidden",
-        overflowX: direction === "horizontal" ? (overflow ? "auto" : "hidden") : "hidden",
-        maxHeight: "100%",
-        maxWidth: "100%",
+        '--scrollbar-thumb': theme.colors.details,
+        '--scrollbar-thumb-hover': `${theme.colors.details}ea`,
+        overflowY:
+          direction === 'vertical' ? (overflow ? 'auto' : 'hidden') : 'hidden',
+        overflowX:
+          direction === 'horizontal'
+            ? overflow
+              ? 'auto'
+              : 'hidden'
+            : 'hidden',
+        maxHeight: '100%',
+        maxWidth: '100%',
         ...style,
       }}
     >

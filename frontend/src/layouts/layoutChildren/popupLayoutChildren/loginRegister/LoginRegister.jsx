@@ -88,25 +88,25 @@ function LoginRegister({ setPopup }) {
 
   return (
     <Col
-      className="d-inline-flex flex-column flex-sm-grow-0 position-relative justify-content-between align-items-center gap-1 px-2 py-4 m-auto"
+      className="d-flex flex-column flex-grow-0 position-relative justify-content-between align-items-center gap-1 px-2 py-4 m-auto"
       style={{
-        minHeight: '394px',
+        minHeight: '400px',
         minWidth: '288px',
         ...theme.schemes.darkText,
         borderRadius: theme.props.bR_less,
-        filter: 'drop-shadow(.5rem .5rem 1rem #0a1f44e8)',
+        filter: `drop-shadow(.5rem .5rem 1rem ${theme.colors.contrast}e8)`,
       }}
     >
-      <PopupCloseButton onClose={() => setPopup(null)} />
+      <PopupCloseButton onClick={() => setPopup(null)} />
       <h1 className="text-center">
         {toggleForm === 'login' ? 'Login' : 'Register'}
       </h1>
       <Form
         id={`${toggleForm}Form`}
-        className="h-100 w-100 d-flex flex-column gap-1 justify-content-center align-items-center my-auto"
+        className="h-100 w-100 d-flex flex-column flex-grow-1 align-items-center"
         onSubmit={handleSubmit}
       >
-        <Row className="h-100 justify-content-center">
+        <Row className="h-100 justify-content-center flex-grow-1">
           <Col
             className="d-flex flex-column gap-1"
             style={{
@@ -162,7 +162,7 @@ function LoginRegister({ setPopup }) {
             )}
           </Col>
         </Row>
-        <Row>
+        <Row className="d-flex flex-row justify-content-center gap-1 align-items-end text-center">
           <p
             className="mx-auto my-0 p-0"
             style={{ fontSize: '.8rem' }}
@@ -181,7 +181,7 @@ function LoginRegister({ setPopup }) {
           </p>
           <Button
             type="submit"
-            className="w-50 align-self-center fw-bold border-1 align-self-end"
+            className="w-50 fw-bold border-1"
             style={{
               ...(toggleForm === 'login'
                 ? theme.buttons.contrast

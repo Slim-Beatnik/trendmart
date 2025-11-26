@@ -4,6 +4,7 @@ import ProductCard from './ProductCard';
 
 // Single-row grid: up to 4 products, no internal scrolling
 function ProductGrid({ products = [], onSelect, onAddToCart, loading, error }) {
+  
   return (
     <div
       className="w-100"

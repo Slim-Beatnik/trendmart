@@ -31,7 +31,13 @@ export async function sendRecommendationFeedback({ product, action, source }) {
 
 function shapeInteractionPayload(product, source) {
   const pid = getNumericProductId(product);
-  const allowed = new Set(['search', 'similar', 'related', 'answer', 'cold_start']);
+  const allowed = new Set([
+    'search',
+    'similar',
+    'related',
+    'answer',
+    'cold_start',
+  ]);
   const payload = { product_id: pid };
   if (source && allowed.has(source)) {
     payload.source = source;

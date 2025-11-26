@@ -4,7 +4,7 @@ const userPrefMode = () => {
   try {
     if (typeof window !== 'undefined' && window.matchMedia) {
       return window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
+        ? 'light'
         : 'light';
     }
   } catch (e) {

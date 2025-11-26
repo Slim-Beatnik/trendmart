@@ -42,15 +42,16 @@ const styleValues = {
   transition: 'all 0.3s ease-in-out',
 };
 
-const baseBtn = {
+const baseBtn = (mode) => ({
   borderWidth: '1px',
   borderStyle: 'solid',
   borderColor: 'transparent',
   borderRadius: '.5rem',
-  padding: '.3rem 0rem',
+  padding: '.3rem .5rem',
   cursor: 'pointer',
   fontWeight: 700,
-};
+  textShadow: `1px 1px 2px ${colorPalette[mode].contrast}`,
+});
 
 const contrast = (mode) => ({
   background: colorPalette[mode].contrast,
@@ -99,11 +100,16 @@ export const buildTheme = (mode) => ({
   alerts: colorPalette.variant,
   props: styleValues,
   buttons: {
-    contrast: { ...contrast(mode), ...baseBtn },
-    splash: { ...splash(mode), ...baseBtn },
-    muted: { ...muted(mode), ...baseBtn },
-    highlight: { ...highlight(mode), ...baseBtn },
-    emphasis: { ...emphasis(mode), ...baseBtn },
+    contrastShadow: { ...contrast(mode), ...baseBtn(mode) },
+    splashShadow: { ...splash(mode), ...baseBtn(mode) },
+    mutedShadow: { ...muted(mode), ...baseBtn(mode) },
+    highlightShadow: { ...highlight(mode), ...baseBtn(mode) },
+    emphasisShadow: { ...emphasis(mode), ...baseBtn(mode) },
+    contrast: { ...contrast(mode), ...baseBtn(mode), textShadow: 'unset' },
+    splash: { ...contrast(mode), ...baseBtn(mode), textShadow: 'unset' },
+    muted: { ...contrast(mode), ...baseBtn(mode), textShadow: 'unset' },
+    highlight: { ...contrast(mode), ...baseBtn(mode), textShadow: 'unset' },
+    emphasis: { ...contrast(mode), ...baseBtn(mode), textShadow: 'unset' },
   },
   schemes: {
     contrast: contrast(mode),
