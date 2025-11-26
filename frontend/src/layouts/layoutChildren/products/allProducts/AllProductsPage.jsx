@@ -22,7 +22,7 @@ import { addToCart as addToCartApi } from '@api/cart';
 import { logCartAdd } from '@api/events';
 
 function AllProductsPage() {
-  const { theme } = useTheme();
+  const { mode, theme } = useTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [popup, setPopup] = useState(null);
@@ -197,6 +197,7 @@ function AllProductsPage() {
             background: theme.colors.lightBg,
             fontSize: '.75rem',
             borderRadius: theme.props?.bR_more || 8,
+            color: theme.colors.contrast
           }}
         >
           <Row className="g-3">

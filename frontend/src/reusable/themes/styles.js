@@ -50,7 +50,7 @@ const baseBtn = (mode) => ({
   padding: '.3rem .5rem',
   cursor: 'pointer',
   fontWeight: 700,
-  textShadow: `2px 2px 3px ${colorPalette[mode].contrast}`,
+  textShadow: `1px 1px 2px ${colorPalette[mode].contrast}`,
 });
 
 const contrast = (mode) => ({
@@ -100,11 +100,11 @@ export const buildTheme = (mode) => ({
   alerts: colorPalette.variant,
   props: styleValues,
   buttons: {
-    contrast: { ...contrast(mode), ...baseBtn },
-    splash: { ...splash(mode), ...baseBtn },
-    muted: { ...muted(mode), ...baseBtn },
-    highlight: { ...highlight(mode), ...baseBtn },
-    emphasis: { ...emphasis(mode), ...baseBtn },
+    contrast: { ...contrast(mode), ...baseBtn(mode) },
+    splash: { ...splash(mode), ...baseBtn(mode) },
+    muted: { ...muted(mode), ...baseBtn(mode) },
+    highlight: { ...highlight(mode), ...baseBtn(mode) },
+    emphasis: { ...emphasis(mode), ...baseBtn(mode) },
   },
   schemes: {
     contrast: contrast(mode),
