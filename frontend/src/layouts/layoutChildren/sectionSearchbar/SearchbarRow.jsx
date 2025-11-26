@@ -62,7 +62,7 @@ function SearchbarRow({
             />
           </Col>
         )}
-        <Col className="d-flex justify-content-center align-items-center p-0">
+        <Col className="d-flex flex-grow-0 justify-content-center align-items-center p-0">
           <Form.Control
             id={searchId}
             type="text"
@@ -73,9 +73,11 @@ function SearchbarRow({
             style={{
               boxSizing: 'border-box',
               fieldSizing: 'content',
+              minWidth: '10rem',
               borderRadius: '.3rem',
               borderWidth: '.13rem',
               borderColor: theme.colors.details,
+              fontSize: 'clamp(.8rem, 1rem, 1rem)'
             }}
           />
         </Col>

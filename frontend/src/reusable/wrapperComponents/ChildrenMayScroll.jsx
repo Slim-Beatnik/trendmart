@@ -34,6 +34,7 @@ const ChildrenMayScroll = ({
 
   return (
     <div
+      id={`childrenMayScroll-${direction}`}
       ref={containerRef}
       className={`${className} ${overflow ? 'custom-scroll' : ''}`}
       style={{

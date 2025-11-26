@@ -20,6 +20,7 @@ import { useDispatch } from 'react-redux';
 import { addItem, attachBackendId } from '@redux/cart/cartSlice';
 import { addToCart as addToCartApi } from '@api/cart';
 import { logCartAdd } from '@api/events';
+import ChildrenMayScroll from '@resources/wrapperComponents/ChildrenMayScroll.jsx';
 
 function AllProductsPage() {
   const { mode, theme } = useTheme();
@@ -194,13 +195,13 @@ function AllProductsPage() {
           className="d-flex flex-column w-100 h-100"
           style={{
             padding: '0.75rem',
-            background: theme.colors.lightBg,
+            background: theme.colors.whiteBg,
             fontSize: '.75rem',
             borderRadius: theme.props?.bR_more || 8,
             color: theme.colors.contrast
           }}
         >
-          <Row className="g-3">
+          <Row className="d-flex flex-grow-0 g-3" style={{ minHeight: '89vh', maxHeight: '89vh' }}>
             <Col
               xs={12}
               md={3}
@@ -220,7 +221,7 @@ function AllProductsPage() {
                   setSearchParams({});
                 }}
               />
-              <div className="mt-3 d-flex flex-column gap-2">
+              <div className="m-0 d-flex flex-column gap-2">
                 <Button
                   size="sm"
                   variant="outline-primary"
@@ -232,14 +233,14 @@ function AllProductsPage() {
                   View Mode: {viewMode === 'popup' ? 'Popup' : 'Full Page'}
                 </Button>
                 <Form.Group className="d-flex flex-column">
-                  <Form.Label style={{ fontSize: '.65rem', marginBottom: 2 }}>
+                  <Form.Label style={{ fontSize: '.65rem', fontWeight: 600 }}>
                     Page Size
                   </Form.Label>
                   <Form.Select
                     size="sm"
                     value={pageSize}
                     onChange={(e) => setPageSize(Number(e.target.value))}
-                    style={{ fontSize: '.7rem' }}
+                    style={{ fontSize: '.7rem', fontWeight: 600 }}
                   >
                     {[8, 16, 24, 32].map((s) => (
                       <option
@@ -251,13 +252,13 @@ function AllProductsPage() {
                     ))}
                   </Form.Select>
                 </Form.Group>
-                <div style={{ fontSize: '.6rem', color: '#555' }}>
-                  {totalItems} product{totalItems === 1 ? '' : 's'} total.
+                <div style={{ fontSize: '.6rem', fontWeight: 600, color: theme.colors.emphasis }}>
+                  {totalItems} product{totalItems === 1 ? '' : 's'} total
                 </div>
                 <Button
                   size="sm"
                   variant="outline-secondary"
-                  style={{ fontSize: '.65rem' }}
+                  style={{ fontSize: '.65rem', fontWeight: 600 }}
                   onClick={() => navigate('/')}
                 >
                   Back to Highlights
@@ -281,8 +282,8 @@ function AllProductsPage() {
                     <Spinner
                       size="sm"
                       animation="border"
-                    />{' '}
-                    Loading
+                    />
+                    &nbsp;Loading
                   </div>
                 )}
               </div>
@@ -365,24 +366,28 @@ function AllProductsPage() {
                     </div>
                   </div>
 
-                  <Row className="gx-3 gy-3 m-0">
-                    {visibleItems.map((p) => (
-                      <Col
-                        key={p.id}
-                        xs={12}
-                        sm={6}
-                        md={4}
-                        lg={3}
-                        className="d-flex"
-                      >
-                        <ProductCard
-                          product={p}
-                          onView={() => handleSelect(p)}
-                          onAddToCart={handleAddToCart}
-                        />
-                      </Col>
-                    ))}
-                  </Row>
+                  <div id="productsContainer" className="h-100">
+                    <ChildrenMayScroll direction="vertical" >
+                      <Row className='h-100 gx-3 gy-3 m-0'>
+                        {visibleItems.map((p) => (
+                          <Col
+                            key={p.id}
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            lg={3}
+                            className="d-flex"
+                          >
+                            <ProductCard
+                              product={p}
+                              onView={() => handleSelect(p)}
+                              onAddToCart={handleAddToCart}
+                            />
+                          </Col>
+                        ))}
+                      </Row>
+                    </ChildrenMayScroll>
+                  </div>
                 </>
               )}
             </Col>

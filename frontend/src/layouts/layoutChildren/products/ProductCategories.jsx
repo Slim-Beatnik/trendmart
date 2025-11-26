@@ -79,7 +79,7 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
       className="p-0 m-0"
       style={{ height: '100%' }}
     >
-      <div className="d-flex flex-column ms-3">
+      <div className="d-flex flex-column">
         <SearchbarRow
           searchId="subcategorySearch"
           placeholder="Filter by category"
@@ -92,12 +92,12 @@ function ProductCategories({ onSelectCategory, activeCategoryId }) {
         {/* Always visible All Categories quick link (button alternative) */}
         <button
           type="button"
-          className="btn btn-sm mt-2 align-self-start"
+          className="btn btn-sm mt-2 btn-outline-secondary align-self-start"
           onClick={() => {
             onSelectCategory?.(null);
             navigate('/products');
           }}
-          style={{ fontSize: '.65rem' }}
+          style={{ fontSize: '.8rem', width: 'fit-content', borderSize: '3rem', borderColor: theme.colors.details }}
         >
           All Categories
         </button>

@@ -223,12 +223,13 @@ function FeaturedProducts({
             type="button"
             onClick={handlePrevPage}
             disabled={pageIndex === 0}
-            className="btn btn-sm px-1"
+            className="btn btn-sm px-1 pt-0"
             style={{
               ...theme.buttons.emphasis,
+              paddingBottom: '.06rem',
             }}
           >
-            Prev
+            &#10229;
           </Button>
           <span className="small">
             Page {totalProducts === 0 ? 0 : pageIndex + 1} of {totalPages}
@@ -237,12 +238,13 @@ function FeaturedProducts({
             type="button"
             onClick={handleNextPage}
             disabled={pageIndex >= totalPages - 1}
-            className="btn btn-sm px-1"
+            className="btn btn-sm px-1 pt-0"
             style={{
               ...theme.buttons.emphasis,
+              paddingBottom: '.06rem',
             }}
           >
-            Next
+            &#10230;
           </Button>
         </div>
 

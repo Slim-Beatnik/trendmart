@@ -4,6 +4,9 @@ import ProductCard from './ProductCard';
 
 // Single-row grid: up to 4 products, no internal scrolling
 function ProductGrid({ products = [], onSelect, onAddToCart, loading, error }) {
+  // DELETE!!!
+  products =  [1, "ASUS ZenBook X14", "ASUS ZenBook X14 in the Electronics / Laptops category at $1299.99 (rated 4.5/5) featuring brand asus, Windows, core I7, 16gb, 1tb.", 1299.99 ]
+  
   return (
     <div
       className="w-100"

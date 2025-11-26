@@ -39,7 +39,7 @@ function MasterLayout() {
           style={{
             height: '16vh',
             minWidth: '100%',
-            marginBottom: '4vh',
+            marginBottom: '2vh',
           }}
         >
           <Row
@@ -65,7 +65,7 @@ function MasterLayout() {
         <Row
           id="mGrid-popupContainer"
           className="pb-2"
-          style={{ height: '81vh' }}
+          style={{ height: '79vh' }}
         >
           <Col
             className="w-100 h-100 m-0 p-0"

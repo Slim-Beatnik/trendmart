@@ -34,7 +34,7 @@ function ProductCard({
       style={{
         minWidth: 0,
         borderRadius: 8,
-        background: '#fffffd',
+        background: theme.colors.text,
         height: cardHeight || undefined,
       }}
       onClick={() => onView?.(product)}
@@ -48,7 +48,7 @@ function ProductCard({
             height: 140,
             width: '100%',
             objectFit: 'contain',
-            background: '#e9eef2',
+            background: theme.colors.lightBg,
           }}
         />
       ) : (
@@ -56,12 +56,12 @@ function ProductCard({
           style={{
             height: 140,
             width: '100%',
-            background: '#e9eef2',
+            background: theme.colors.lightBg,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '.65rem',
-            color: '#555',
+            color: theme.colors.emphasis,
             fontStyle: 'italic',
           }}
         >
@@ -129,7 +129,7 @@ function ProductCard({
             <Button
               size="sm"
               variant="outline-primary"
-              style={{ fontSize: '.7rem' }}
+              style={{ fontSize: '.7rem', fontWeight: 600, ...theme.buttons.contrast, borderSize: '.3rem' }}
               disabled={adding}
               onClick={async (e) => {
                 e.stopPropagation();

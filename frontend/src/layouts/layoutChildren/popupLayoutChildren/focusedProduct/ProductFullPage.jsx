@@ -82,6 +82,7 @@ function ProductFullPage() {
           );
         }
       } catch {}
+      
       try {
         await logCartAdd(product);
       } catch {}

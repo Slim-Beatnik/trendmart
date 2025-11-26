@@ -118,7 +118,7 @@ function ProductPopup({
           >
             You may also like
           </h6>
-          <div style={{ fontSize: '.65rem', color: '#555' }}>
+          <div style={{ fontSize: '.65rem', ...theme.buttons.emphasis }}>
             Similar product recommendations coming soon.
           </div>
         </div>
@@ -146,7 +146,7 @@ function ProductPopup({
                 height: 56,
                 borderRadius: '50%',
                 overflow: 'hidden',
-                backgroundColor: theme.colors.primaryBg || '#0a1f45',
+                backgroundColor: theme.colors.highlight || '#0a1f45',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
