@@ -164,7 +164,7 @@ const Profile = () => {
       style={{
         ...theme.schemes.darkText,
         borderRadius: theme.props.bR_less,
-        filter: 'drop-shadow(.5rem .5rem 1rem #0a1f44e8)'
+        filter: `drop-shadow(.5rem .5rem 1rem ${theme.colors.contrast}e8)`
       }}
     >
       <Row className="h-100 w-100 justify-content-center  my-auto">
