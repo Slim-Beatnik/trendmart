@@ -96,7 +96,7 @@ function ProductFiltersPanel({
           size="sm"
           style={{
             fontSize: '.65rem',
-            ...theme.buttons.muted,
+            ...theme.buttons.mutedShadow,
             color: theme.colors.text
           }}
           onClick={onClear}

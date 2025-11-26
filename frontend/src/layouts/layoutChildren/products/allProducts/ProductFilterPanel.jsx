@@ -97,7 +97,7 @@ function ProductFiltersPanel({
         <Button
           variant="outline-secondary"
           size="sm"
-          style={{ fontSize: '.65rem', ...theme.buttons.muted }}
+          style={{ fontSize: '.65rem', ...theme.buttons.mutedShadow }}
           onClick={onClear}
         >
           Clear Filters
