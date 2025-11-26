@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
-import ProductCategories from '../layoutChildren/products/ProductCategories';
-import FeaturedProducts from '../layoutChildren/products/FeaturedProducts';
-import RecommendedProducts from '../layoutChildren/products/RecommendedProducts';
+import ProductCategories from '@children/products/ProductCategories';
+import FeaturedProducts from '@children/products/FeaturedProducts';
+import RecommendedProducts from '@children/products/RecommendedProducts';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useTheme } from '@resources/themes/themeContext';
@@ -30,8 +30,9 @@ function MasterGrid() {
     >
       <Col
         id="leftCol"
-        className="flex-column m-0 p-0 d-none d-sm-flex flex-grow-0-ns align-self-start"
+        className="flex-column m-0 p-0 d-none d-sm-flex flex-grow-0 align-self-start"
         style={{
+          height: '98%',
           maxWidth: '20%',
           borderRight: `.13rem solid ${theme.colors.details}`,
         }}
@@ -52,7 +53,10 @@ function MasterGrid() {
         <Row
           id="featuredRow"
           className="d-flex flex-row"
-          style={{ borderBottom: `.13rem solid ${theme.colors.details}` }}
+          style={{
+            height: '45%',
+            borderBottom: `.13rem solid ${theme.colors.details}` }}
+
         >
           <FeaturedProducts
             activeCategoryId={activeCategoryId}
@@ -60,7 +64,12 @@ function MasterGrid() {
             onClearCategory={() => handleSelectCategory(null)}
           />
         </Row>
-        <Row className="d-flex flex-column">
+        <Row
+          className="d-flex flex-column pt-4"
+          style={{
+            borderTop: `.13rem solid ${theme.colors.details}`,
+          }}
+        >
           <RecommendedProducts />
         </Row>
       </Col>

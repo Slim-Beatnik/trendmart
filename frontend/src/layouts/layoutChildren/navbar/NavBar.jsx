@@ -6,13 +6,12 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '@redux/auth/authSlice';
-import LoginRegister from '@children/popupLayoutChildren/loginRegister/LoginRegister';
+import LoginRegister from '@popupChildren/loginRegister/LoginRegister';
 import { useTheme } from '@resources/themes/themeContext';
-import Logo from '../logo/Logo';
+import Logo from '@children/logo/Logo';
 import HoverLink from './HoverLink';
 import { selectCartQuantity } from '@redux/cart/cartSlice';
-import CartPopup from '../popupLayoutChildren/cart/CartPopup';
-console.debug('[NavBar] CartPopup import resolved');
+import CartPopup from '@popupChildren/cart/CartPopup';
 
 function NavBar({ setPopup }) {
   const { theme } = useTheme();

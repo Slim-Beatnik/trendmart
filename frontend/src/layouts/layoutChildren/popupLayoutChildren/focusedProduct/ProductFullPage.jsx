@@ -3,8 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import { useTheme } from '@resources/themes/themeContext';
-import NavBar from '../../navbar/NavBar.jsx';
-import PopupLayout from '../../../mainComponents/PopupLayout.jsx';
+import NavBar from '@children/navbar/NavBar.jsx';
+import PopupLayout from '@main/PopupLayout.jsx';
 import FocusedProduct from './FocusedProduct.jsx';
 import { listProducts, getProduct } from '@api/catalog';
 import { normalizeProducts } from '@utils/helpers';
@@ -103,7 +103,7 @@ function ProductFullPage() {
       >
         <div
           className="w-100"
-          style={{ marginBottom: '2vh' }}
+          style={{ marginBottom: '2vh', backgroundColor: theme.colors.emphasis }}
         >
           <NavBar setPopup={setPopup} />
         </div>
