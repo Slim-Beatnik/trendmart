@@ -119,7 +119,6 @@ function RecommendedProducts() {
   return (
     <Col
       className="d-flex flex-column w-100 p-0"
-      style={{ borderTop: '${}' }}
     >
       <SearchbarRow
         searchId="recommendedSearch"
